@@ -18,6 +18,7 @@ namespace SistemaAnubis.Models.DTO
         [DisplayName("Digite sua senha")]
         public string Senha { get; set; }
         
+        [Required]
         [DisplayName("Confirme sua senha")]
         public string ConfSenha { get; set; }
     }

@@ -27,17 +27,24 @@ namespace SistemaAnubis.Controllers
         public ActionResult Administrador(AdministradorDTO dto)
         {
             if (Validacoes.IsCpf(dto.Cpf)) {
+                //if (dto.ConfSenha.Equals(dto.Senha))
+                //{
                     AdministradorBLL bll = new AdministradorBLL();
                     bll.inserir(dto);
-                if (dto.erro == "1")
-                {
-                    ViewBag.erro = "Este usuário já existe";
-                    return View();
-                }
-                else if (dto.erro == "2")
-                    return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
-                else
-                    return View();
+                    if (dto.erro == "1")
+                    {
+                        ViewBag.erro = "Este usuário já existe";
+                        return View();
+                    }
+                    else if (dto.erro == "2")
+                        return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                    else
+                        return View();
+                //}
+                //else {
+                    
+                    //return View();
+                //}
             }
             else {
                 

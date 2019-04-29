@@ -6,51 +6,51 @@
 
 @using (Html.BeginForm())
 {
-    <fieldset>
-        <legend>Cadastrar Funcionário</legend>
-        @Html.LabelFor(m => m.User);
+<fieldset>
+    <legend>Cadastrar Funcionário</legend>
+    @Html.LabelFor(m => m.User);
 
-        @Html.EditorFor(m => m.User)<br>
+    @Html.EditorFor(m => m.User)<br>
 
-        @Html.LabelFor(m => m.Senha)
+    @Html.LabelFor(m => m.Senha)
 
-        @Html.PasswordFor(m => m.Senha)<br>
+    @Html.PasswordFor(m => m.Senha)<br>
 
-        @Html.Label("Confirme sua senha")
+    @Html.LabelFor(m => m.ConfSenha)
 
-        @Html.PasswordFor(m => m.Senha) <br>
+    @Html.PasswordFor(m => m.Senha) <br>
 
-        @Html.LabelFor(m => m.Nome)
+    @Html.LabelFor(m => m.Nome)
 
-        @Html.EditorFor(m => m.Nome)<br>
+    @Html.EditorFor(m => m.Nome)<br>
 
-        @Html.LabelFor(m => m.Cpf)
+    @Html.LabelFor(m => m.Cpf)
 
-        @Html.EditorFor(m => m.Cpf) <br>
+    @Html.EditorFor(m => m.Cpf) <br>
 
-        @Html.LabelFor(m => m.Email)
+    @Html.LabelFor(m => m.Email)
 
-        @Html.EditorFor(m => m.Email) <br>
+    @Html.EditorFor(m => m.Email) <br>
 
-        @Html.LabelFor(m => m.Telefone)
+    @Html.LabelFor(m => m.Telefone)
 
-        @Html.EditorFor(m => m.Telefone) <br>
+    @Html.EditorFor(m => m.Telefone) <br>
 
-        @Html.LabelFor(m => m.Celular)
+    @Html.LabelFor(m => m.Celular)
 
-        @Html.EditorFor(m => m.Celular) <br>
+    @Html.EditorFor(m => m.Celular) <br>
 
-        @Html.LabelFor(m => m.Cep)
+    @Html.LabelFor(m => m.Cep)
 
-        @Html.EditorFor(m => m.Cep) <br>
+    @Html.EditorFor(m => m.Cep) <br>
 
-        @Html.LabelFor(m => m.Num)
+    @Html.LabelFor(m => m.Num)
 
-        @Html.EditorFor(m => m.Num) <br>
+    @Html.EditorFor(m => m.Num) <br>
 
-        <input type="submit">
+    <input type="submit">
 
-    </fieldset>
+</fieldset>
 }
 
 @section Scripts {
