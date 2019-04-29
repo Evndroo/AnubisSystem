@@ -7,16 +7,13 @@
 @using (Html.BeginForm())
 {
 <fieldset>
+    @Html.ValidationSummary()
     <legend>Cadastrar Administrador</legend>
-    @Html.LabelFor(m => m.User);
+    @Html.LabelFor(m => m.User)
 
-    @Html.EditorFor(m => m.User)<br>
+    @Html.EditorFor(m => m.User)  @ViewBag.erro <br>
 
     @Html.LabelFor(m => m.Senha)
-
-    @Html.PasswordFor(m => m.Senha)<br>
-
-    @Html.Label("Confirme sua senha")
 
     @Html.PasswordFor(m => m.Senha) <br>
 
@@ -47,6 +44,7 @@
     @Html.LabelFor(m => m.Num)
 
     @Html.EditorFor(m => m.Num) <br>
+
 
     <input type="submit">
 

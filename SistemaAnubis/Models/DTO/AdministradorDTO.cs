@@ -8,14 +8,12 @@ namespace SistemaAnubis.Models.DTO
 {
     public class AdministradorDTO : LoginDTO
     {
-        public const int nivel = 1;
 
         [Required]
         [StringLength(85, MinimumLength = 3)]
         public string Nome { get; set; }
 
         [Required]
-        [RegularExpression(@"^\d{11}$|^\d{3}.\d{3}.\d{3}.\d{2}$", ErrorMessage = "O formato de CPF passado está incorreto")]
         public string Cpf { get; set; }
 
         [Required]
@@ -30,6 +28,8 @@ namespace SistemaAnubis.Models.DTO
         public string Celular { get; set; }
 
         public string Cep { get; set; }
+
+        public string erro;
 
         public string Num { get; set; }
     }

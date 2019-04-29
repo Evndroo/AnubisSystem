@@ -1,7 +1,58 @@
-﻿
+﻿@model SistemaAnubis.Models.DTO.FuncionarioDTO
+
 @{
-    ViewBag.Title = "Funcionario";
+    ViewBag.Title = "Cadastrar Funcionário";
 }
 
-<h2>Funcionario</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        <legend>Cadastrar Funcionário</legend>
+        @Html.LabelFor(m => m.User);
 
+        @Html.EditorFor(m => m.User)<br>
+
+        @Html.LabelFor(m => m.Senha)
+
+        @Html.PasswordFor(m => m.Senha)<br>
+
+        @Html.Label("Confirme sua senha")
+
+        @Html.PasswordFor(m => m.Senha) <br>
+
+        @Html.LabelFor(m => m.Nome)
+
+        @Html.EditorFor(m => m.Nome)<br>
+
+        @Html.LabelFor(m => m.Cpf)
+
+        @Html.EditorFor(m => m.Cpf) <br>
+
+        @Html.LabelFor(m => m.Email)
+
+        @Html.EditorFor(m => m.Email) <br>
+
+        @Html.LabelFor(m => m.Telefone)
+
+        @Html.EditorFor(m => m.Telefone) <br>
+
+        @Html.LabelFor(m => m.Celular)
+
+        @Html.EditorFor(m => m.Celular) <br>
+
+        @Html.LabelFor(m => m.Cep)
+
+        @Html.EditorFor(m => m.Cep) <br>
+
+        @Html.LabelFor(m => m.Num)
+
+        @Html.EditorFor(m => m.Num) <br>
+
+        <input type="submit">
+
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

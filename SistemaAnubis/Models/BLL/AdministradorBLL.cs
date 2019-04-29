@@ -13,13 +13,13 @@ namespace SistemaAnubis.Models.BLL
     {
         Conexao con = new Conexao();
 
+        
 
         public void inserir(AdministradorDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirAdm(@user,@senha,@lvl,@nome,@cpf,@email,@telefone,@celular,@cep,@num,)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call inserirAdmLogin(@user,@senha,@nome,@cpf,@email,@telefone,@celular,@cep,@num)", con.conectarBD());
             cmd.Parameters.Add("@user",MySqlDbType.VarChar).Value = dto.User;
             cmd.Parameters.Add("@senha", MySqlDbType.VarChar).Value = dto.Senha;
-            cmd.Parameters.Add("@lvl", MySqlDbType.VarChar).Value = AdministradorDTO.nivel;
             cmd.Parameters.Add("@nome",MySqlDbType.VarChar).Value=dto.Nome;
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
             cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = dto.Email;
@@ -28,8 +28,24 @@ namespace SistemaAnubis.Models.BLL
             cmd.Parameters.Add("@cep", MySqlDbType.VarChar).Value = dto.Cep;
             cmd.Parameters.Add("@num", MySqlDbType.VarChar).Value = dto.Num;
 
-            cmd.ExecuteNonQuery();
-            con.desconectarBD();
+            
+            try
+            {
+                cmd.ExecuteNonQuery();
+                con.desconectarBD();
+            }
+            catch (MySqlException e) {
+
+                //verifica se o usuário já existe, caso sim manda uma mensagem melhor para a tela
+                if (e.Message.Equals("Duplicate entry '" + dto.User + "' for key 'user_log'"))
+                {
+                    dto.erro = "1";
+                }
+                else if (e.Message.Equals("Duplicate entry '" + dto.Cpf + "' for key 'cpf_adm'"))
+                {
+                    dto.erro = "2";
+                }
+            }
         }
 
         public DataTable Consultar(AdministradorDTO dto) {

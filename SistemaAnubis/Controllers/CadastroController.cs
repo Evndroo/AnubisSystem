@@ -27,18 +27,21 @@ namespace SistemaAnubis.Controllers
         public ActionResult Administrador(AdministradorDTO dto)
         {
             if (Validacoes.IsCpf(dto.Cpf)) {
-                try {
                     AdministradorBLL bll = new AdministradorBLL();
                     bll.inserir(dto);
-                    return View();
-                }
-                catch
+                if (dto.erro == "1")
                 {
+                    ViewBag.erro = "Este usuário já existe";
                     return View();
                 }
+                else if (dto.erro == "2")
+                    return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                else
+                    return View();
             }
             else {
-                return View();
+                
+                return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
             }
         }
 
@@ -53,16 +56,28 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Cliente(ClienteDTO dto)
         {
-            try
+            if (Validacoes.IsCpf(dto.Cpf))
             {
-                ClienteBLL bll = new ClienteBLL();
-                bll.inserir(dto);
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
+                try
+                {
+                    ClienteBLL bll = new ClienteBLL();
+                    bll.inserir(dto);
+
+                    if (dto.erro == "1")
+                    {
+                        ViewBag.erro = "Este usuário já existe";
+                        return View();
+                    }
+                    else if (dto.erro == "2")
+                        return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                    else
+                        return View();
+                }
+                catch
+                {
+                    return View();
+                }
+            } else return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
         }
 
 
@@ -75,19 +90,30 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Funcionario(FuncionarioDTO dto)
         {
-            try
-            {
-                FuncionarioBLL bll = new FuncionarioBLL();
-                bll.inserir(dto);
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            if (Validacoes.IsCpf(dto.Cpf)){
+                try
+                {
+                    FuncionarioBLL bll = new FuncionarioBLL();
+                    bll.inserir(dto);
+                    if (dto.erro == "1")
+                    {
+                        ViewBag.erro = "Este usuário já existe";
+                        return View();
+                    }
+                    else if (dto.erro == "2")
+                        return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                    else
+                        return View();
+                }
+                catch
+                {
+                    return View();
+                }
+            } else return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
 
-        public ActionResult Falecido()
+    }
+
+    public ActionResult Falecido()
         {
             return View();
         }
