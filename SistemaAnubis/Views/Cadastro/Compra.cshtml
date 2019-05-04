@@ -1,7 +1,18 @@
-﻿
+﻿@model SistemaAnubis.Models.DTO.CompraDTO
+
 @{
-    ViewBag.Title = "Compra";
+    ViewBag.Title = "Cadastrar Administrador";
 }
 
-<h2>Compra</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.ValidationSummary()
+        <legend>Cadastrar Administrador</legend>
+        @Html.LabelFor(m => m.User)
 
+
+        <input type="submit">
+
+    </fieldset>
+}

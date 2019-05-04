@@ -1,7 +1,44 @@
-﻿
+﻿@model SistemaAnubis.Models.DTO.CaixaoDTO
+
 @{
-    ViewBag.Title = "Caixao";
+    ViewBag.Title = "Cadastrar Administrador";
+
+    List<string> TiposProjetos = new List<string>();
+    TiposProjetos.Add("Caixão alto");
+    TiposProjetos.Add("Caixão baixo");
 }
 
-<h2>Caixao</h2>
+@using (Html.BeginForm())
+{
+<fieldset>
+    @Html.ValidationSummary()
+    <legend>Cadastrar Caixão</legend>
 
+    @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposProjetos),new {@id= "comboCaixao" })
+
+
+
+    @Html.LabelFor(m => m.Altura)
+
+    @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly" })
+
+    @Html.LabelFor(m => m.Largura)
+
+    @Html.TextBoxFor(m => m.Largura, new { disabled = "disabled", @readonly = "readonly" })
+
+    @Html.LabelFor(m => m.Profundidade)
+
+    @Html.TextBoxFor(m => m.Profundidade, new { disabled = "disabled", @readonly = "readonly" })
+
+    @Html.LabelFor(m => m.Modelo)
+
+    @Html.EditorFor(m => m.Modelo)
+
+    @Html.LabelFor(m => m.Valor)
+
+    @Html.TextBoxFor(m => m.Valor, new { disabled = "disabled", @readonly = "readonly" })
+
+    <input type="submit">
+
+</fieldset>
+} 

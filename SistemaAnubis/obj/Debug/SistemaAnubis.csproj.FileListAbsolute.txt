@@ -1,4 +1,3 @@
-C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\obj\Debug\SistemaAnubis.csprojAssemblyReference.cache
 C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\obj\Debug\SistemaAnubis.csproj.CoreCompileInputs.cache
 C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\bin\SistemaAnubis.dll.config
 C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\bin\SistemaAnubis.dll
@@ -86,3 +85,4 @@ C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\bin\pt-br\Syste
 C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\obj\Debug\SistemaAnubis.csproj.CopyComplete
 C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\obj\Debug\SistemaAnubis.dll
 C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\obj\Debug\SistemaAnubis.pdb
+C:\Users\Evandro Junior\source\repos\SistemaAnubis\SistemaAnubis\obj\Debug\SistemaAnubis.csprojAssemblyReference.cache

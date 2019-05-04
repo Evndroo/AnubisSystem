@@ -13,14 +13,28 @@ namespace SistemaAnubis.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Empresa()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Suporte()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Contato()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+        public ActionResult Portifolio()
         {
             ViewBag.Message = "Your contact page.";
 

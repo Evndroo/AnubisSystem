@@ -1,7 +1,17 @@
-﻿
+﻿@model SistemaAnubis.Models.DTO.PlanoDTO
+
 @{
-    ViewBag.Title = "Plano";
+    ViewBag.Title = "Cadastrar Administrador";
 }
 
-<h2>Plano</h2>
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.ValidationSummary()
+        
 
+
+        <input type="submit">
+
+    </fieldset>
+} 

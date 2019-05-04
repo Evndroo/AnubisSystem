@@ -1,0 +1,17 @@
+﻿@model SistemaAnubis.Models.DTO.UrnaDTO
+
+@{
+    ViewBag.Title = "Cadastrar Administrador";
+}
+
+@using (Html.BeginForm())
+{
+    <fieldset>
+        @Html.ValidationSummary()
+        <legend>Cadastrar Administrador</legend>
+
+
+        <input type="submit">
+
+    </fieldset>
+} 

@@ -1,7 +1,44 @@
-﻿
+﻿<div>
+@model SistemaAnubis.Models.DTO.UrnaDTO
+
 @{
-    ViewBag.Title = "Urna";
+    ViewBag.Title = "Cadastrar Administrador";
+
+    List<string> TiposUrna = new List<string>();
+    TiposUrna.Add("Caixão alto");
+    TiposUrna.Add("Caixão baixo");
 }
+@using (Html.BeginForm())
+{
+<fieldset>
+    @Html.ValidationSummary()
 
-<h2>Urna</h2>
 
+    @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "comboCaixao", onChange="" })
+
+
+    @Html.LabelFor(m => m.Altura)
+
+    @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly", @id = "altura" })
+
+    @Html.LabelFor(m => m.Largura)
+
+    @Html.TextBoxFor(m => m.Largura, new { disabled = "disabled", @readonly = "readonly", @id = "largura" })
+
+    @Html.LabelFor(m => m.Profundidade)
+
+    @Html.TextBoxFor(m => m.Profundidade, new { disabled = "disabled", @readonly = "readonly", @id = "profundidade" })
+
+    @Html.LabelFor(m => m.Nome)
+
+    @Html.EditorFor(m => m.Nome)
+
+    @Html.LabelFor(m => m.Valor)
+
+    @Html.TextBoxFor(m => m.Valor, new { disabled = "disabled", @readonly = "readonly", @id="valor"})
+
+    <input type="submit">
+
+</fieldset>
+
+</div>

@@ -1,43 +1,81 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
+    <link type="text/css" href="~/Scripts/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sobre", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000;">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-left: 25%;">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="color: #ffff;">Home<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: #ffff;">
+                        Planos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Planos padrões</a>
+                        <a class="dropdown-item" href="#">Planos personalizados</a>
+                        <!--- <div class="dropdown-divider"></div> Esse dropdown-divider serve para dividir. -->
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #ffff;">Empresa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #ffff;">Suporte</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="color: #ffff;">Entre ou Cadastre-se</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    @RenderBody()
+
+    <footer style="padding-top: 0;">
+        <div class="container-fluid padding" style="background-color: #000000;">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Horários</h5>
+                    <hr class="light">
+                    <p>De segunda à sexta: 07hr às 22hr</p>
+                    <p>Sábado: 12hr às 20hr</p>
+                    <p>Domingo: Fechado.</p>
+                </div>
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Service Area</h5>
+                    <hr class="light">
+                    <p>City, State, 00000</p>
+                    <p>City, State, 00000</p>
+                    <p>City, State, 00000</p>
+                    <p>City, State, 00000</p>
+                </div>
+                <div class="col-12">
+                    <hr class="light-100">
+                    <img src="~/Imagens/emgelf_logo.PNG" style="width: 100px; height: 100px; padding-bottom: 10px;">
+                    <p>Website inteiramente produzido pela empresa Emgelf Corporation.</p>
+                    <p>COPYRIGHT &copy; 2019 - TODOS OS DIREITOS RESERVADOS.</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
-        </footer>
-    </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    </footer>
 </body>
 </html>
