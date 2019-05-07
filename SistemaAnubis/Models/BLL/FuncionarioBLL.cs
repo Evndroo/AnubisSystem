@@ -61,7 +61,7 @@ namespace SistemaAnubis.Models.BLL
 
 
         MySqlDataReader dr;
-        public void buscar(FuncionarioDTO dto)
+        public DataTable buscarCpf(FuncionarioDTO dto)
         {
             MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where cpf_func = @cpf", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
@@ -71,7 +71,6 @@ namespace SistemaAnubis.Models.BLL
             while (dr.Read())
             {
                 dto.User = dr[0].ToString();
-                dto.Senha = dr[1].ToString();
                 dto.Nome = dr[2].ToString();
                 dto.Cpf = dr[3].ToString();
                 dto.Email = dr[4].ToString();
@@ -80,7 +79,49 @@ namespace SistemaAnubis.Models.BLL
                 dto.Cep = dr[7].ToString();
                 dto.Num = dr[8].ToString();
             }
-            con.desconectarBD();
+            return Data(cmd);
+        }
+
+        public DataTable buscarEmail(FuncionarioDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where email_func = @email", con.conectarBD());
+            cmd.Parameters.AddWithValue("@email", dto.Email);
+            dr = cmd.ExecuteReader();
+
+
+            while (dr.Read())
+            {
+                dto.User = dr[0].ToString();
+                dto.Nome = dr[2].ToString();
+                dto.Cpf = dr[3].ToString();
+                dto.Email = dr[4].ToString();
+                dto.Telefone = dr[5].ToString();
+                dto.Celular = dr[6].ToString();
+                dto.Cep = dr[7].ToString();
+                dto.Num = dr[8].ToString();
+            }
+            return Data(cmd);
+        }
+
+        public DataTable buscarUser(FuncionarioDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where user = @user", con.conectarBD());
+            cmd.Parameters.AddWithValue("@user", dto.User);
+            dr = cmd.ExecuteReader();
+
+
+            while (dr.Read())
+            {
+                dto.User = dr[0].ToString();
+                dto.Nome = dr[2].ToString();
+                dto.Cpf = dr[3].ToString();
+                dto.Email = dr[4].ToString();
+                dto.Telefone = dr[5].ToString();
+                dto.Celular = dr[6].ToString();
+                dto.Cep = dr[7].ToString();
+                dto.Num = dr[8].ToString();
+            }
+            return Data(cmd);
         }
 
         public void atualizar(FuncionarioDTO dto)
@@ -104,6 +145,15 @@ namespace SistemaAnubis.Models.BLL
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
 
             con.desconectarBD();
+        }
+
+        public DataTable Data(MySqlCommand cmd)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable agenda = new DataTable();
+            da.Fill(agenda);
+            con.desconectarBD();
+            return agenda;
         }
     }
 }

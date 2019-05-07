@@ -1,20 +1,33 @@
 ﻿@model SistemaAnubis.Models.DTO.AdministradorDTO
 
 @{
+
+    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
+
+    List<string> TipoBusca = new List<string>();
+    
+    TipoBusca.Add("");
+    TipoBusca.Add("Usuário");
+    TipoBusca.Add("CPF");
+    TipoBusca.Add("E-mail");
 }
+
 
 @using (Html.BeginForm())
 {
-    <fieldset>
-        @Html.ValidationSummary()
-        <legend>Cadastrar Administrador</legend>
-        @Html.LabelFor(m => m.User)
+<fieldset>
+    @Html.ValidationSummary()
+    <legend>Consultar Administrador</legend>
+    Consultar por: 
+    @Html.DropDownList("TipoBusca", new MultiSelectList(TipoBusca)) <br />
+
+    <input type="text" name="busca" id="busca"/>
 
 
 
 
-        <input type="submit">
+    <input type="submit">
 
-    </fieldset>
+</fieldset>
 } 

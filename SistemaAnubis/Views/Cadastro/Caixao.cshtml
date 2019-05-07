@@ -1,6 +1,7 @@
 ﻿@model SistemaAnubis.Models.DTO.CaixaoDTO
 
 @{
+    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
 
     List<string> TiposProjetos = new List<string>();
@@ -8,19 +9,20 @@
     TiposProjetos.Add("Caixão baixo");
 }
 
+
 @using (Html.BeginForm())
 {
 <fieldset>
     @Html.ValidationSummary()
     <legend>Cadastrar Caixão</legend>
 
-    @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposProjetos),new {@id= "comboCaixao" })
+    @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposProjetos),new {@id= "comboCaixao"})
 
 
 
     @Html.LabelFor(m => m.Altura)
 
-    @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly" })
+    @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly", onChage="populaCampos()" })
 
     @Html.LabelFor(m => m.Largura)
 

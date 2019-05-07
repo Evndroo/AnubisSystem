@@ -1,13 +1,20 @@
-﻿using System;
+﻿using SistemaAnubis.Models.BLL;
+using SistemaAnubis.Models.DTO;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace SistemaAnubis.Controllers
 {
     public class ConsultaController : Controller
     {
+        GridView dgv = new GridView();
+
         // GET: Consulta
         public ActionResult Index()
         {
@@ -27,8 +34,64 @@ namespace SistemaAnubis.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Cliente(ClienteDTO dto, FormCollection frm)
+        {
+
+
+            if (frm["busca"] == "Usuário")
+            {
+                dgv.DataSource = new ClienteBLL().buscarUser(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else if (frm["busca"] == "CPF")
+            {
+                dgv.DataSource = new ClienteBLL().buscarCpf(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else if (frm["busca"] == "E-mail")
+            {
+                dgv.DataSource = new ClienteBLL().buscarEmail(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else
+            {
+                ViewBag.GridViewString = "Escolha uma maneira de consulta";
+            }
+
+            return View();
+        }
+
         public ActionResult Funcionario()
         {
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Funcionario(FuncionarioDTO dto, FormCollection frm)
+        {
+
+
+            if (frm["busca"] == "Usuário")
+            {
+                dgv.DataSource = new FuncionarioBLL().buscarUser(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else if (frm["busca"] == "CPF")
+            {
+                dgv.DataSource = new FuncionarioBLL().buscarCpf(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else if (frm["busca"] == "E-mail")
+            {
+                dgv.DataSource = new FuncionarioBLL().buscarEmail(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else
+            {
+                ViewBag.GridViewString = "Escolha uma maneira de consulta";
+            }
 
             return View();
         }
@@ -39,6 +102,32 @@ namespace SistemaAnubis.Controllers
             return View();
         }
 
+        [HttpPost] 
+        public ActionResult Administrador(AdministradorDTO dto, FormCollection frm)
+        {
+            
+            
+            if (frm["busca"] == "Usuário")
+            {
+                dgv.DataSource = new AdministradorBLL().buscarUser(dto);
+                ViewBag.GridViewString =CarregaGrid();
+            }
+            else if (frm["busca"] == "CPF")
+            {
+                dgv.DataSource = new AdministradorBLL().buscarCpf(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else if (frm["busca"] == "E-mail")
+            {
+                dgv.DataSource = new AdministradorBLL().buscarEmail(dto);
+                ViewBag.GridViewString = CarregaGrid();
+            }
+            else {
+                ViewBag.GridViewString = "Escolha uma maneira de consulta";
+            }
+
+            return View();
+        }
 
         public ActionResult Urna()
         {
@@ -62,6 +151,15 @@ namespace SistemaAnubis.Controllers
         {
 
             return View();
+        }
+
+        public string CarregaGrid() {
+            
+            dgv.DataBind();
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            dgv.RenderControl(htw);
+            return sw.ToString();
         }
     }
 }

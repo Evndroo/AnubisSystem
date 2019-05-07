@@ -1,44 +1,46 @@
-﻿<div>
+﻿<script language="javaScript" type="text/javascript" src="~/Scripts/urna.js"></script>
 @model SistemaAnubis.Models.DTO.UrnaDTO
 
 @{
+    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
 
     List<string> TiposUrna = new List<string>();
     TiposUrna.Add("Caixão alto");
     TiposUrna.Add("Caixão baixo");
 }
+
+
 @using (Html.BeginForm())
 {
-<fieldset>
-    @Html.ValidationSummary()
+    <fieldset>
+        @Html.ValidationSummary()
 
 
-    @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "comboCaixao", onChange="" })
+        @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "dropUrna", onChange = "dropUrna();" })
 
 
-    @Html.LabelFor(m => m.Altura)
+        @Html.LabelFor(m => m.Altura)
 
-    @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly", @id = "altura" })
+        @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly", @id = "altura" })
 
-    @Html.LabelFor(m => m.Largura)
+        @Html.LabelFor(m => m.Largura)
 
-    @Html.TextBoxFor(m => m.Largura, new { disabled = "disabled", @readonly = "readonly", @id = "largura" })
+        @Html.TextBoxFor(m => m.Largura, new { disabled = "disabled", @readonly = "readonly", @id = "largura" })
 
-    @Html.LabelFor(m => m.Profundidade)
+        @Html.LabelFor(m => m.Profundidade)
 
-    @Html.TextBoxFor(m => m.Profundidade, new { disabled = "disabled", @readonly = "readonly", @id = "profundidade" })
+        @Html.TextBoxFor(m => m.Profundidade, new { disabled = "disabled", @readonly = "readonly", @id = "profundidade" })
 
-    @Html.LabelFor(m => m.Nome)
+        @Html.LabelFor(m => m.Nome)
 
-    @Html.EditorFor(m => m.Nome)
+        @Html.EditorFor(m => m.Nome)
 
-    @Html.LabelFor(m => m.Valor)
+        @Html.LabelFor(m => m.Valor)
 
-    @Html.TextBoxFor(m => m.Valor, new { disabled = "disabled", @readonly = "readonly", @id="valor"})
+        @Html.TextBoxFor(m => m.Valor, new { disabled = "disabled", @readonly = "readonly", @id = "valor" })
 
-    <input type="submit">
+        <input type="submit">
 
-</fieldset>
-
-</div>
+    </fieldset>
+}

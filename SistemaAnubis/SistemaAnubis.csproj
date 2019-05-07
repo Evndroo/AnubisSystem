@@ -169,6 +169,8 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Imagens\emgelf_logo.PNG" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -177,14 +179,6 @@
     <Content Include="Imagens\1.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
@@ -204,12 +198,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\script.js" />
     <Content Include="Scripts\style.css" />
-    <Content Include="Scripts\umd\popper-utils.js" />
-    <Content Include="Scripts\umd\popper-utils.min.js" />
-    <Content Include="Scripts\umd\popper.js" />
-    <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Scripts\Urna_populate.js" />
+    <Content Include="Scripts\urna.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -223,7 +214,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Cadastro\Administrador.cshtml" />
-    <Content Include="Views\Cadastro\Index.cshtml" />
     <Content Include="Views\Cadastro\Cliente.cshtml" />
     <Content Include="Views\Cadastro\Funcionario.cshtml" />
     <Content Include="Views\Cadastro\Falecido.cshtml" />
@@ -242,7 +232,6 @@
     <Content Include="Views\Consulta\Administrador.cshtml" />
     <Content Include="Views\Consulta\Funcionario.cshtml" />
     <Content Include="Views\Consulta\Cliente.cshtml" />
-    <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Busca\Index.cshtml" />
     <Content Include="Views\Busca\Cliente.cshtml" />
     <Content Include="Views\Busca\Funcionario.cshtml" />
@@ -256,10 +245,7 @@
     <Content Include="Views\Home\Contato.cshtml" />
     <Content Include="Views\Home\Suporte.cshtml" />
     <Content Include="Views\Home\Empresa.cshtml" />
-    <Content Include="Scripts\umd\popper.min.js.map" />
-    <Content Include="Scripts\umd\popper.js.map" />
-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
-    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Views\Shared\_Logado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

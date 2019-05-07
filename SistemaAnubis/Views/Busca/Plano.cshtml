@@ -1,6 +1,7 @@
 ﻿@model SistemaAnubis.Models.DTO.PlanoDTO
 
 @{
+    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
 }
 
@@ -9,7 +10,7 @@
     <fieldset>
         @Html.ValidationSummary()
         <legend>Cadastrar Administrador</legend>
-        @Html.LabelFor(m => m.User)
+        @Html.LabelFor(m => m.Caixao)
 
 
 
