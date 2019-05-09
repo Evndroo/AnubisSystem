@@ -16,12 +16,12 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirCaixao(@cod,@altura,@largura,@profundidade,@modelo,@valor)", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call inserirCaixao(@modelo,@altura,@largura,@profundidade,@descricao,@valor)", con.conectarBD());
+            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Modelo;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
             cmd.Parameters.Add("@largura", MySqlDbType.VarChar).Value = dto.Largura;
             cmd.Parameters.Add("@profundidade", MySqlDbType.VarChar).Value = dto.Profundidade;
-            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Modelo;
+            cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = dto.Descricao;            
             cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
 
             cmd.ExecuteNonQuery();

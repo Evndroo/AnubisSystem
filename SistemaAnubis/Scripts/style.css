@@ -178,7 +178,7 @@ hr.light-100 {
 /*---Sidebar---*/
 #sidebar-wrapper {
     min-height: 100vh;
-    margin-left: -15rem;
+    margin-left: -17.2rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
@@ -197,7 +197,10 @@ hr.light-100 {
     }
 
 #page-content-wrapper {
-    min-width: 100vw;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -209,6 +212,36 @@ hr.light-100 {
     color: #fff;
 }
 
+    .list-group-item:hover {
+        background-color: #ff0000;
+        color: #ffff;
+    }
+
+.d-flex {
+    display: flex !important;
+    height: 100%;
+}
+
+/*---Formulário de Urna --*/
+#formUrna {
+    flex: 1;
+    position: relative;
+    background-image: url('../Imagens/1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    padding-top: 7%;
+}
+
+    #formUrna label {
+        color: #ffff;
+    }
+
+    #formUrna fieldset {
+        padding: inherit;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
 /*---Media Queries --*/
 @media (max-width: 992px) {
     .social a {
@@ -272,12 +305,14 @@ hr.light-100 {
     }
 
     #page-content-wrapper {
-        min-width: 0;
         width: 100%;
+        height: 100%;
+        display: flex;
+        flex-flow: column;
     }
 
     #wrapper.toggled #sidebar-wrapper {
-        margin-left: -15rem;
+        margin-left: -17.3rem;
     }
 }
 
@@ -326,7 +361,7 @@ hr.light-100 {
 
 
 
-/*---Firefox Bug Fix --*/
+/*--- Arrumando erro do Firefox. --*/
 .carousel-item {
     transition: -webkit-transform 0.5s ease;
     transition: transform 0.5s ease;

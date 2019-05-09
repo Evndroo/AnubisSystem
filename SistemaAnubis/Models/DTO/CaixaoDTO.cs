@@ -10,19 +10,17 @@ namespace SistemaAnubis.Models.DTO
     {
 
         public string Codigo { get; set; }
-
-        [ReadOnly(true)]
+        
         public string Altura { get; set; }
-
-        [ReadOnly(true)]
+        
         public string Largura { get; set; }
-
-        [ReadOnly(true)]
+                
         public string Profundidade { get; set; }
 
         public string Modelo { get; set; }
 
-        [ReadOnly(true)]
+        public string Descricao { get; set; }
+
         public string Valor { get; set; }
     }
 }

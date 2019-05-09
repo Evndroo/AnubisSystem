@@ -157,8 +157,8 @@ namespace SistemaAnubis.Controllers
                 return View();
             }
             catch
-            {
-                return View();
+            {            
+                return Content("<script language='javascript' type='text/javascript'> alert('Erro ao cadastrar!');</script>");
             }
         }
 
@@ -221,7 +221,7 @@ namespace SistemaAnubis.Controllers
             }
             catch
             {
-                return View();
+                return Content("<script language='javascript' type='text/javascript'> alert('Erro ao cadastrar!');</script>");
             }
         }
 

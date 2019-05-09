@@ -37,28 +37,6 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Cliente(ClienteDTO dto, FormCollection frm)
         {
-
-
-            if (frm["busca"] == "Usuário")
-            {
-                dgv.DataSource = new ClienteBLL().buscarUser(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else if (frm["busca"] == "CPF")
-            {
-                dgv.DataSource = new ClienteBLL().buscarCpf(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else if (frm["busca"] == "E-mail")
-            {
-                dgv.DataSource = new ClienteBLL().buscarEmail(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else
-            {
-                ViewBag.GridViewString = "Escolha uma maneira de consulta";
-            }
-
             return View();
         }
 
@@ -69,63 +47,13 @@ namespace SistemaAnubis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Funcionario(FuncionarioDTO dto, FormCollection frm)
-        {
+        public ActionResult Funcionario(FuncionarioDTO dto, FormCollection frm){return View();}
 
-
-            if (frm["busca"] == "Usuário")
-            {
-                dgv.DataSource = new FuncionarioBLL().buscarUser(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else if (frm["busca"] == "CPF")
-            {
-                dgv.DataSource = new FuncionarioBLL().buscarCpf(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else if (frm["busca"] == "E-mail")
-            {
-                dgv.DataSource = new FuncionarioBLL().buscarEmail(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else
-            {
-                ViewBag.GridViewString = "Escolha uma maneira de consulta";
-            }
-
-            return View();
-        }
-
-        public ActionResult Administrador()
-        {
-
-            return View();
-        }
+        public ActionResult Administrador(){return View();}
 
         [HttpPost] 
         public ActionResult Administrador(AdministradorDTO dto, FormCollection frm)
         {
-            
-            
-            if (frm["busca"] == "Usuário")
-            {
-                dgv.DataSource = new AdministradorBLL().buscarUser(dto);
-                ViewBag.GridViewString =CarregaGrid();
-            }
-            else if (frm["busca"] == "CPF")
-            {
-                dgv.DataSource = new AdministradorBLL().buscarCpf(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else if (frm["busca"] == "E-mail")
-            {
-                dgv.DataSource = new AdministradorBLL().buscarEmail(dto);
-                ViewBag.GridViewString = CarregaGrid();
-            }
-            else {
-                ViewBag.GridViewString = "Escolha uma maneira de consulta";
-            }
-
             return View();
         }
 

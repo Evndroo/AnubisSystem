@@ -22,14 +22,14 @@
     <div class="d-flex" id="wrapper">
 
         <!-- Sidebar -->
-        <div class="border-right" id="sidebar-wrapper">
+        <div id="sidebar-wrapper">
             <div class="sidebar-heading">Funções Administrativas</div>
             <div class="list-group list-group-flush">
                 <div class="sidebar-heading">Cadastro</div>
-                <a href="#" class="list-group-item list-group-item-action" id="list-group-item">Cliente</a>
-                <a href="#" class="list-group-item list-group-item-action" id="list-group-item">Falecido</a>
-                <a href="#" class="list-group-item list-group-item-action" id="list-group-item">Funcionário</a>
-                <a href="#" class="list-group-item list-group-item-action" id="list-group-item">Administrador</a>
+                @Html.ActionLink("Cliente", "Cliente", "Cadastro", new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Falecido", "Falecido", "Cadastro", new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Funcionário", "Funcionario", "Cadastro", new { @class = "list-group-item list-group-item-action" })
+                @Html.ActionLink("Administrador", "Administrador", "Cadastro", new { @class = "list-group-item list-group-item-action" })
                 <div class="sidebar-heading">Outras Funções</div>
                 <a href="#" class="list-group-item list-group-item-action" id="list-group-item">Busca/Alteração</a>
                 <a href="#" class="list-group-item list-group-item-action" id="list-group-item">Planos</a>
@@ -39,51 +39,18 @@
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg border-bottom" style="background-color: #000; color: #fff;">
+            <nav class="navbar navbar-expand-lg" style="background-color: #000; color: #fff;">
                 <button class="btn btn-primary" id="menu-toggle">Menu</button>
             </nav>
-            <div>
-                @RenderBody()
-            </div>
-            <!--- Footer -->
-            <footer style="padding-top: 0;">
-                <div class="container-fluid padding" style="background-color: #000000;">
-                    <div class="row text-center">
-                        <div class="col-md-4">
-                            <hr class="light">
-                            <h5>Horários</h5>
-                            <hr class="light">
-                            <p>De segunda à sexta: 07hr às 22hr</p>
-                            <p>Sábado: 12hr às 20hr</p>
-                            <p>Domingo: Fechado.</p>
-                        </div>
-                        <div class="col-md-4">
-                            <hr class="light">
-                            <h5>Service Area</h5>
-                            <hr class="light">
-                            <p>City, State, 00000</p>
-                        </div>
-                        <div class="col-12">
-                            <hr class="light-100">
-                            <img src="~/Imagens/emgelf_logo.PNG" style="width: 100px; height: 100px; padding-bottom: 10px;">
-                            <p>Website inteiramente produzido pela empresa Emgelf Corporation.</p>
-                            <p>COPYRIGHT &copy; 2019. TODOS OS DIREITOS RESERVADOS.</p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
-    </div>
+                    @RenderBody()
 
 
     <!-- Bootstrap core JavaScript -->
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
-    
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Menu Toggle Script -->
-
     <script>
-
         $("#menu-toggle").click(function (e) {
             e.preventDefault();
             $("#wrapper").toggleClass("toggled");

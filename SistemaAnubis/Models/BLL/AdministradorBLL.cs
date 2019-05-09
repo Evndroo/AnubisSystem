@@ -59,7 +59,7 @@ namespace SistemaAnubis.Models.BLL
         MySqlDataReader dr;
         public DataTable buscarCpf(AdministradorDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where cpf_func = @cpf", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busCliCPF(@cpf)", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
             dr = cmd.ExecuteReader();
 
@@ -80,7 +80,7 @@ namespace SistemaAnubis.Models.BLL
 
         public DataTable buscarEmail(AdministradorDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where email_func = @email", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busCliEmail(@email)", con.conectarBD());
             cmd.Parameters.AddWithValue("@email", dto.Email);
             dr = cmd.ExecuteReader();
 
@@ -99,10 +99,10 @@ namespace SistemaAnubis.Models.BLL
             return Data(cmd);
         }
 
-        public DataTable buscarUser(AdministradorDTO dto)
+        public DataTable buscarNome(AdministradorDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbFuncionario where user = @user", con.conectarBD());
-            cmd.Parameters.AddWithValue("@user", dto.User);
+            MySqlCommand cmd = new MySqlCommand("call busCli(@nome)", con.conectarBD());
+            cmd.Parameters.AddWithValue("@nome", dto.Nome);
             dr = cmd.ExecuteReader();
 
 

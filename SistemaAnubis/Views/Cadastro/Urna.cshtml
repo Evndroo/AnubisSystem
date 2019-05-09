@@ -1,46 +1,59 @@
-﻿<script language="javaScript" type="text/javascript" src="~/Scripts/urna.js"></script>
-@model SistemaAnubis.Models.DTO.UrnaDTO
+﻿@model SistemaAnubis.Models.DTO.UrnaDTO
 
 @{
     Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
 
     List<string> TiposUrna = new List<string>();
-    TiposUrna.Add("Caixão alto");
-    TiposUrna.Add("Caixão baixo");
+    TiposUrna.Add("Urna alta");
+    TiposUrna.Add("Urna baixa");
 }
+<div class="form-container" id="formUrna">
+    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+        @using (Html.BeginForm())
+        {
+        <fieldset>
+            <div class="validation-summary-valid" data-valmsg-summary="true">
+                <ul>
+                    <li style="display:none"></li>
+                </ul>
+            </div>
+
+            @Html.ValidationSummary()
 
 
-@using (Html.BeginForm())
-{
-    <fieldset>
-        @Html.ValidationSummary()
+            @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "dropUrna", @class = "form-control my-2", onChange = "Urna();" })
 
 
-        @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "dropUrna", onChange = "dropUrna();" })
+            @Html.LabelFor(m => m.Altura)
 
+            @Html.TextBoxFor(m => m.Altura, new {@readonly = "readonly", @id = "altura", @class = "form-control" })
 
-        @Html.LabelFor(m => m.Altura)
+            @Html.LabelFor(m => m.Largura)
 
-        @Html.TextBoxFor(m => m.Altura, new { disabled = "disabled", @readonly = "readonly", @id = "altura" })
+            @Html.TextBoxFor(m => m.Largura, new { @readonly = "readonly", @id = "largura", @class = "form-control" })
 
-        @Html.LabelFor(m => m.Largura) 
+            @Html.LabelFor(m => m.Profundidade)
 
-        @Html.TextBoxFor(m => m.Largura, new { disabled = "disabled", @readonly = "readonly", @id = "largura" })
+            @Html.TextBoxFor(m => m.Profundidade, new { @readonly = "readonly", @id = "profundidade", @class = "form-control" })
 
-        @Html.LabelFor(m => m.Profundidade)
+            @Html.LabelFor(m => m.Nome)
 
-        @Html.TextBoxFor(m => m.Profundidade, new { disabled = "disabled", @readonly = "readonly", @id = "profundidade" })
+            @Html.TextBoxFor(m => m.Nome, new { id = "Nome", @class = "form-control" })
 
-        @Html.LabelFor(m => m.Nome)
+            @Html.LabelFor(m => m.Descricao)
 
-        @Html.EditorFor(m => m.Nome)
+            @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
 
-        @Html.LabelFor(m => m.Valor)
+            @Html.LabelFor(m => m.Valor)
 
-        @Html.TextBoxFor(m => m.Valor, new { disabled = "disabled", @readonly = "readonly", @id = "valor" })
-
-        <input type="submit">
-
-    </fieldset>
-}
+            @Html.TextBoxFor(m => m.Valor, new { @readonly = "readonly", @id = "valor", @class = "form-control" })
+            <div class="col text-center my-3">
+                <button type="submit" class="btn btn-primary">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </fieldset>
+        }
+    </div>
+    
+</div>
