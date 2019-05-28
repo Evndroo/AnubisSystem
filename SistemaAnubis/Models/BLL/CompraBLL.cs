@@ -39,7 +39,7 @@ namespace SistemaAnubis.Models.BLL
         MySqlDataReader dr;
         public void buscar(CompraDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbCompra where cpf_adm = @cli", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("select * from tbCompra where cod_cli = @cli", con.conectarBD());
             cmd.Parameters.AddWithValue("@cli", dto.Cliente);
             dr = cmd.ExecuteReader();
 

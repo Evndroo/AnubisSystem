@@ -9,17 +9,58 @@ namespace SistemaAnubis.Models.DTO
 {
     public class LoginDTO
     {
-        
-        
-        [Required]
+
+
+        [DisplayName("Usuário")]
         public string User { get; set; }
 
-        [Required]
+
         [DisplayName("Digite sua senha")]
+        
         public string Senha { get; set; }
         
-        [Required]
+        
         [DisplayName("Confirme sua senha")]
         public string ConfSenha { get; set; }
+
+        public string Codigo;
+
+        
+        [StringLength(85, MinimumLength = 3)]
+        public string Nome { get; set; }
+
+        
+        [DisplayName("CPF")]
+        public string Cpf { get; set; }
+        
+        [DataType(DataType.EmailAddress,ErrorMessage = "Email inválido")]
+        public string Email { get; set; }
+
+        [RegularExpression(@"^\d{10}$|^\d{8}$")]
+        public string Telefone { get; set; }
+
+        
+        [RegularExpression(@"^\d{11}$|^\d{9}$")]
+        public string Celular { get; set; }
+
+        [DisplayName("CEP")]
+        public string Cep { get; set; }
+
+        public string erro;
+
+        public string Num { get; set; }
+
+        public void LimpaDTO(LoginDTO dto) {
+            dto.Codigo = null;
+            dto.User = null;
+            dto.Senha = null;
+            dto.Nome = null;
+            dto.Cpf = null;
+            dto.Email = null;
+            dto.Telefone = null;
+            dto.Celular = null;
+            dto.Cep = null;
+            dto.Num = null;
+        }
     }
 }
