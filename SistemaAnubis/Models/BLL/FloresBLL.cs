@@ -16,11 +16,13 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(FloresDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirAdm(@codigo,@especie,@quantidade,@tipo)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call inserirFlores(@especie,@tipo,@quantidade,@val)", con.conectarBD());
             cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
             cmd.Parameters.Add("@quantidade", MySqlDbType.VarChar).Value = dto.Quantidade;
             cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
+            cmd.Parameters.Add("@val", MySqlDbType.VarChar).Value = dto.Valor;
+
 
             cmd.ExecuteNonQuery();
             con.desconectarBD();
@@ -70,8 +72,8 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(FloresDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbFlores where cpf_adm = @cpf", con.conectarBD());
-            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call delFlores(@especie)", con.conectarBD());
+            cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
 
             con.desconectarBD();
         }

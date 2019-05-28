@@ -13,5 +13,6 @@ namespace SistemaAnubis.Models.DTO
         public string Especie { get; set; }
         public string Circunferencia { get; set; }
         public string Descricao { get; set; }
+        public string Valor { get; internal set; }
     }
 }

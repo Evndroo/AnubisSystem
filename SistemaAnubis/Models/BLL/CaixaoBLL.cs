@@ -16,7 +16,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call inserirCaixao(@modelo,@altura,@largura,@profundidade,@descricao,@valor)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call inserirCaixao(@modelo,@altura,@largura,@profundidade,@descricao,@valor);", con.conectarBD());
             cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Modelo;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
             cmd.Parameters.Add("@largura", MySqlDbType.VarChar).Value = dto.Largura;
@@ -43,8 +43,8 @@ namespace SistemaAnubis.Models.BLL
         MySqlDataReader dr;
         public void buscar(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbCaixao where ", con.conectarBD());
-            cmd.Parameters.AddWithValue("@cod", dto.Codigo);
+            MySqlCommand cmd = new MySqlCommand("call busCaixao(@modelo) ", con.conectarBD());
+            cmd.Parameters.AddWithValue("@modelo", dto.Modelo);
             dr = cmd.ExecuteReader();
 
 
@@ -63,7 +63,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void atualizar(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("update tbCaixao set where ", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call upCaixao(@cod,@altura,@largura,@profundidade,@modelo, @valor) ", con.conectarBD());
             cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
             cmd.Parameters.Add("@largura", MySqlDbType.VarChar).Value = dto.Largura;
@@ -76,8 +76,8 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbCaixao where cod_caixao = @cod", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call delCaixao(@codigo)", con.conectarBD());
+            cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
 
             con.desconectarBD();
         }

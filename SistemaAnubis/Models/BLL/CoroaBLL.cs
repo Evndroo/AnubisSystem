@@ -16,12 +16,13 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirCoroa(@codigo,@tipo,@especie,@circunferencia,@descricao)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call inserirCoroa(@especie,@tipo,@circunferencia,@descricao,@val)", con.conectarBD());
             cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
             cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
             cmd.Parameters.Add("@circunferencia", MySqlDbType.VarChar).Value = dto.Circunferencia;
             cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = dto.Descricao;
+            cmd.Parameters.Add("@val", MySqlDbType.VarChar).Value = dto.Valor;
 
             cmd.ExecuteNonQuery();
             con.desconectarBD();
@@ -42,7 +43,7 @@ namespace SistemaAnubis.Models.BLL
         MySqlDataReader dr;
         public void buscar(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbCoroa where cpf_adm = @codigo", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busCoroaDono(@codigo)", con.conectarBD());
             cmd.Parameters.AddWithValue("@codigo", dto.Codigo);
             dr = cmd.ExecuteReader();
 
@@ -61,7 +62,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void atualizar(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("update tbCoroa set nome_adm=@Nome, cpf_adm=@cpf, tel_adm=@tel, email_adm=@email, cel_adm = @cel, CepAdm=@cep, admnum_end = @num where cpf_adm = @cpf", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call upCoroa(@codigo,@tipo,@especie,@circunferencia,@desccricao)", con.conectarBD());
             cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
             cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
@@ -73,8 +74,8 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbCoroa where cod_coroa = @cod", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call delCoroa(@codigo)", con.conectarBD());
+            cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
 
             con.desconectarBD();
         }

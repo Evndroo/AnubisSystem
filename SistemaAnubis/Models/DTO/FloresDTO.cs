@@ -12,5 +12,6 @@ namespace SistemaAnubis.Models.DTO
         public string Especie { get; set; }
         public string Quantidade { get; set; }
         public string Tipo { get; set; }
+        public string Valor { get; internal set; }
     }
 }

@@ -15,10 +15,10 @@ namespace SistemaAnubis.Models.DTO
         public string QuantFlor { get; set; }
         public string Coroa { get; set; }
         public string QuantCoroa { get; set; }
-        public string Lapide { get; set; }
-        public string Necromaquiagem { get; set; }
-        public string Paramentacao { get; set; }
-        public string Translado { get; set; }
-        public string Veu { get; set; }
+        public bool Lapide { get; set; }
+        public bool Necromaquiagem { get; set; }
+        public bool Paramentacao { get; set; }
+        public bool Translado { get; set; }
+        public bool Veu { get; set; }
     }
 }

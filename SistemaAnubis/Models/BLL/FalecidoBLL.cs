@@ -16,14 +16,13 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(FalecidoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirFal(@cod,@nome,@nascimento,@falecimento,@circunferencia,@altura,@plano,@responsavel)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call inserirFal(@responsavel,@nome,@nascimento,@falecimento,@circunferencia,@altura)", con.conectarBD());
             cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
             cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
             cmd.Parameters.Add("@nascimento", MySqlDbType.VarChar).Value = dto.Nascimento;
             cmd.Parameters.Add("@falecimento", MySqlDbType.VarChar).Value = dto.Falecimento;
             cmd.Parameters.Add("@circunferencia", MySqlDbType.VarChar).Value = dto.Circunferencia;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
-            cmd.Parameters.Add("@plano", MySqlDbType.VarChar).Value = dto.Plano;
             cmd.Parameters.Add("@responsavel", MySqlDbType.VarChar).Value = dto.Responsavel;
 
             cmd.ExecuteNonQuery();
@@ -81,7 +80,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(FalecidoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbFalecido where cod_fal = @cod", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call delFalecido(cod)", con.conectarBD());
             cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
 
             con.desconectarBD();

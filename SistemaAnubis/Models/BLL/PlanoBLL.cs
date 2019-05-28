@@ -62,11 +62,11 @@ namespace SistemaAnubis.Models.BLL
                 dto.QuantFlor = dr[3].ToString();
                 dto.Coroa = dr[4].ToString();
                 dto.QuantCoroa = dr[5].ToString();
-                dto.Lapide = dr[6].ToString();
-                dto.Necromaquiagem = dr[7].ToString();
-                dto.Paramentacao = dr[8].ToString();
-                dto.Translado = dr[9].ToString();
-                dto.Veu = dr[10].ToString();
+                dto.Lapide = bool.Parse(dr[6].ToString());
+                dto.Necromaquiagem = bool.Parse(dr[7].ToString());
+                dto.Paramentacao = bool.Parse(dr[8].ToString());
+                dto.Translado = bool.Parse(dr[9].ToString());
+                dto.Veu = bool.Parse(dr[10].ToString());
 
             }
             con.desconectarBD();
@@ -93,8 +93,8 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(PlanoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbPlano where cpf_adm = @cpf", con.conectarBD());
-            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call delPlano(@cod)", con.conectarBD());
+            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
 
             con.desconectarBD();
         }

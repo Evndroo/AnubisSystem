@@ -17,11 +17,11 @@ namespace SistemaAnubis.Models.BLL
         public void inserir(UrnaDTO dto)
         {
             MySqlCommand cmd = new MySqlCommand("call inserirUrna(@nome,@altura,@largura,@profundidade,@descricao,@valor)", con.conectarBD());
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
             cmd.Parameters.Add("@largura", MySqlDbType.VarChar).Value = dto.Largura;
             cmd.Parameters.Add("@profundidade", MySqlDbType.VarChar).Value = dto.Profundidade;
             cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = dto.Descricao;
-            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
             cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
 
             cmd.ExecuteNonQuery();
@@ -50,6 +50,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = int.TryParse(dr[0].ToString(),out);
                 dto.Altura = dr[1].ToString();
                 dto.Largura = dr[2].ToString();
                 dto.Profundidade = dr[3].ToString();
@@ -73,8 +74,8 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(UrnaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbUrna where cpf_adm = @cpf", con.conectarBD());
-            //cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call delUrna(@cpf)", con.conectarBD());
+            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
 
             con.desconectarBD();
         }

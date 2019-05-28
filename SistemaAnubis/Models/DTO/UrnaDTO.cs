@@ -21,6 +21,6 @@ namespace SistemaAnubis.Models.DTO
         public string Descricao { get; set; }
 
         public string Valor { get; set; }
-
+        public int Codigo { get;  set; }
     }
 }
