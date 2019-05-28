@@ -27,8 +27,8 @@ namespace SistemaAnubis.Controllers
         public ActionResult Administrador(AdministradorDTO dto)
         {
             if (Validacoes.IsCpf(dto.Cpf)) {
-                //if (dto.ConfSenha.Equals(dto.Senha))
-                //{
+                if (dto.ConfSenha.Equals(dto.Senha))
+                {
                     AdministradorBLL bll = new AdministradorBLL();
                     bll.inserir(dto);
                     if (dto.erro == "1")
@@ -37,14 +37,23 @@ namespace SistemaAnubis.Controllers
                         return View();
                     }
                     else if (dto.erro == "2")
-                        return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                    {
+                        ViewBag.erro2 = "Cpf já cadastrado";
+                        return View();
+                    }
+                    else if (dto.erro == "3")
+                    {
+                        ViewBag.erro3 = "Email já cadastrado.";
+                        return View();
+                    }
                     else
                         return View();
-                //}
-                //else {
-                    
-                    //return View();
-                //}
+                }
+                else
+                {
+
+                    return View();
+                }
             }
             else {
                 
@@ -150,16 +159,16 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Caixao(CaixaoDTO dto)
         {
-            try
-            {
+            //try
+            //{
                 CaixaoBLL bll = new CaixaoBLL();
                 bll.inserir(dto);
                 return View();
-            }
-            catch
-            {            
-                return Content("<script language='javascript' type='text/javascript'> alert('Erro ao cadastrar!');</script>");
-            }
+            //}
+            //catch
+            //{            
+            //    return Content("<script language='javascript' type='text/javascript'> alert('Erro ao cadastrar!');</script>");
+            //}
         }
 
 
