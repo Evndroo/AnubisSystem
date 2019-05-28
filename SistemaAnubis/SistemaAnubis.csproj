@@ -147,11 +147,13 @@
     <Compile Include="Models\BLL\FalecidoBLL.cs" />
     <Compile Include="Models\BLL\FloresBLL.cs" />
     <Compile Include="Models\BLL\FuncionarioBLL.cs" />
+    <Compile Include="Models\BLL\LoginBLL.cs" />
     <Compile Include="Models\BLL\PlanoBLL.cs" />
     <Compile Include="Models\BLL\UrnaBLL.cs" />
     <Compile Include="Models\DAL\Conexao.cs" />
     <Compile Include="Models\DTO\FloresDTO.cs" />
     <Compile Include="Models\DTO\CoroaDTO.cs" />
+    <Compile Include="Models\DTO\Logado.cs" />
     <Compile Include="Models\DTO\LoginDTO.cs" />
     <Compile Include="Models\DTO\CompraDTO.cs" />
     <Compile Include="Models\DTO\PlanoDTO.cs" />
@@ -169,6 +171,8 @@
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Imagens\2.jpg" />
+    <Content Include="Imagens\3.jpg" />
     <Content Include="Imagens\emgelf_logo.PNG" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap.css" />
@@ -222,7 +226,6 @@
     <Content Include="Views\Cadastro\Urna.cshtml" />
     <Content Include="Views\Cadastro\Plano.cshtml" />
     <Content Include="Views\Cadastro\Compra.cshtml" />
-    <Content Include="Views\Consulta\Index.cshtml" />
     <Content Include="Views\Consulta\Planos.cshtml" />
     <Content Include="Views\Consulta\Coroa.cshtml" />
     <Content Include="Views\Consulta\Flores.cshtml" />
@@ -245,6 +248,8 @@
     <Content Include="Views\Home\Suporte.cshtml" />
     <Content Include="Views\Home\Empresa.cshtml" />
     <Content Include="Views\Shared\_Logado.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\Esqueci.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
