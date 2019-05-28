@@ -5,53 +5,71 @@
     ViewBag.Title = "Cadastrar Administrador";
 }
 
-@using (Html.BeginForm())
+
+
+@using (Html.BeginForm("Administrador", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
 {
-<fieldset>
-    @Html.ValidationSummary()
-    <legend>Cadastrar Administrador</legend>
-    @Html.LabelFor(m => m.User)
+<div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+    <fieldset>
+        <div class="validation-summary-valid" data-valmsg-summary="true">
+            <ul>
+                <li style="display:none"><legend>Cadastrar Caixão</legend></li>
+            </ul>
+        </div>
+        @Html.ValidationSummary()
 
-    @Html.EditorFor(m => m.User)  @ViewBag.erro <br>
+        @Html.LabelFor(m => m.User) <br>
 
-    @Html.LabelFor(m => m.Senha)
+        @Html.TextBoxFor(m => m.User, new { @class = "form-control" })  @ViewBag.erro <br>
 
-    @Html.PasswordFor(m => m.Senha) <br>
+        @Html.ValidationMessageFor(m => m.User)
 
-    @Html.LabelFor(m => m.ConfSenha)
+        @Html.LabelFor(m => m.Senha) <br>
 
-    @Html.PasswordFor(m => m.Senha) <br>
+        @Html.PasswordFor(m => m.Senha, new { @class = "form-control" }) <br>
 
-    @Html.LabelFor(m => m.Nome)
+        @Html.LabelFor(m => m.ConfSenha) <br>
 
-    @Html.EditorFor(m => m.Nome)<br>
+        @Html.PasswordFor(m => m.ConfSenha, new { @class = "form-control" }) <br>
 
-    @Html.LabelFor(m => m.Cpf)
+        @Html.LabelFor(m => m.Nome) <br>
 
-    @Html.EditorFor(m => m.Cpf) <br>
+        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })<br>
 
-    @Html.LabelFor(m => m.Email)
+        @Html.LabelFor(m => m.Cpf) <br>
 
-    @Html.EditorFor(m => m.Email /*, new { InputType="email"}*/) <br>
+        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control" }) <br>
 
-    @Html.LabelFor(m => m.Telefone)
+        @Html.LabelFor(m => m.Email) <br>
 
-    @Html.EditorFor(m => m.Telefone) <br>
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" }) <br>
 
-    @Html.LabelFor(m => m.Celular)
+        @ViewBag.erro2
 
-    @Html.EditorFor(m => m.Celular) <br>
+        @Html.ValidationMessageFor(m => m.Email)
 
-    @Html.LabelFor(m => m.Cep)
+        @Html.LabelFor(m => m.Telefone) <br>
 
-    @Html.EditorFor(m => m.Cep) <br>
+        @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" }) <br>
 
-    @Html.LabelFor(m => m.Num)
+        @Html.LabelFor(m => m.Celular) <br>
 
-    @Html.EditorFor(m => m.Num) <br>
+        @Html.TextBoxFor(m => m.Celular, new { @class = "form-control" }) <br>
+
+        @Html.LabelFor(m => m.Cep) <br>
+
+        @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" }) <br>
+
+        @Html.LabelFor(m => m.Num) <br>
+
+        @Html.TextBoxFor(m => m.Num, new { @class = "form-control" }) <br>
 
 
-    <input type="submit">
+        <div class="col text-center my-3">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </div>
 
-</fieldset>
-} 
+    </fieldset>
+</div>
+ }
+        

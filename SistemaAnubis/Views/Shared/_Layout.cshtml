@@ -21,32 +21,34 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" style="color: #ffff;">Home<span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Index", "Home", new { style = "color:ffffff", @class = "nav-link" })
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #ffff;">Empresa</a>
+                    @Html.ActionLink("Empresa", "Empresa", "Home", new { style = "color:ffffff", @class = "nav-link" })
+
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #ffff;">Portfólio</a>
+                    @Html.ActionLink("Portfólio", "Portifolio", "Home", new { style = "color:ffffff", @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #ffff;">Suporte</a>
+                    @Html.ActionLink("Suporte", "Suporte", "Home", new { style = "color:ffffff", @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #ffff;">Contato</a>
+                    @Html.ActionLink("Contato", "Contato", "Home", new { style = "color:ffffff", @class = "nav-link" })
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" style="color: #ffff;">Entre ou Cadastre-se</a>
+                    @Html.ActionLink("Entre ou Cadastre-se", "Login", "Home", new { style = "color:ffffff", @class = "nav-link" })
                 </li>
             </ul>
         </div>
     </nav>
+
     @RenderBody()
 
-    <footer style="padding-top: 0;">
-        <div class="container-fluid padding" style="background-color: #000000;">
+    <footer style="padding-top: 0; padding-bottom: 0;">
+        <div class="container-fluid" style="background-color: #000000;">
             <div class="row text-center">
                 <div class="col-md-4">
                     <hr class="light">
@@ -58,18 +60,23 @@
                 </div>
                 <div class="col-md-4">
                     <hr class="light">
-                    <h5>Service Area</h5>
+                    <h5>Áreas de serviço</h5>
                     <hr class="light">
-                    <p>City, State, 00000</p>
-                    <p>City, State, 00000</p>
-                    <p>City, State, 00000</p>
-                    <p>City, State, 00000</p>
+                    <p>Vila Leopoldina, São Paulo, 437</p>
+                    <p>Carapicuíba, São Paulo, 103</p>
                 </div>
-                <div class="col-12">
+                <div class="col-md-4">
+                    <hr class="light">
+                    <h5>Contato Rápido</h5>
+                    <hr class="light">
+                    <p>(11) 4147-1234</p>
+                    <p>anubisfuneraria@gmail.com</p>
+                </div>
+                <div class="col-12 pb-0">
                     <hr class="light-100">
-                    <img src="~/Imagens/emgelf_logo.PNG" style="width: 100px; height: 100px; padding-bottom: 10px;">
+                    <img src="imagens/emgelf logo.PNG" style="width: 100px; height: 100px; padding-bottom: 10px;">
                     <p>Website inteiramente produzido pela empresa Emgelf Corporation.</p>
-                    <p>COPYRIGHT &copy; 2019 - TODOS OS DIREITOS RESERVADOS.</p>
+                    <p>COPYRIGHT &copy; 2019. TODOS OS DIREITOS RESERVADOS.</p>
                 </div>
             </div>
         </div>

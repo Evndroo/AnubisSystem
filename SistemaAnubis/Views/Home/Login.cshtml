@@ -1,0 +1,32 @@
+﻿@model SistemaAnubis.Models.DTO.ClienteDTO
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+@ViewBag.msg
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+{
+    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+        <fieldset>
+            @Html.LabelFor(m => m.User)
+            @Html.TextBoxFor(m => m.User, new { @class = "form-control", id = "login", name = "Login", placeholder = "Digite seu CPF ou E-mail" })
+            @Html.LabelFor(m => m.Senha)
+            @Html.PasswordFor(m => m.Senha, new { @class = "form-control", id = "senha", name = "senha" })
+
+
+
+            <div class="col text-center my-3">
+                @Html.ActionLink("Esqueci minha senha", "Esqueci", "Home", new { style = "color: #fff;" })<br>
+                <button type="reset" class="btn btn-primary">Limpar</button>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+            </div>
+            <div class="form-group text-center">
+                <label>Ainda não tem uma conta?</label>
+                @Html.ActionLink("Cadastre-se", "Cliente", "Cadastro", new { @class = "btn btn-outline-primary" })
+            </div>
+        </fieldset>
+    </div>
+}

@@ -5,14 +5,53 @@
     ViewBag.Title = "Cadastrar Administrador";
 }
 
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Plano", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
 {
-    <fieldset>
-        @Html.ValidationSummary()
-        
+    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+        <fieldset>
+            <div class="validation-summary-valid" data-valmsg-summary="true">
+                <ul>
+                    <li style="display:none"><legend>Cadastrar Plano</legend></li>
+                </ul>
+            </div>
+            @Html.ValidationSummary()
 
 
-        <input type="submit">
 
-    </fieldset>
-} 
+            @Html.LabelFor(m => m.Caixao)
+
+            @Html.TextBoxFor(m => m.Caixao, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.Coroa)
+
+            @Html.TextBoxFor(m => m.Coroa, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.Urna)
+
+            @Html.TextBoxFor(m => m.Urna, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.Veu)
+
+            @Html.CheckBoxFor(m => m.Veu, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.Necromaquiagem)
+
+            @Html.CheckBoxFor(m => m.Necromaquiagem, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.Paramentacao)
+
+            @Html.CheckBoxFor(m => m.Paramentacao, new { @class = "form-control" })
+
+            @Html.LabelFor(m => m.Translado)
+
+            @Html.CheckBoxFor(m => m.Translado, new { @class = "form-control" })
+
+            <div class="col text-center my-3">
+                <button type="submit" class="btn btn-primary">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </fieldset>
+        </div>
+        }
+

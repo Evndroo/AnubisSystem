@@ -6,7 +6,7 @@
     ViewBag.Title = "Cadastrar Administrador";
 
     List<string> TipoBusca = new List<string>();
-    
+
     TipoBusca.Add("");
     TipoBusca.Add("Usuário");
     TipoBusca.Add("CPF");
@@ -14,21 +14,23 @@
 }
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Administrador", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
 {
-<fieldset>
-    @Html.ValidationSummary()
-    <legend>Consultar Administrador</legend>
-    Consultar por:
-    @Html.DropDownList("TipoBusca", new MultiSelectList(TipoBusca)) <br />
-    
-
-    <input type="text" name="busca" id="busca" />
+    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+        <fieldset>
+            @Html.ValidationSummary()
+            <legend>Consultar Administrador</legend>
+            Consultar por:
+            @Html.DropDownList("TipoBusca", new MultiSelectList(TipoBusca)) <br />
 
 
+            <input type="text" name="busca" id="busca" />
 
 
-    <input type="submit">
 
-</fieldset>
-} 
+
+            <input type="submit">
+
+        </fieldset>
+        </div>
+        }
