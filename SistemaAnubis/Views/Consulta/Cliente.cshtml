@@ -12,21 +12,31 @@
     }
     else
     {
-        using (Html.BeginForm("Cliente", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
+            using (Html.BeginForm("Cliente", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
 
-            <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
-            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                <fieldset>
-                    @Html.LabelFor(m => m.User)
+                <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+                        @Html.LabelFor(m => m.User)
 
 
 
 
-                    <input type="submit">
+                        <input type="submit">
 
-                </fieldset>
-            </div>
+                    </fieldset>
+                </div>
+            }
         }
+        else
+        {
+            <h1>Permissão negada</h1>
+            <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
+        }
+
+
     }
 }

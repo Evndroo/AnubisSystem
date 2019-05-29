@@ -15,7 +15,7 @@
     }
     else
     {
-        if (MvcApplication.Session.Instance.Nvl == "1")
+        if (int.Parse(MvcApplication.Session.Instance.Nvl)  == 1)
         {
             List<string> TipoBusca = new List<string>();
 
@@ -37,12 +37,11 @@
                     </fieldset>
                 </div>
             }
-
         }
-        else {
-               <h1>Permissão negada</h1>
-               <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
+        else
+        {
+            <h1>Permissão negada</h1>
+            <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
         }
-
     }
 }
