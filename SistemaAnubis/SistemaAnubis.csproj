@@ -250,6 +250,7 @@
     <Content Include="Views\Shared\_Logado.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Esqueci.cshtml" />
+    <Content Include="Views\Busca\Result.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

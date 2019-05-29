@@ -1,57 +1,64 @@
 ﻿@model SistemaAnubis.Models.DTO.PlanoDTO
 
 @{
-    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
-}
+
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <h1>Faça login primeiro</h1>
+        <a onclick="location.href='@Url.Action("Login","Home")'">Voltar</a>
+
+    }
+    else
+    {
+        using (Html.BeginForm("Plano", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+
+            <legend class="text-center card-title" style="color:white">Cadastrar Plano</legend>
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <fieldset>
+                    @Html.ValidationSummary()
 
 
-@using (Html.BeginForm("Plano", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-{
-    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-        <fieldset>
-            <div class="validation-summary-valid" data-valmsg-summary="true">
-                <ul>
-                    <li style="display:none"><legend>Cadastrar Plano</legend></li>
-                </ul>
+
+                    @Html.LabelFor(m => m.Caixao)
+
+                    @Html.TextBoxFor(m => m.Caixao, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Coroa)
+
+                    @Html.TextBoxFor(m => m.Coroa, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Urna)
+
+                    @Html.TextBoxFor(m => m.Urna, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Veu)
+
+                    @Html.CheckBoxFor(m => m.Veu, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Necromaquiagem)
+
+                    @Html.CheckBoxFor(m => m.Necromaquiagem, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Paramentacao)
+
+                    @Html.CheckBoxFor(m => m.Paramentacao, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Translado)
+
+                    @Html.CheckBoxFor(m => m.Translado, new { @class = "form-control" })
+
+                    <div class="col text-center my-3">
+                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </fieldset>
             </div>
-            @Html.ValidationSummary()
-
-
-
-            @Html.LabelFor(m => m.Caixao)
-
-            @Html.TextBoxFor(m => m.Caixao, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Coroa)
-
-            @Html.TextBoxFor(m => m.Coroa, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Urna)
-
-            @Html.TextBoxFor(m => m.Urna, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Veu)
-
-            @Html.CheckBoxFor(m => m.Veu, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Necromaquiagem)
-
-            @Html.CheckBoxFor(m => m.Necromaquiagem, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Paramentacao)
-
-            @Html.CheckBoxFor(m => m.Paramentacao, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Translado)
-
-            @Html.CheckBoxFor(m => m.Translado, new { @class = "form-control" })
-
-            <div class="col text-center my-3">
-                <button type="submit" class="btn btn-primary">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
-        </fieldset>
-        </div>
         }
+    }
+
+
+
 

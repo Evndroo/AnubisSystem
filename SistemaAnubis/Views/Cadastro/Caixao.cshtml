@@ -1,59 +1,68 @@
 ﻿@model SistemaAnubis.Models.DTO.CaixaoDTO
 
 @{
-    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
 
-    List<string> TiposCaixao = new List<string>();
-    TiposCaixao.Add("");
-    TiposCaixao.Add("Caixão alto");
-    TiposCaixao.Add("Caixão baixo");
-}
 
 
-@using (Html.BeginForm("Caixao", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-{
-    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-        <fieldset>
-            <div class="validation-summary-valid" data-valmsg-summary="true">
-                <ul>
-                    <li style="display:none"><legend>Cadastrar Caixão</legend></li>
-                </ul>
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <h1>Faça login primeiro</h1>
+        <a onclick="location.href='@Url.Action("Login","Home")'">Voltar</a>
+
+    }
+    else
+    {
+        List<string> TiposCaixao = new List<string>();
+        TiposCaixao.Add("");
+        TiposCaixao.Add("Caixão alto");
+        TiposCaixao.Add("Caixão baixo");
+
+        using (Html.BeginForm("Caixao", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+            <legend class="text-center card-title" style="color:white">Cadastrar Caixão </legend>
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <fieldset>
+
+                    @Html.Label("Tipo de caixão")
+                    @Html.DropDownList("dropCaixao", new MultiSelectList(TiposCaixao), new { id = "dropCaixao", onChange = "Caixao();", @class = "form-control" })
+
+
+
+                    @Html.LabelFor(m => m.Altura)
+
+                    @Html.TextBoxFor(m => m.Altura, new { @readonly = "readonly", id = "alturaC", @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Largura)
+
+                    @Html.TextBoxFor(m => m.Largura, new { @readonly = "readonly", id = "larguraC", @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Profundidade)
+
+                    @Html.TextBoxFor(m => m.Profundidade, new { @readonly = "readonly", id = "profundidadeC", @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Modelo)
+
+                    @Html.TextBoxFor(m => m.Modelo, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Descricao)
+
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Valor)
+
+                    @Html.TextBoxFor(m => m.Valor, new { id = "valor", @readonly = "readonly", @class = "form-control" })
+
+                    <div class="col text-center my-3">
+                        <button type="submit" class="btn btn-primary">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </fieldset>
             </div>
+        }
 
-            @Html.Label("Tipo de caixão")
-            @Html.DropDownList("dropCaixao", new MultiSelectList(TiposCaixao), new { id = "dropCaixao", onChange = "Caixao();", @class = "form-control" })
+    }
 
 
-
-            @Html.LabelFor(m => m.Altura)
-
-            @Html.TextBoxFor(m => m.Altura, new { @readonly = "readonly", id = "alturaC", @class = "form-control" })
-
-            @Html.LabelFor(m => m.Largura)
-
-            @Html.TextBoxFor(m => m.Largura, new { @readonly = "readonly", id = "larguraC", @class = "form-control" })
-
-            @Html.LabelFor(m => m.Profundidade)
-
-            @Html.TextBoxFor(m => m.Profundidade, new { @readonly = "readonly", id = "profundidadeC", @class = "form-control" })
-
-            @Html.LabelFor(m => m.Modelo)
-
-            @Html.TextBoxFor(m => m.Modelo, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Descricao)
-
-            @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
-
-            @Html.LabelFor(m => m.Valor)
-
-            @Html.TextBoxFor(m => m.Valor, new { id = "valor", @readonly = "readonly", @class = "form-control" })
-
-            <div class="col text-center my-3">
-                <button type="submit" class="btn btn-primary">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </div>
-        </fieldset>
-        </div>
- }
+    @

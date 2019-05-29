@@ -1,23 +1,31 @@
 ﻿@model SistemaAnubis.Models.DTO.CaixaoDTO
 
 @{
-    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
-}
 
-@using (Html.BeginForm("Caixao", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-{
-    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-        <fieldset>
-            @Html.ValidationSummary()
-            <legend>Cadastrar Administrador</legend>
-            @Html.LabelFor(m => m.User)
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <h1>Faça login primeiro</h1>
+        <a onclick="location.href='@Url.Action("Login","Home")'">Voltar</a>
+
+    }
+    else
+    {
+        using (Html.BeginForm("Caixao", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+            <legend class="text-center card-title" style="color:white">Busccar Caixao</legend>
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <fieldset>
+                    @Html.LabelFor(m => m.User)
 
 
 
 
-            <input type="submit">
+                    <input type="submit">
 
-        </fieldset>
-    </div>
-}
+                </fieldset>
+            </div>
+        }
+
+    }

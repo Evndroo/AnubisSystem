@@ -23,7 +23,9 @@ namespace SistemaAnubis.Models.DTO
         [DisplayName("Confirme sua senha")]
         public string ConfSenha { get; set; }
 
-        public string Codigo;
+        public string Codigo { get; set; }
+
+        public string CodUser { get; set; }
 
         
         [StringLength(85, MinimumLength = 3)]
@@ -31,6 +33,7 @@ namespace SistemaAnubis.Models.DTO
 
         
         [DisplayName("CPF")]
+        [Required(ErrorMessage ="Campo é obrigatório")]
         public string Cpf { get; set; }
         
         [DataType(DataType.EmailAddress,ErrorMessage = "Email inválido")]
@@ -49,6 +52,8 @@ namespace SistemaAnubis.Models.DTO
         public string erro;
 
         public string Num { get; set; }
+
+        public string Nvl { get; set; }
 
         public void LimpaDTO(LoginDTO dto) {
             dto.Codigo = null;

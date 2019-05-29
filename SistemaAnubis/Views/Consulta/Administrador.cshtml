@@ -1,36 +1,48 @@
 ﻿@model SistemaAnubis.Models.DTO.AdministradorDTO
 
 @{
+    /**/
 
-    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Cadastrar Administrador";
 
-    List<string> TipoBusca = new List<string>();
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <h1>Faça login primeiro</h1>
 
-    TipoBusca.Add("");
-    TipoBusca.Add("Usuário");
-    TipoBusca.Add("CPF");
-    TipoBusca.Add("E-mail");
-}
+        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
 
+    }
+    else
+    {
+        if (MvcApplication.Session.Instance.Nvl == "1")
+        {
+            List<string> TipoBusca = new List<string>();
 
-@using (Html.BeginForm("Administrador", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-{
-    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-        <fieldset>
-            @Html.ValidationSummary()
-            <legend>Consultar Administrador</legend>
-            Consultar por:
-            @Html.DropDownList("TipoBusca", new MultiSelectList(TipoBusca)) <br />
+            TipoBusca.Add("");
+            TipoBusca.Add("Usuário");
+            TipoBusca.Add("CPF");
+            TipoBusca.Add("E-mail");
 
+            using (Html.BeginForm("Administrador", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
 
-            <input type="text" name="busca" id="busca" />
+                <legend class="text-center card-title" style="color:white">Buscar Administrador</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+                        Consultar por:
+                        @Html.DropDownList("TipoBusca", new MultiSelectList(TipoBusca)) <br />
+                        <input type="text" name="busca" id="busca" />
+                        <input type="submit">
+                    </fieldset>
+                </div>
+            }
 
-
-
-
-            <input type="submit">
-
-        </fieldset>
-        </div>
         }
+        else {
+               <h1>Permissão negada</h1>
+               <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
+        }
+
+    }
+}

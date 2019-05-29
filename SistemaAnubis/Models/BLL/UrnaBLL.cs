@@ -50,7 +50,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = int.TryParse(dr[0].ToString(),out);
+                dto.Codigo = dr[0].ToString();
                 dto.Altura = dr[1].ToString();
                 dto.Largura = dr[2].ToString();
                 dto.Profundidade = dr[3].ToString();

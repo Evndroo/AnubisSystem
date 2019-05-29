@@ -1,43 +1,53 @@
 ﻿
 @{
-    Layout = "~/Views/Shared/_Logado.cshtml";
     ViewBag.Title = "Index";
+
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <h1>Faça login primeiro</h1>
+        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+        <div id="slides" class="carousel slide" data-ride="carousel">
+            <ul class="carousel-indicators">
+                <li data-target="#slides" data-slide-to="0" class="active"></li>
+                <li data-target="#slides" data-slide-to="1"></li>
+                <li data-target="#slides" data-slide-to="2"></li>
+            </ul>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/Imagens/1.jpg">
+                    <div class="carousel-caption">
+                        <img src="~/Imagens/logo.png" class="logo">
+                        <h1 class="display-2">ANUBIS</h1>
+                        <h3>AQUI VEM O SLOGAN DA ANUBIS.</h3>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Imagens/2.jpg">
+                    <div class="carousel-caption">
+                        <button type="button" class="btn btn-primary btn-lg">
+                            Desejo fazer um plano.
+                        </button>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="~/Imagens/3.jpg">
+                </div>
+                <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Anterior</span>
+                </a>
+                <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Próximo</span>
+                </a>
+            </div>
+        </div>
+    }
 }
 
-
-<div id="slides" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
-        <li data-target="#slides" data-slide-to="0" class="active"></li>
-        <li data-target="#slides" data-slide-to="1"></li>
-        <li data-target="#slides" data-slide-to="2"></li>
-    </ul>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/Imagens/1.jpg">
-            <div class="carousel-caption">
-                <img src="~/Imagens/logo.png" class="logo">
-                <h1 class="display-2">ANUBIS</h1>
-                <h3>AQUI VEM O SLOGAN DA ANUBIS.</h3>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/Imagens/2.jpg">
-            <div class="carousel-caption">
-                <button type="button" class="btn btn-primary btn-lg">
-                    Desejo fazer um plano.
-                </button>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="~/Imagens/3.jpg">
-        </div>
-        <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
-            <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Próximo</span>
-        </a>
-    </div>
-</div>

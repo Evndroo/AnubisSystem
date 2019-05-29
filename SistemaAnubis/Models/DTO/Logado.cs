@@ -9,21 +9,21 @@ namespace SistemaAnubis.Models.DTO
     public class Logado
     {
         public static string User { get; set; }
-        
+
         public static string Senha { get; set; }
-        
+
 
         public static string Codigo;
-        
+
         public static string Nome { get; set; }
-        
+
         public static string Cpf { get; set; }
-        
-        public static string Email { get; set; }        
+
+        public static string Email { get; set; }
 
         public static string Telefone { get; set; }
-        
-        public static string Celular { get; set; }        
+
+        public static string Celular { get; set; }
 
         public static string Cep { get; set; }
 

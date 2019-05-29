@@ -61,16 +61,17 @@ namespace SistemaAnubis.Controllers
             //    Senha está correta           E                      Login está correto              
             else if (dto.Senha == Logado.Senha && (dto.Cpf == Logado.Cpf || dto.User == Logado.User || dto.Email == Logado.Email)) //
             {
-                Logado.User = dto.User;
-                Logado.Senha = dto.Senha;
-                Logado.Nome = dto.Nome;
-                Logado.Cpf = dto.Cpf;
-                Logado.Email = dto.Email;
-                Logado.Telefone = dto.Telefone;
-                Logado.Celular = dto.Celular;
-                Logado.Cep = dto.Cep;
-                Logado.Num = dto.Num;
-
+                MvcApplication.Session.Instance.User = dto.User;
+                MvcApplication.Session.Instance.Senha = dto.Senha;
+                MvcApplication.Session.Instance.Nome = dto.Nome;
+                MvcApplication.Session.Instance.Cpf = dto.Cpf;
+                MvcApplication.Session.Instance.Email = dto.Email;
+                MvcApplication.Session.Instance.Telefone = dto.Telefone;
+                MvcApplication.Session.Instance.Celular = dto.Celular;
+                MvcApplication.Session.Instance.Cep = dto.Cep;
+                MvcApplication.Session.Instance.Num = dto.Num;
+                MvcApplication.Session.Instance.Nvl = dto.Nvl;
+                
                 return RedirectToAction("Index", "Busca");
             }
             else

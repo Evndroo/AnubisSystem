@@ -17,7 +17,7 @@ namespace SistemaAnubis.Controllers
 
         // GET: Busca
         public ActionResult Index(){
-            ViewBag.Mensagem = "Bem vindo " + Logado.Nome + ".";
+            ViewBag.Mensagem = "Bem vindo " + MvcApplication.Session.Instance.Nome + ".";
             return View();
         }
 
@@ -62,38 +62,52 @@ namespace SistemaAnubis.Controllers
             return View();
         }
 
+        
         [HttpPost]
         public ActionResult Funcionario(FuncionarioDTO dto, FormCollection frm)
         {
 
-
+            /*
             if (frm["busca"] == "Usuário")
             {
-                new FuncionarioBLL().buscarUser(dto);
+                new FuncionarioBLL().buscarUserGrid(dto);
                 return RedirectToAction("Index");
 
             }
             else if (frm["busca"] == "CPF")
             {
-                new FuncionarioBLL().buscarCpf(dto);
+                new FuncionarioBLL().buscarCpfGrid(dto);
                 ViewBag.GridViewString = CarregaGrid();
                 return RedirectToAction("Index");
             }
             else if (frm["busca"] == "E-mail")
-            {
-                new FuncionarioBLL().buscarEmail(dto);
-                ViewBag.GridViewString = CarregaGrid();
-                return RedirectToAction("Index");
-            }
+            {*/
+            GridView dgv = new GridView();
+            dgv.DataSource = new FuncionarioBLL().buscarEmailGrid(dto);
+            dgv.DataBind();
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            dgv.RenderControl(htw);
+            ViewBag.GridViewString = sw.ToString();
+            return View();
+            
+            /*}
             else
             {
                 ViewBag.GridViewString = "Escolha uma maneira de consulta";
             }
 
+            return View();*/
+        }
+        
+
+        public ActionResult Administrador()
+        {
+
             return View();
         }
 
-        public ActionResult Administrador()
+        public ActionResult Result()
         {
 
             return View();
@@ -103,28 +117,48 @@ namespace SistemaAnubis.Controllers
         public ActionResult Administrador(AdministradorDTO dto, FormCollection frm)
         {
 
-
+            /*
             if (frm["busca"] == "Usuário")
             {
-                new AdministradorBLL().buscarNome(dto);
-                ViewBag.GridViewString = CarregaGrid();
+                GridView dgv = new GridView();
+                dgv.DataSource = new FuncionarioBLL().buscarUserGrid(dto);
+                dgv.DataBind();
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                dgv.RenderControl(htw);
+                ViewBag.GridViewString = sw.ToString();
+                return View();
             }
             else if (frm["busca"] == "CPF")
             {
-                new AdministradorBLL().buscarCpf(dto);
-                ViewBag.GridViewString = CarregaGrid();
+                GridView dgv = new GridView();
+                dgv.DataSource = new FuncionarioBLL().buscarCpfGrid(dto);
+                dgv.DataBind();
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                dgv.RenderControl(htw);
+                ViewBag.GridViewString = sw.ToString();
+                return View();
             }
             else if (frm["busca"] == "E-mail")
-            {/*
-                dgv.DataSource = new AdministradorBLL().buscarEmail(dto);
-                ViewBag.GridViewString = CarregaGrid();*/
+            {*/
+                GridView dgv = new GridView();
+                new FuncionarioBLL().buscarEmailGrid(dto);
+                dgv.DataSource = new AdministradorBLL().buscarEmailGrid(dto);
+            dgv.DataBind();
+                StringWriter sw = new StringWriter();
+                HtmlTextWriter htw = new HtmlTextWriter(sw);
+                dgv.RenderControl(htw);
+                ViewBag.GridViewString = sw.ToString();
+                return View();
+            /*
             }
             else
             {
                 ViewBag.GridViewString = "Escolha uma maneira de consulta";
             }
-
-            return View();
+            
+            return View();*/
         }
 
 
@@ -139,14 +173,7 @@ namespace SistemaAnubis.Controllers
         public ActionResult Coroa() { return View(); }
 
 
-        public string CarregaGrid()
-        {
-            dgv.DataBind();
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            dgv.RenderControl(htw);
-            return sw.ToString();
-        }
+        
 
     }
 }

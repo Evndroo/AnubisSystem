@@ -1,23 +1,47 @@
 ﻿@model SistemaAnubis.Models.DTO.AdministradorDTO
 
 @{
-    Layout = "~/Views/Shared/_Logado.cshtml";
+    /**/
+
     ViewBag.Title = "Cadastrar Administrador";
+
+    ViewBag.Title = "Cadastrar Administrador";
+
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <h1>Faça login primeiro</h1>
+
+        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+    }
+    else
+    {
+        if (MvcApplication.Session.Instance.Nvl == "1")
+        {
+            using (Html.BeginForm("Administrador", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+                <legend class="text-center card-title" style="color:white">Buscar Administrador</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+                        @Html.LabelFor(m => m.Cpf)
+
+                        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control" })
+
+
+                        <div class="col text-center my-3">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+
+                    </fieldset>
+                </div>
+            }
+        }
+        else
+        {
+            <h1>Permissão negada</h1>
+            <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
+        }
+    }
 }
 
-@using (Html.BeginForm("Administrador", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-{
-    <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-        <fieldset>
-            @Html.ValidationSummary()
-            <legend>Cadastrar Administrador</legend>
-            @Html.LabelFor(m => m.User)
-
-
-
-
-            <input type="submit">
-
-        </fieldset>
-    </div>
-} 

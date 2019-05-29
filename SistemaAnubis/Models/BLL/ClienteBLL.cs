@@ -38,6 +38,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -45,9 +46,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
             }
             con.desconectarBD();
         }
@@ -61,6 +63,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -68,9 +71,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
             }
             con.desconectarBD();
         }
@@ -83,6 +87,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -90,9 +95,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
 
             }
             con.desconectarBD();
@@ -107,6 +113,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -114,9 +121,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
             }
             con.desconectarBD();
         }
@@ -130,6 +138,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -137,9 +146,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
             }
             con.desconectarBD();
             return Data(cmd);
@@ -154,6 +164,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -161,9 +172,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
             }
             con.desconectarBD();
             return Data(cmd);
@@ -178,6 +190,7 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
+                dto.Codigo = dr[0].ToString();
                 dto.Nome = dr[1].ToString();
                 dto.Cpf = dr[2].ToString();
                 dto.Email = dr[3].ToString();
@@ -185,9 +198,10 @@ namespace SistemaAnubis.Models.BLL
                 dto.Celular = dr[5].ToString();
                 dto.Cep = dr[6].ToString();
                 dto.Num = dr[7].ToString();
-                dto.Codigo = dr[9].ToString();
+                dto.CodUser = dr[9].ToString();
                 dto.User = dr[10].ToString();
                 dto.Senha = dr[11].ToString();
+                dto.Nvl = dr[12].ToString();
             }
             con.desconectarBD();
             return Data(cmd);
