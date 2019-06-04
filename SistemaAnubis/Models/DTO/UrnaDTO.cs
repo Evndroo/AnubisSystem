@@ -21,6 +21,14 @@ namespace SistemaAnubis.Models.DTO
         public string Descricao { get; set; }
 
         public string Valor { get; set; }
+
         public string Codigo { get;  set; }
+
+        public List<UrnaDTO> arrayU = new List<UrnaDTO>();
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }

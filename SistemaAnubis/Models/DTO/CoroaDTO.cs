@@ -13,6 +13,13 @@ namespace SistemaAnubis.Models.DTO
         public string Especie { get; set; }
         public string Circunferencia { get; set; }
         public string Descricao { get; set; }
-        public string Valor { get; internal set; }
+        public string Valor { get;  set; }
+
+        public List<CoroaDTO> arrayCO = new List<CoroaDTO>();
+
+        public override string ToString()
+        {
+            return Tipo;
+        }
     }
 }

@@ -16,32 +16,55 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(PlanoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirAdm(@user,@senha,@nome,@cpf,@email,@telefone,@celular,@cep,@num)", con.conectarBD());
-            cmd.Parameters.Add("@urna", MySqlDbType.VarChar).Value = dto.Urna;
+            MySqlCommand cmd = new MySqlCommand("call inserirPlano(@nome,@dono,@caixao,@urna,@flor,@qtdFlor,@coroa,@qtdCoroa,@translado,@paramentacao,@necro,@lapide,@veu,@valor);", con.conectarBD());
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
+
+            cmd.Parameters.Add("@dono", MySqlDbType.VarChar).Value = MvcApplication.Session.Instance.Codigo;
             cmd.Parameters.Add("@caixao", MySqlDbType.VarChar).Value = dto.Caixao;
+            cmd.Parameters.Add("@urna", MySqlDbType.VarChar).Value = dto.Urna;
             cmd.Parameters.Add("@flor", MySqlDbType.VarChar).Value = dto.Flor;
-            cmd.Parameters.Add("@quantF", MySqlDbType.VarChar).Value = dto.QuantFlor;
+            cmd.Parameters.Add("@quantFlor", MySqlDbType.VarChar).Value = dto.QuantFlor;
             cmd.Parameters.Add("@coroa", MySqlDbType.VarChar).Value = dto.Coroa;
-            cmd.Parameters.Add("@quantC", MySqlDbType.VarChar).Value = dto.QuantCoroa;
-            cmd.Parameters.Add("@lapide", MySqlDbType.VarChar).Value = dto.Lapide;
-            cmd.Parameters.Add("@necro", MySqlDbType.VarChar).Value = dto.Necromaquiagem;
-            cmd.Parameters.Add("@paramentacao", MySqlDbType.VarChar).Value = dto.Paramentacao;
-            cmd.Parameters.Add("@translado", MySqlDbType.VarChar).Value = dto.Translado;
-            cmd.Parameters.Add("@veu", MySqlDbType.VarChar).Value = dto.Veu;
+            cmd.Parameters.Add("@quantCoroa", MySqlDbType.VarChar).Value = dto.QuantCoroa;
+
+            cmd.Parameters.Add("@translado", MySqlDbType.VarChar).Value = dto.Translado.ToString();
+            cmd.Parameters.Add("@paramentacao", MySqlDbType.VarChar).Value = dto.Paramentacao.ToString();
+            cmd.Parameters.Add("@necro", MySqlDbType.VarChar).Value = dto.Necromaquiagem.ToString();
+            cmd.Parameters.Add("@lapide", MySqlDbType.VarChar).Value = dto.Lapide.ToString();
+            cmd.Parameters.Add("@veu", MySqlDbType.VarChar).Value = dto.Veu.ToString();
+
+
+            cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = 1500;
 
             cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 
-        public DataTable Consultar(PlanoDTO dto)
+        public List<PlanoDTO> Consultar(PlanoDTO dto)
         {
-
             MySqlCommand cmd = new MySqlCommand("select * from tbPlano", con.conectarBD());
-            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
-            DataTable agenda = new DataTable();
-            da.Fill(agenda);
+            dr = cmd.ExecuteReader();
+            List<PlanoDTO> array = new List<PlanoDTO>();
+
+            while (dr.Read())
+            {
+                PlanoDTO dto1 = new PlanoDTO();
+                dto1.Urna = dr[0].ToString();
+                dto1.Caixao = dr[1].ToString();
+                dto1.Flor = dr[2].ToString();
+                dto1.QuantFlor = dr[3].ToString();
+                dto1.Coroa = dr[4].ToString();
+                dto1.QuantCoroa = dr[5].ToString();
+                dto1.Lapide = bool.Parse(dr[6].ToString());
+                dto1.Necromaquiagem = bool.Parse(dr[7].ToString());
+                dto1.Paramentacao = bool.Parse(dr[8].ToString());
+                dto1.Translado = bool.Parse(dr[9].ToString());
+                dto1.Veu = bool.Parse(dr[10].ToString());
+                array.Add(dto1);
+            }
+            dto.arrayP = array;
             con.desconectarBD();
-            return agenda;
+            return array;
         }
 
 

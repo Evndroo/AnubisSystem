@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,5 +21,24 @@ namespace SistemaAnubis.Models.DTO
         public bool Paramentacao { get; set; }
         public bool Translado { get; set; }
         public bool Veu { get; set; }
+        public string Dono { get;  set; }
+        public string Nome { get;  set; }
+        public string Valor { get; set; }
+
+        public List<CoroaDTO> arrayCO = new List<CoroaDTO>();
+
+        public List<UrnaDTO> arrayU = new List<UrnaDTO>();
+        public List<CaixaoDTO> arrayC = new List<CaixaoDTO>();
+        public List<FloresDTO> arrayF = new List<FloresDTO>();
+        public List<PlanoDTO> arrayP = new List<PlanoDTO>();
+
+        public override string ToString()
+        {
+            return Nome;
+        }
+
+
+
+
     }
 }

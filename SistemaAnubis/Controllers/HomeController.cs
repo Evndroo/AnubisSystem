@@ -59,8 +59,9 @@ namespace SistemaAnubis.Controllers
                 return View();
             }
             //    Senha está correta           E                      Login está correto              
-            else if (dto.Senha == Logado.Senha && (dto.Cpf == Logado.Cpf || dto.User == Logado.User || dto.Email == Logado.Email)) //
+            else if (dto.Senha == Logado.Senha && (dto.Cpf == Logado.Cpf || dto.User == Logado.User || dto.Email == Logado.Email)) 
             {
+                MvcApplication.Session.Instance.Codigo = dto.Codigo;
                 MvcApplication.Session.Instance.User = dto.User;
                 MvcApplication.Session.Instance.Senha = dto.Senha;
                 MvcApplication.Session.Instance.Nome = dto.Nome;
@@ -215,16 +216,16 @@ namespace SistemaAnubis.Controllers
             switch (tipo)
             {
                 case 0:
-                    bll.buscarEmail(dto);
+                    bll.buscarEmail(dto); //buscando Cliente pelo email
 
                     if (dto.Nome == null)
                     {
-                        bllF.buscarEmail(dto);
+                        bllF.buscarEmail(dto); //buscando Funcionário pelo email
                         if (dto.Nome == null)
                         {
-                            bllA.buscarEmail(dto);
+                            bllA.buscarEmail(dto); //buscando Administrador pelo email
                             if (dto.Nome == null)
-                            {
+                            { //Email passado não foi encontrado em nenhum nível de acesso
                                 dto.LimpaDTO(dto);
                                 dto.erro = "E-mail não registrado";
                             }
@@ -233,14 +234,15 @@ namespace SistemaAnubis.Controllers
                     break;
                 case 1:
                     bll.buscarCpf(dto);
-                    if (dto.Nome == null)
+                    if (dto.Nome == null) //Busca Cliente pelo CPF
                     {
-                        bllF.buscarCpf(dto);
+                        bllF.buscarCpf(dto); //Busca Funcionário pelo CPF
                         if (dto.Nome == null)
                         {
-                            bllA.buscarCpf(dto);
+                            bllA.buscarCpf(dto); //Busca Administrador pelo CPF
                             if (dto.Nome == null)
                             {
+                                //CPF passado não foi encontrado em nenhum nível de acesso
                                 dto.LimpaDTO(dto);
                                 dto.erro = "Cpf não registrado";
                             }
@@ -249,14 +251,14 @@ namespace SistemaAnubis.Controllers
                     break;
                 case 2:
                     bll.buscarUser(dto);
-                    if (dto.Nome == null)
+                    if (dto.Nome == null) //Busca cliente pelo user de Login
                     {
                         bllF.buscarUser(dto);
-                        if (dto.Nome == null)
+                        if (dto.Nome == null) //Busca funcionário pelo user de Login
                         {
-                            bllA.buscarUser(dto);
+                            bllA.buscarUser(dto);//Busca administrador pelo user de Login
                             if (dto.Nome == null)
-                            {
+                            {//Usuário não está cadastrado
                                 dto.LimpaDTO(dto);
                                 dto.erro  = "Usuário não registrado";
                             }

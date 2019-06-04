@@ -44,6 +44,24 @@ namespace SistemaAnubis
                 }
 
             }
+            public void LimparLogado()
+            {
+                User = null;
+                Senha = null;
+                Codigo = null;
+                CodUser = null;
+                Nome = null;
+                Cpf = null;
+                Email = null;
+                Telefone = null;
+                Celular = null;
+                Cep = null;
+                Num = null;
+                Nvl = null;
+                erro = null;
+                Models.DTO.Logado.Logoff();
+            }
+
             public  string User { get; set; }
 
             public string Senha { get; set; }

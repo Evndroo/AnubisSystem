@@ -22,5 +22,12 @@ namespace SistemaAnubis.Models.DTO
         public string Descricao { get; set; }
 
         public string Valor { get; set; }
+
+        public List<CaixaoDTO> arrayC = new List<CaixaoDTO>();
+
+        public override string ToString()
+        {
+            return Modelo;
+        }
     }
 }

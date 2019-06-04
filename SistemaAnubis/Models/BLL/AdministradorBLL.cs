@@ -13,9 +13,11 @@ namespace SistemaAnubis.Models.BLL
     {
         Conexao con = new Conexao();
 
-        
 
-        
+
+        /***************************************************************************************************
+         **                                     Buscando dados no banco                                   **
+         ***************************************************************************************************/
 
         public DataTable Consultar()
         {
@@ -35,18 +37,18 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
             }
             con.desconectarBD();
         }
@@ -61,18 +63,18 @@ namespace SistemaAnubis.Models.BLL
             
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
             }
             con.desconectarBD();
         }
@@ -86,18 +88,18 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
             }
             con.desconectarBD();
         }
@@ -106,25 +108,6 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("call busAdmCPF(@cpf)", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
-            dr = cmd.ExecuteReader();
-
-
-            while (dr.Read())
-            {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
-            }
-            con.desconectarBD();
             return Data(cmd);
         }
 
@@ -132,54 +115,30 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("call busAdmEmail(@email)", con.conectarBD());
             cmd.Parameters.AddWithValue("@email", dto.Email);
-            dr = cmd.ExecuteReader();
-
-
-
-            while (dr.Read())
-            {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
-            }
-            con.desconectarBD();
             return Data(cmd);
         }
 
         public override DataTable buscarUserGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call buscaAdm(@user)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busAdm(@user)", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
-            dr = cmd.ExecuteReader();
-
-
-            while (dr.Read())
-            {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
-            }
-            con.desconectarBD();
             return Data(cmd);
         }
+
+        public override void buscarNome(LoginDTO dto)
+        {//para fazer
+            throw new NotImplementedException();
+        }
+
+
+
+        /************************************************************************************
+         **                             Manipulando dados no banco                         **
+         ************************************************************************************/
+
+
+
+
 
         public void inserir(AdministradorDTO dto)
         {
@@ -241,6 +200,13 @@ namespace SistemaAnubis.Models.BLL
             con.desconectarBD();
         }
 
+
+
+        /************************************************************************************
+         **                       Métodos sem conexão com o banco                          **
+         ************************************************************************************/
+
+
         public DataTable Data(MySqlCommand cmd)
         {
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
@@ -250,9 +216,6 @@ namespace SistemaAnubis.Models.BLL
             return agenda;
         }
 
-        public override void buscarNome(LoginDTO dto)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

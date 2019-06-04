@@ -6,12 +6,22 @@
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
     {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
         if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
             using (Html.BeginForm("Cliente", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
@@ -19,12 +29,15 @@
                 <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
-                        @Html.LabelFor(m => m.User)
+                        @Html.LabelFor(m => m.Cpf)
 
+                        @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control" })
 
+                        @Html.Raw(@ViewBag.GridViewString)
 
-
-                        <input type="submit">
+                        <div class="col text-center my-3">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
 
                     </fieldset>
                 </div>
@@ -33,8 +46,16 @@
         }
         else
         {
-            <h1>Permissão negada</h1>
-            <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
+            <div class="form-container" style="padding: 15% 0 10% 0;">
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <h1 class="text-center">Acesso negado</h1>
+                    <div class="col text-center my-3">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Busca")'">
+                            Voltar ao início
+                        </button>
+                    </div>
+                </div>
+            </div>
         }
     }
 }

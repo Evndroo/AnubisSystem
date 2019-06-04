@@ -38,18 +38,18 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
             }
             con.desconectarBD();
         }
@@ -63,18 +63,18 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
             }
             con.desconectarBD();
         }
@@ -87,18 +87,18 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
 
             }
             con.desconectarBD();
@@ -113,18 +113,18 @@ namespace SistemaAnubis.Models.BLL
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
+                dto.CodUser = dr[0].ToString();
+                dto.User = dr[1].ToString();
+                dto.Senha = dr[2].ToString();
+                dto.Nvl = dr[3].ToString();
+                dto.Codigo = dr[4].ToString();
+                dto.Nome = dr[5].ToString();
+                dto.Cpf = dr[6].ToString();
+                dto.Email = dr[7].ToString();
+                dto.Telefone = dr[8].ToString();
+                dto.Celular = dr[9].ToString();
+                dto.Cep = dr[10].ToString();
+                dto.Num = dr[11].ToString();
             }
             con.desconectarBD();
         }
@@ -133,25 +133,6 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("call busCliEmail(@email)", con.conectarBD());
             cmd.Parameters.AddWithValue("@email", dto.Email);
-            dr = cmd.ExecuteReader();
-
-
-            while (dr.Read())
-            {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
-            }
-            con.desconectarBD();
             return Data(cmd);
         }
 
@@ -159,25 +140,6 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("Call busCliCPF(@cpf)", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
-            dr = cmd.ExecuteReader();
-
-
-            while (dr.Read())
-            {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
-            }
-            con.desconectarBD();
             return Data(cmd);
         }
 
@@ -185,25 +147,6 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("call busCli(@user);", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
-            dr = cmd.ExecuteReader();
-
-
-            while (dr.Read())
-            {
-                dto.Codigo = dr[0].ToString();
-                dto.Nome = dr[1].ToString();
-                dto.Cpf = dr[2].ToString();
-                dto.Email = dr[3].ToString();
-                dto.Telefone = dr[4].ToString();
-                dto.Celular = dr[5].ToString();
-                dto.Cep = dr[6].ToString();
-                dto.Num = dr[7].ToString();
-                dto.CodUser = dr[9].ToString();
-                dto.User = dr[10].ToString();
-                dto.Senha = dr[11].ToString();
-                dto.Nvl = dr[12].ToString();
-            }
-            con.desconectarBD();
             return Data(cmd);
         }
 

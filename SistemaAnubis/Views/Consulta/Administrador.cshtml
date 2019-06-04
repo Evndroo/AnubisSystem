@@ -8,14 +8,22 @@
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
 
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
     {
-        if (int.Parse(MvcApplication.Session.Instance.Nvl)  == 1)
+        Layout = "~/Views/Shared/_Logado.cshtml";
+        if (int.Parse(MvcApplication.Session.Instance.Nvl) == 1)
         {
             List<string> TipoBusca = new List<string>();
 
@@ -40,8 +48,16 @@
         }
         else
         {
-            <h1>Permissão negada</h1>
-            <a onclick="location.href='@Url.Action("Index", "Busca")'">Voltar</a>
+            <div class="form-container" style="padding: 15% 0 10% 0;">
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <h1 class="text-center">Acesso negado</h1>
+                    <div class="col text-center my-3">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Busca")'">
+                            Voltar ao início
+                        </button>
+                    </div>
+                </div>
+            </div>
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SistemaAnubis.Models.BLL;
 using SistemaAnubis.Models.DTO;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -21,6 +22,7 @@ namespace SistemaAnubis.Controllers
             return View();
         }
 
+
         public ActionResult Cliente()
         {
 
@@ -30,31 +32,48 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Cliente(ClienteDTO dto, FormCollection frm)
         {
+            ClienteBLL bll = new ClienteBLL();
+            dto.Email = dto.Cpf;
+            dto.User = dto.Cpf;
+            if (Validacoes.isEmail(dto.Email)) //buscando por email
+            {
+                dto.Cpf = null;
+                dto.User = null;
+                dgv.DataSource = bll.buscarEmailGrid(dto);
 
-
-            if (frm["busca"] == "Usuário")
-            {
-                new ClienteBLL().buscarUser(dto);
-                return RedirectToAction("Index");
             }
-            else if (frm["busca"] == "CPF")
+            else if (Int64.TryParse(dto.Cpf,out long i))
             {
-                new ClienteBLL().buscarCpf(dto);
-                return RedirectToAction("Index");
+                if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                {
+                    dto.Email = null;
+                    dto.User = null;
+                    dgv.DataSource = bll.buscarCpfGrid(dto);
+                }
+                else if (dto.Cpf.Length != 11)
+                { //Usuário numérico
+                    dto.Email = "";
+                    dto.Cpf = "";
+                    Logado.User = dto.User;
+                }
+                else
+                {
+                    //CPF inválido
+                    ViewBag.GridViewString = "Cpf Inválido";
+                }
             }
-            else if (frm["busca"] == "E-mail")
+            else //tentou buscar com o user
             {
-                new ClienteBLL().buscarEmail(dto);
-                return RedirectToAction("Index");
+                dto.Cpf = null;
+                dto.Email = null;
+                dgv.DataSource = bll.buscarUserGrid(dto);
             }
-            else
-            {
-                ViewBag.erro = "Escolha uma maneira de consulta";
-                return View();
-            }
+            ViewBag.GridViewString = CarregaGrid();
+            return View();
+        }
 
             
-        }
+        
 
         public ActionResult Funcionario()
         {
@@ -64,40 +83,47 @@ namespace SistemaAnubis.Controllers
 
         
         [HttpPost]
-        public ActionResult Funcionario(FuncionarioDTO dto, FormCollection frm)
+        public ActionResult Funcionario(FuncionarioDTO dto)
         {
+            FuncionarioBLL bll = new FuncionarioBLL();
+            dto.Email = dto.Cpf;
+            dto.User = dto.Cpf;
 
-            /*
-            if (frm["busca"] == "Usuário")
+            if (Validacoes.isEmail(dto.Email)) //buscando por email
             {
-                new FuncionarioBLL().buscarUserGrid(dto);
-                return RedirectToAction("Index");
+                dto.Cpf = null;
+                dto.User = null;
+                dgv.DataSource = bll.buscarEmailGrid(dto);
 
             }
-            else if (frm["busca"] == "CPF")
+            else if (Int64.TryParse(dto.Cpf, out long i))
             {
-                new FuncionarioBLL().buscarCpfGrid(dto);
-                ViewBag.GridViewString = CarregaGrid();
-                return RedirectToAction("Index");
+                if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                {
+                    dto.Email = null;
+                    dto.User = null;
+                    dgv.DataSource = bll.buscarCpfGrid(dto);
+                }
+                else if (dto.Cpf.Length != 11)
+                { //Usuário numérico
+                    dto.Email = "";
+                    dto.Cpf = "";
+                    Logado.User = dto.User;
+                }
+                else
+                {
+                    //CPF inválido
+                    ViewBag.GridViewString = "Cpf Inválido";
+                }
             }
-            else if (frm["busca"] == "E-mail")
-            {*/
-            GridView dgv = new GridView();
-            dgv.DataSource = new FuncionarioBLL().buscarEmailGrid(dto);
-            dgv.DataBind();
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            dgv.RenderControl(htw);
-            ViewBag.GridViewString = sw.ToString();
-            return View();
-            
-            /*}
-            else
+            else //tentou buscar com o user
             {
-                ViewBag.GridViewString = "Escolha uma maneira de consulta";
+                dto.Cpf = null;
+                dto.Email = null;
+                dgv.DataSource = bll.buscarUserGrid(dto);
             }
-
-            return View();*/
+            ViewBag.GridViewString = CarregaGrid();
+            return View();           
         }
         
 
@@ -114,66 +140,130 @@ namespace SistemaAnubis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Administrador(AdministradorDTO dto, FormCollection frm)
+        public ActionResult Administrador(AdministradorDTO dto)
         {
+            AdministradorBLL bll = new AdministradorBLL();
+            dto.Email = dto.Cpf;
+            dto.User = dto.Cpf;
+            if (Validacoes.isEmail(dto.Email)) //buscando por email
+            {
+                dto.Cpf = null;
+                dto.User = null;
+                dgv.DataSource = bll.buscarEmailGrid(dto);
 
-            /*
-            if (frm["busca"] == "Usuário")
+            }
+            else if (Int64.TryParse(dto.Cpf, out long i))
             {
-                GridView dgv = new GridView();
-                dgv.DataSource = new FuncionarioBLL().buscarUserGrid(dto);
-                dgv.DataBind();
-                StringWriter sw = new StringWriter();
-                HtmlTextWriter htw = new HtmlTextWriter(sw);
-                dgv.RenderControl(htw);
-                ViewBag.GridViewString = sw.ToString();
-                return View();
+                if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                {
+                    dto.Email = null;
+                    dto.User = null;
+                    dgv.DataSource = bll.buscarCpfGrid(dto);
+                }
+                else if (dto.Cpf.Length != 11)
+                { //Usuário numérico
+                    dto.Email = "";
+                    dto.Cpf = "";
+                    Logado.User = dto.User;
+                }
+                else
+                {
+                    //CPF inválido
+                    ViewBag.GridViewString = "Cpf Inválido";
+                }
             }
-            else if (frm["busca"] == "CPF")
+            else //tentou buscar com o user
             {
-                GridView dgv = new GridView();
-                dgv.DataSource = new FuncionarioBLL().buscarCpfGrid(dto);
-                dgv.DataBind();
-                StringWriter sw = new StringWriter();
-                HtmlTextWriter htw = new HtmlTextWriter(sw);
-                dgv.RenderControl(htw);
-                ViewBag.GridViewString = sw.ToString();
-                return View();
+                dto.Cpf = null;
+                dto.Email = null;
+                dgv.DataSource = bll.buscarUserGrid(dto);
             }
-            else if (frm["busca"] == "E-mail")
-            {*/
-                GridView dgv = new GridView();
-                new FuncionarioBLL().buscarEmailGrid(dto);
-                dgv.DataSource = new AdministradorBLL().buscarEmailGrid(dto);
-            dgv.DataBind();
-                StringWriter sw = new StringWriter();
-                HtmlTextWriter htw = new HtmlTextWriter(sw);
-                dgv.RenderControl(htw);
-                ViewBag.GridViewString = sw.ToString();
-                return View();
-            /*
-            }
-            else
-            {
-                ViewBag.GridViewString = "Escolha uma maneira de consulta";
-            }
-            
-            return View();*/
+            ViewBag.GridViewString = CarregaGrid();
+            return View();
         }
 
 
-        public ActionResult Caixao() { return View(); }
+        public ActionResult Caixao() {
+            CaixaoBLL bll = new CaixaoBLL();
+            CaixaoDTO dto = new CaixaoDTO();
+            dto.arrayC = bll.buscar(dto);
+            return View(dto);
+        }
 
-        public ActionResult Urna() { return View(); }
-
-        public ActionResult Plano() { return View(); }
-
-        public ActionResult Flores() { return View(); }
-
-        public ActionResult Coroa() { return View(); }
+        [HttpPost]
+        public ActionResult Caixao(CaixaoDTO dto) {
+            return RedirectToAction("Index");
+        }
 
 
-        
+        public ActionResult Urna() {
+            UrnaBLL bll = new UrnaBLL();
+            UrnaDTO dto = new UrnaDTO();
+            dto.arrayU = bll.buscar(dto);
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Urna(UrnaDTO dto) {
+            return RedirectToAction("Index");
+        }
+
+
+
+        public ActionResult Plano() {
+            PlanoBLL bll = new PlanoBLL();
+            PlanoDTO dto = new PlanoDTO();
+            dto.arrayP = bll.Consultar(dto);
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Plano(CaixaoDTO dto) {
+            return RedirectToAction("Index");
+        }
+
+
+        public ActionResult Flores() {
+            FloresBLL bll = new FloresBLL();
+            FloresDTO dto = new FloresDTO();
+            dto.arrayF = bll.Consultar(dto);
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Flores(CaixaoDTO dto) {
+            return RedirectToAction("Index");
+
+        }
+
+
+        public ActionResult Coroa() {
+            CoroaBLL bll = new CoroaBLL();
+            CoroaDTO dto = new CoroaDTO();
+            dto.arrayCO = bll.Consultar(dto);
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Coroa(CaixaoDTO dto) {
+            return RedirectToAction("Index");
+        }
+
+
+        public string CarregaGrid()
+        {
+
+            dgv.DataBind();
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter htw = new HtmlTextWriter(sw);
+            dgv.RenderControl(htw);
+
+            if (dgv.Rows.Count >= 1) { 
+                return sw.ToString();
+            }
+            else return "Nenhum dado foi encontrado";
+        }
+
 
     }
 }

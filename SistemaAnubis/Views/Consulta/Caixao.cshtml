@@ -12,6 +12,8 @@
     }
     else
     {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
         using (Html.BeginForm("Caiao", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
             <legend class="text-center card-title" style="color:white">Buscar Caixao</legend>

@@ -1,17 +1,33 @@
 ﻿@model SistemaAnubis.Models.DTO.UrnaDTO
-
+@using SistemaAnubis.Models.DTO
 @{
     ViewBag.Title = "Cadastrar Administrador";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
     {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
+        List<string> tipoUrna = new List<string>();
+        tipoUrna.Add("");
+        foreach (UrnaDTO dto in Model.arrayU)
+        {
+            tipoUrna.Add(dto.ToString());
+        }
+
         using (Html.BeginForm("Urna", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
             <legend class="text-center card-title" style="color:white">Buscar Urna</legend>
@@ -19,8 +35,13 @@
                 <fieldset>
 
 
+                    @Html.LabelFor(m => m.Nome)
 
-                    <input type="submit">
+                    @Html.DropDownListFor(m => m.Nome, new MultiSelectList(tipoUrna), new { @class = "form-control" })
+
+                    <div class="col text-center my-3">
+                        <button type="submit" class="btn btn-primary">Buscar</button>
+                    </div>
 
                 </fieldset>
             </div>

@@ -1,4 +1,6 @@
 ﻿@model SistemaAnubis.Models.DTO.FloresDTO
+@using SistemaAnubis.Models.DTO
+
 
 @{
     ViewBag.Title = "Cadastrar Administrador";
@@ -12,17 +14,29 @@
     }
     else
     {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
+        List<string> tipoCoroa = new List<string>();
+        tipoCoroa.Add("");
+        foreach (FloresDTO dto in Model.arrayF)
+        {
+            tipoCoroa.Add(dto.ToString());
+        }
+
         using (Html.BeginForm("Flores", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
             <legend class="text-center card-title" style="color:white">Buscar Flores</legend>
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <fieldset>
-                    @Html.LabelFor(m => m.User)
+                    @Html.LabelFor(m => m.Especie)
+
+                    @Html.DropDownListFor(m => m.Especie, new MultiSelectList(tipoCoroa), new { @class = "form-control" })
 
 
 
-
-                    <input type="submit">
+                    <div class="col text-center my-3">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
 
                 </fieldset>
             </div>
