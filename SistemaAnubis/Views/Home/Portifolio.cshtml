@@ -2,6 +2,11 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Portifolio";
+
+    if (MvcApplication.Session.Instance.Nome != null)
+    {
+        MvcApplication.Session.Instance.LimparLogado();
+    }
 }
 
 <h2>Portifolio</h2>

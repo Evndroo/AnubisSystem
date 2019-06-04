@@ -1,6 +1,10 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Home";
+
+    if (MvcApplication.Session.Instance.Nome != null) {
+        MvcApplication.Session.Instance.LimparLogado();
+    }
 }
 
 <div id="slides" class="carousel slide" data-ride="carousel">
