@@ -1,4 +1,5 @@
-﻿using SistemaAnubis.Models.BLL;
+﻿using MySql.Data.MySqlClient;
+using SistemaAnubis.Models.BLL;
 using SistemaAnubis.Models.DTO;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,8 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Administrador(AdministradorDTO dto)
         {
-            if (Validacoes.IsCpf(dto.Cpf)) {
-                if (dto.ConfSenha.Equals(dto.Senha))
+            if  (dto.ConfSenha.Equals(dto.Senha)) {
+                if (Validacoes.IsCpf(dto.Cpf))
                 {
                     AdministradorBLL bll = new AdministradorBLL();
                     bll.inserir(dto);
@@ -51,13 +52,12 @@ namespace SistemaAnubis.Controllers
                 }
                 else
                 {
-
-                    return View();
+                    return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");                    
                 }
             }
             else {
-                
-                return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
+                ViewBag.erro4 = "Senha e confirmação se divergem";
+                return View();
             }
         }
 
@@ -72,28 +72,40 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Cliente(ClienteDTO dto)
         {
-            if (Validacoes.IsCpf(dto.Cpf))
+            if (dto.ConfSenha.Equals(dto.Senha))
             {
-                try
+                if (Validacoes.IsCpf(dto.Cpf))
                 {
                     ClienteBLL bll = new ClienteBLL();
                     bll.inserir(dto);
-
                     if (dto.erro == "1")
                     {
                         ViewBag.erro = "Este usuário já existe";
                         return View();
                     }
                     else if (dto.erro == "2")
-                        return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                    {
+                        ViewBag.erro2 = "Cpf já cadastrado";
+                        return View();
+                    }
+                    else if (dto.erro == "3")
+                    {
+                        ViewBag.erro3 = "Email já cadastrado.";
+                        return View();
+                    }
                     else
                         return View();
                 }
-                catch
+                else
                 {
-                    return View();
+                    return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
                 }
-            } else return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
+            }
+            else
+            {
+                ViewBag.erro4 = "Senha e confirmação se divergem";
+                return View();
+            }
         }
 
 
@@ -106,8 +118,9 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Funcionario(FuncionarioDTO dto)
         {
-            if (Validacoes.IsCpf(dto.Cpf)){
-                try
+            if (dto.ConfSenha.Equals(dto.Senha))
+            {
+                if (Validacoes.IsCpf(dto.Cpf))
                 {
                     FuncionarioBLL bll = new FuncionarioBLL();
                     bll.inserir(dto);
@@ -117,19 +130,32 @@ namespace SistemaAnubis.Controllers
                         return View();
                     }
                     else if (dto.erro == "2")
-                        return Content("<script language='javascript' type='text/javascript'>alert('CPF já cadastrado, favor resgatar seu logine senha !'); location.href='Administrador'</script>");
+                    {
+                        ViewBag.erro2 = "Cpf já cadastrado";
+                        return View();
+                    }
+                    else if (dto.erro == "3")
+                    {
+                        ViewBag.erro3 = "Email já cadastrado.";
+                        return View();
+                    }
                     else
                         return View();
                 }
-                catch
+                else
                 {
-                    return View();
+                    return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
                 }
-            } else return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
+            }
+            else
+            {
+                ViewBag.erro4 = "Senha e confirmação se divergem";
+                return View();
+            }
 
-    }
+        }
 
-    public ActionResult Falecido()
+        public ActionResult Falecido()
         {
             return View();
         }
@@ -137,16 +163,9 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Falecido(FalecidoDTO dto)
         {
-            try
-            {
-                FalecidoBLL bll = new FalecidoBLL();
-                bll.inserir(dto);
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
+            FalecidoBLL bll = new FalecidoBLL();
+            bll.inserir(dto);
+            return View();
         }
 
 
@@ -159,18 +178,13 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Caixao(CaixaoDTO dto)
         {
-            //try
-            //{
-                CaixaoBLL bll = new CaixaoBLL();
-                bll.inserir(dto);
-                return View();
-            //}
-            //catch
-            //{            
-            //    return Content("<script language='javascript' type='text/javascript'> alert('Erro ao cadastrar!');</script>");
-            //}
+            CaixaoBLL bll = new CaixaoBLL();
+            if (bll.inserir(dto)){
+                return RedirectToAction("Index", "Busca");
+            }
+            return View();
         }
-
+        
 
         public ActionResult Coroa()
         {
@@ -180,16 +194,9 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Coroa(CoroaDTO dto)
         {
-            try
-            {
-                CoroaBLL bll = new CoroaBLL();
-                bll.inserir(dto);
-                return View();
-            }
-            catch
-            {
-                return View();
-            }
+            CoroaBLL bll = new CoroaBLL();
+            if (bll.inserir(dto)) return RedirectToAction("Indexx", "Busca");
+            else return View();
         }
 
 
@@ -201,16 +208,13 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Flores(FloresDTO dto)
         {
-            try
-            {
-                FloresBLL bll = new FloresBLL();
-                bll.inserir(dto);
+            
+            FloresBLL bll = new FloresBLL();
+            if (bll.inserir(dto)) {
+                return RedirectToAction("Index","Busca");
+            }else
                 return View();
-            }
-            catch
-            {
-                return View();
-            }
+            
         }
 
 
@@ -222,16 +226,13 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Urna(UrnaDTO dto)
         {
-            try
-            {
-                UrnaBLL bll = new UrnaBLL();
-                bll.inserir(dto);
-                return View();
+
+            UrnaBLL bll = new UrnaBLL();
+            if (bll.inserir(dto)) {
+                return RedirectToAction("Index", "Busca");
             }
-            catch
-            {
-                return Content("<script language='javascript' type='text/javascript'> alert('Erro ao cadastrar!');</script>");
-            }
+            return View();
+
         }
 
 
@@ -239,20 +240,35 @@ namespace SistemaAnubis.Controllers
 
         public ActionResult Plano()
         {
-            return View();
+            CaixaoBLL bllC = new CaixaoBLL();
+            UrnaBLL bllU = new UrnaBLL();
+            CoroaBLL bllCO = new CoroaBLL();
+            FloresBLL bllF = new FloresBLL();
+            CaixaoDTO dtoC = new CaixaoDTO();
+            UrnaDTO dtoU = new UrnaDTO();
+            CoroaDTO dtoCO = new CoroaDTO();
+            FloresDTO dtoF = new FloresDTO();
+            PlanoDTO dtoP = new PlanoDTO();
+            dtoP.arrayU = bllU.buscar(dtoU);
+            dtoP.arrayC = bllC.buscar(dtoC);
+            dtoP.arrayCO = bllCO.Consultar(dtoCO);
+            dtoP.arrayF = bllF.Consultar(dtoF);
+            return View(dtoP);
         }
 
         [HttpPost]
         public ActionResult Plano(PlanoDTO dto)
-        {
+            {
+            PlanoBLL bll = new PlanoBLL();
+
             try
             {
-                PlanoBLL bll = new PlanoBLL();
                 bll.inserir(dto);
                 return View();
             }
-            catch
+            catch(MySqlException ex)
             {
+                ViewBag.Erro = ex.ToString();
                 return View();
             }
         }

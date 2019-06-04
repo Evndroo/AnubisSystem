@@ -44,7 +44,23 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg" style="background-color: #000; color: #fff;">
                 <button class="btn btn-primary" id="menu-toggle">Menu</button>
-                <h3>@ViewBag.mensagem</h3>
+                <!---h3>@ViewBag.mensagem</h3--->
+                <li class="nav-item dropdown ml-auto" style="list-style-type: none;">
+                    <nav id="nav-menu-container">
+                        <ul class="nav-menu" style="list-style-type: none;">
+                            <li class="menu-has-children" style="list-style-type: none;">
+                                <a>Minha Conta</a>
+                                <ul style="list-style-type: none; right: 0%;">
+                                    <li><a href="#">Configurações</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="@Url.Action("Index", "Home")">Sair</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </li>
             </nav>
             @RenderBody()
                 

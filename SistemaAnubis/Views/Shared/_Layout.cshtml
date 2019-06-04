@@ -15,6 +15,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000;">
+        <a class="navbar-brand" href="index.html">Anubis</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,24 +23,23 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    @Html.ActionLink("Home", "Index", "Home", new { style = "color:ffffff", @class = "nav-link" })
+                    <a onclick="location.href='@Url.Action("Index", "Home")'" style = "color:#ffffff" class = "nav-link">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    @Html.ActionLink("Empresa", "Empresa", "Home", new { style = "color:ffffff", @class = "nav-link" })
-
+                    <a onclick="location.href='@Url.Action("Empresa", "Home")'" style="color:#ffffff" class="nav-link">Empresa</a>
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Portfólio", "Portifolio", "Home", new { style = "color:ffffff", @class = "nav-link" })
+                    <a onclick="location.href='@Url.Action("Portifolio", "Home")'" style="color:#ffffff" class="nav-link">Portfólio</a>
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Suporte", "Suporte", "Home", new { style = "color:ffffff", @class = "nav-link" })
+                    <a onclick="location.href='@Url.Action("Suporte", "Home")'" style="color:#ffffff" class="nav-link">Suporte</a>
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Contato", "Contato", "Home", new { style = "color:ffffff", @class = "nav-link" })
+                    <a onclick="location.href='@Url.Action("Contato", "Home")'" style="color:#ffffff" class="nav-link">Contato</a>
                 </li>
                 <li class="nav-item">
-                    @Html.ActionLink("Entre ou Cadastre-se", "Login", "Home", new { style = "color:ffffff", @class = "nav-link" })
+                    <a onclick="location.href='@Url.Action("Login", "Home")'" style="color:#ffffff" class="nav-link">Entre ou Cadastre-se</a>
                 </li>
             </ul>
         </div>

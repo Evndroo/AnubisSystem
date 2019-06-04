@@ -9,11 +9,12 @@
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
         <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login","Home")'">Voltar</a>
+        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
 
     }
     else
     {
+        Layout = "~/Views/Shared/_Logado.cshtml";
         List<string> TiposCaixao = new List<string>();
         TiposCaixao.Add("");
         TiposCaixao.Add("Caixão alto");
@@ -60,9 +61,9 @@
                     </div>
                 </fieldset>
             </div>
+            }
+
         }
 
+
     }
-
-
-    @

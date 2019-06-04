@@ -12,21 +12,48 @@
     }
     else
     {
-        using (Html.BeginForm("Coroa", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+
+        if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
-            <legend class="text-center card-title" style="color:white">Cadastrar </legend>
-            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                <fieldset>
-                    @Html.ValidationSummary()
+            Layout = "~/Views/Shared/_Logado.cshtml";
+            using (Html.BeginForm("Coroa", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+                <legend class="text-center card-title" style="color:white">Cadastrar </legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+
+                        @Html.LabelFor(m => m.Tipo)
+                        @Html.TextBoxFor(m => m.Tipo, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.Especie)
+                        @Html.TextBoxFor(m => m.Especie, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.Circunferencia)
+                        @Html.TextBoxFor(m => m.Circunferencia, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.Descricao)
+                        @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                        @Html.LabelFor(m => m.Valor)
+                        @Html.TextBoxFor(m => m.Valor, new { @class = "form-control" })
 
 
 
-
+                        <div class="col text-center my-3">
+                            <button type="submit" class="btn btn-primary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </fieldset>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="form-container" style="padding: 15% 0 10% 0;">
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <h1 class="text-center">Acesso negado</h1>
                     <div class="col text-center my-3">
-                        <button type="submit" class="btn btn-primary">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Busca")'">
+                            Voltar ao início
+                        </button>
                     </div>
-                </fieldset>
+                </div>
             </div>
         }
     }

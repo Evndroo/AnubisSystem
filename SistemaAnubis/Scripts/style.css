@@ -24,6 +24,58 @@ html, body {
     font-size: 1.1em !important;
 }
 
+.nav-menu ul {
+    position: absolute;
+    display: none;
+    z-index: 100;
+}
+
+.nav-menu > li {
+    float: left;
+}
+
+.nav-menu li:hover > ul,
+.nav-menu li.sfHover > ul {
+    display: block;
+}
+
+.nav-menu ul li {
+    min-width: 180px;
+}
+
+#nav-menu-container {
+    float: left;
+}
+
+.nav-menu a {
+    padding: 0 8px 10px 8px;
+    text-decoration: none;
+    color: #fff;
+    outline: none;
+}
+
+.nav-menu ul {
+    margin: 4px 0 0 0;
+    padding: 10px;
+    background: #000;
+}
+
+    .nav-menu ul li a {
+        padding: 10px;
+        color: #fff;
+        display: block;
+        text-transform: none;
+    }
+
+        .nav-menu ul li a:focus {
+            color: #fff;
+        }
+
+        .nav-menu ul li a:hover {
+            color: #fff !important;
+            background-color: #792929 !important;
+        }
+
 .carousel-inner img {
     width: 100%;
     height: 100%;
@@ -72,7 +124,7 @@ html, body {
     }
 
 .btn-outline-primary {
-    color: #F0EAD1;
+    color: #FFFFFF;
     border: 1px solid #792929;
 }
 
@@ -90,7 +142,7 @@ html, body {
     }
 
 .dropdown-menu {
-    background-color: #F0EAD1;
+    background-color: #FFFFFF;
 }
 
 .dropdown-item:hover {
@@ -126,6 +178,13 @@ hr.light-100 {
     margin-bottom: 1rem;
 }
 
+#index_text {
+    background: linear-gradient(#792929, #31302f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: brightness(300%);
+}
+
 
 
 /*---Sidebar---*/
@@ -137,7 +196,7 @@ hr.light-100 {
     -o-transition: margin .25s ease-out;
     transition: margin .25s ease-out;
     background-color: #000;
-    color: #F0EAD1;
+    color: #FFFFFF;
 }
 
     #sidebar-wrapper .sidebar-heading {
@@ -162,12 +221,12 @@ hr.light-100 {
 
 .list-group-item {
     background-color: #000;
-    color: #F0EAD1;
+    color: #FFFFFF;
 }
 
     .list-group-item:hover {
         background-color: #ff0000;
-        color: #F0EAD1;
+        color: #FFFFFF;
     }
 
 .d-flex {
@@ -181,7 +240,7 @@ hr.light-100 {
 #formUrna {
     flex: 1;
     position: relative;
-    background-image: url('../imagens/bg-cadUrna.jpg');
+    background-image: url('../imagens/flowers3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
@@ -190,41 +249,38 @@ hr.light-100 {
 }
 
     #formUrna label {
-        color: #F0EAD1;
+        color: #FFFFFF;
     }
 
-     fieldset {
-        padding: inherit;
-        background-color: rgba(0, 0, 0, 0.5);
+    #formUrna fieldset {
+        border-radius: 5px;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
     }
+
+
 /*--- Empresa ---*/
-/*--- Equipe ---*/
+
 #team-section, #about-section header {
     text-transform: uppercase;
-    color: #F0EAD1;
+    color: #FFFFFF;
 }
 
 #about-section, #team-section {
-    color: #F0EAD1;
+    color: #FFFFFF;
 }
 
-#about-section {
+#corpo {
     background-image: url('../imagens/flowers3.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
 }
 
-#team-section {
-    background-image: url('../imagens/flowers3.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom center;
-}
-
 #about-section b {
     color: #792929;
 }
+
 /*---Media Queries --*/
 @media (max-width: 992px) {
     .social a {
@@ -344,51 +400,15 @@ hr.light-100 {
     backface-visibility: visible;
 }
 
-
-
-/*--- Imagem fixada no background. 
-figure
-{
-  position: relative;
-  width: 100%;
-  height: 60%;
-  margin: 0!important;
+#erro {
+color:white;
 }
-.fixed-wrap
-{
-  clip: rect(0, auto, auto, 0);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-#fixed
-{
-  background-image: url('img/mac.png');
-  position: fixed;
-  display: block;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center center;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-  will-change: transform;
-}
---*/
-
 
 
 /*--- Bootstrap Padding Fix --*/
 [class*="col-"] {
     padding: 1rem;
 }
-
-
-
 /*
 Extra small (xs) devices (portrait phones, less than 576px)
 No media query since this is the default in Bootstrap

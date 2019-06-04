@@ -12,6 +12,8 @@
     }
     else
     {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
         using (Html.BeginForm("Falecido", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
 
