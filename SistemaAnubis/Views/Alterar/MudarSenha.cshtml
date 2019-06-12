@@ -1,0 +1,54 @@
+﻿@model SistemaAnubis.Models.DTO.LoginDTO
+
+
+@{
+    ViewBag.Title = "ClienteInfo";
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+            using (Html.BeginForm("MudarSenha", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+                <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+
+                        <label>Sua senha:</label> <small class="text-muted text-danger" id="erro">@ViewBag.incorreta</small>
+
+                        <input class="form-control" id="Antiga" name="Antiga" type="password" />
+
+                        @Html.Label("Nova senha") <small class="text-muted text-danger" id="erro">@ViewBag.senha</small>
+
+                        <input class="form-control" id="Senha" name="Senha" type="password">
+
+
+                        @Html.Label("Confirme a senha") 
+
+                        <input class="form-control" id="ConfSenha" name="ConfSenha" type="password">
+
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
+                        </div>
+
+                    </fieldset>
+                </div>
+            }
+
+       
+    }
+}
+

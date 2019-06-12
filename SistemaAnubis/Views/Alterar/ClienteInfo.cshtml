@@ -1,0 +1,92 @@
+﻿@model SistemaAnubis.Models.DTO.ClienteDTO
+
+@{
+    ViewBag.Title = "ClienteInfo";
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
+        if (int.Parse(MvcApplication.Session.Instance.Nvl) == 3)
+        {
+            using (Html.BeginForm("ClienteInfo", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+                <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+
+                        @Html.LabelFor(m => m.User)<small class="text-muted" id="erro">@ViewBag.erro</small>
+
+                        <input class="form-control" id="txtUser" name="User" type="text" value="@Model.User">
+
+
+                        @Html.LabelFor(m => m.Nome)
+
+                        <input class="form-control" data-val="true" data-val-length="O campo Nome deve ser uma cadeia de caracteres com no mínimo 3 e no máximo 85 de comprimento." data-val-length-max="85" data-val-length-min="3" id="Nome" name="Nome" type="text" value="@Model.Nome" />
+
+                        @Html.LabelFor(m => m.Cpf) <small class="text-muted" id="erro">@ViewBag.erro2</small>
+
+                        <input class="form-control text-box single-line" data-val="true" data-val-required="Campo é obrigatório" id="Cpf" name="Cpf" type="text" value="@Model.Cpf">
+
+
+                        @Html.LabelFor(m => m.Email) <small class="text-muted" id="erro">@ViewBag.erro3</small>
+
+                        <input class="form-control" id="Email" name="Email" type="email" value="@Model.Email">
+
+                        @Html.LabelFor(m => m.Telefone)
+
+                        <input class="form-control" data-val="true" data-val-regex="O campo Telefone deve corresponder à expressão regular '^\d{10}$|^\d{8}$'." data-val-regex-pattern="^\d{10}$|^\d{8}$" id="Telefone" name="Telefone" type="text" value="@Model.Telefone">
+
+                        @Html.LabelFor(m => m.Celular)
+
+                        <input class="form-control" data-val="true" data-val-regex="O campo Celular deve corresponder à expressão regular '^\d{11}$|^\d{9}$'." data-val-regex-pattern="^\d{11}$|^\d{9}$" id="Celular" name="Celular" type="text" value="@Model.Celular">
+
+                        @Html.LabelFor(m => m.Cep)
+
+                        <input class="form-control" id="Cep" name="Cep" type="text" value="@Model.Cep">
+
+                        @Html.LabelFor(m => m.Num)
+
+                        <input class="form-control" id="Num" name="Num" type="text" value="@Model.Num">
+
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
+                        </div>
+
+                    </fieldset>
+                </div>
+            }
+
+        }
+        else
+        {
+            <div class="form-container" style="padding: 15% 0 10% 0;">
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <h1 class="text-center">Acesso negado</h1>
+                    <div class="col text-center my-3">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Busca")'">
+                            Voltar ao início
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+
+

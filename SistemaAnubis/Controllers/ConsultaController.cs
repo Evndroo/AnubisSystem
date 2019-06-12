@@ -22,40 +22,38 @@ namespace SistemaAnubis.Controllers
         }
 
         public ActionResult Planos() {
-
-            return View();
+            PlanoBLL bll = new PlanoBLL();
+            List<PlanoDTO> plano = new List<PlanoDTO>();
+            plano = bll.Listar();
+            return View(plano);
         }
 
 
         //só funcionário ou adm pode fazer
         public ActionResult Cliente()
         {
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Cliente(ClienteDTO dto, FormCollection frm)
-        {
-            return View();
+            ClienteBLL bll = new ClienteBLL();
+            List<ClienteDTO> cli = new List<ClienteDTO>();
+            cli = bll.Listar();
+            return View(cli);
         }
 
         public ActionResult Funcionario()
         {
-
-            return View();
+            FuncionarioBLL bll = new FuncionarioBLL();
+            List<FuncionarioDTO> func = new List<FuncionarioDTO>();
+            func = bll.Listar();
+            return View(func);
         }
+        
 
-        [HttpPost]
-        public ActionResult Funcionario(FuncionarioDTO dto, FormCollection frm){return View();}
-
-        public ActionResult Administrador(){return View();}
-
-        [HttpPost] 
-        public ActionResult Administrador(AdministradorDTO dto, FormCollection frm)
-        {
-            return View();
+        public ActionResult Administrador(){
+            AdministradorBLL bll = new AdministradorBLL();
+            List<AdministradorDTO> adm = new List<AdministradorDTO>();
+            adm = bll.listar();
+            return View(adm);
         }
+        
 
         public ActionResult Urna()
         {
@@ -79,15 +77,6 @@ namespace SistemaAnubis.Controllers
         {
 
             return View();
-        }
-
-        public string CarregaGrid() {
-            
-            dgv.DataBind();
-            StringWriter sw = new StringWriter();
-            HtmlTextWriter htw = new HtmlTextWriter(sw);
-            dgv.RenderControl(htw);
-            return sw.ToString();
         }
     }
 }

@@ -9,8 +9,11 @@ namespace SistemaAnubis.Models.DTO
     {
 
         public string Cliente { get; set; }
+        public string Vendedor{ get; set; }
         public string Plano { get; set; }
         public string Data { get; set; }
+        public List<PlanoDTO> Planos = new List<PlanoDTO>();
+        public List<FuncionarioDTO> Funcionarios = new List<FuncionarioDTO>();
 
     }
 }

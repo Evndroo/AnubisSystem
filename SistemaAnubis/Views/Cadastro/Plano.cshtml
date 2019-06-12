@@ -91,19 +91,19 @@
 
                     @Html.LabelFor(m => m.Veu)
 
-                    @Html.CheckBoxFor(m => m.Veu, new { @class = "form-control" })
+                    @Html.CheckBox("Véu", new { @class = "form-control" })
 
                     @Html.LabelFor(m => m.Necromaquiagem)
 
-                    @Html.CheckBoxFor(m => m.Necromaquiagem, new { @class = "form-control" })
+                    @Html.CheckBox("Necro", new { @class = "form-control" })
 
                     @Html.LabelFor(m => m.Paramentacao)
 
-                    @Html.CheckBoxFor(m => m.Paramentacao, new { @class = "form-control" })
+                    @Html.CheckBox("Paramentação", new { @class = "form-control" })
 
                     @Html.LabelFor(m => m.Translado)
 
-                    @Html.CheckBoxFor(m => m.Translado, new { @class = "form-control" })
+                    @Html.CheckBox("Transl", new { @class = "form-control" })
 
                     <div class="col text-center my-3">
                         <button type="submit" class="btn btn-primary">Cancelar</button>

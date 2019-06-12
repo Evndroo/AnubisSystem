@@ -118,6 +118,14 @@ namespace SistemaAnubis.Models.BLL
 
         }
 
+        public DataTable BuscarUrnaGrid(UrnaDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from tburna where modelo_urna = @modelo", con.conectarBD());
+            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Nome;
+            return Data(cmd);
+
+        }
+
         public void deletar(UrnaDTO dto)
         {
             MySqlCommand cmd = new MySqlCommand("call delUrna(@cpf)", con.conectarBD());
@@ -136,6 +144,32 @@ namespace SistemaAnubis.Models.BLL
                 return dr[0].ToString();
             }
             else return "Urna não encontrada";
+        }
+
+        internal void achar(UrnaDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("call busUrnaMod(@modelo)", con.conectarBD());
+            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Nome;
+            dr = cmd.ExecuteReader();
+
+            if (dr.Read()) {
+                dto.Nome = dr[0].ToString();
+                dto.Altura = dr[1].ToString();
+                dto.Largura = dr[2].ToString();
+                dto.Profundidade = dr[3].ToString();
+                dto.Descricao = dr[4].ToString();
+                dto.Valor= dr[5].ToString();
+            }
+            con.desconectarBD();
+        }
+
+        public DataTable Data(MySqlCommand cmd)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable agenda = new DataTable();
+            da.Fill(agenda);
+            con.desconectarBD();
+            return agenda;
         }
     }
 }

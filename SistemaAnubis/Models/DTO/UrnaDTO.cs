@@ -15,6 +15,7 @@ namespace SistemaAnubis.Models.DTO
 
         public string Profundidade { get; set; }
 
+        [DisplayName("Urna")]
         public string Nome { get; set; }
 
         [DataType(DataType.MultilineText)]

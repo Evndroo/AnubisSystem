@@ -1,7 +1,7 @@
-﻿@model SistemaAnubis.Models.DTO.ClienteDTO
+﻿@model IEnumerable<SistemaAnubis.Models.DTO.ClienteDTO>
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Cliente";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -11,7 +11,7 @@
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <h1 class="text-center">Você precisa se logar!</h1>
                 <div class="col text-center my-3">
-                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
                     <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
                 </div>
             </div>
@@ -23,22 +23,69 @@
         Layout = "~/Views/Shared/_Logado.cshtml";
         if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
-            using (Html.BeginForm("Cliente", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-            {
+            <h2>Clientes</h2>
 
-                <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
-                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                    <fieldset>
-                        @Html.LabelFor(m => m.User)
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cpf)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Celular)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Num)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nvl)
+                    </th>
+                    <th></th>
+                </tr>
 
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cpf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Celular)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cep)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Num)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nvl)
+                        </td>
+                    </tr>
+                }
 
+            </table>
 
-
-                        <input type="submit">
-
-                    </fieldset>
-                </div>
-            }
         }
         else
         {
@@ -52,8 +99,6 @@
                     </div>
                 </div>
             </div>
+            }
         }
-
-
     }
-}

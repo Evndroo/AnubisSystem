@@ -1,35 +1,157 @@
-﻿@model SistemaAnubis.Models.DTO.PlanoDTO
+﻿@model IEnumerable<SistemaAnubis.Models.DTO.PlanoDTO>
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Planos";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
     {
         Layout = "~/Views/Shared/_Logado.cshtml";
 
-        using (Html.BeginForm("Planos", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-        {
+        <h2>Planos</h2>
+        <table class="table-responsive-sm table"  style="font-size:15px; " >
+            <tr style="text-align:center;">
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Urna)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Caixao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Flor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantFlor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Coroa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantCoroa)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lapide)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Necromaquiagem)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Paramentacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Translado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Veu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Valor)
+                </th>
+            </tr>
 
-            <legend class="text-center card-title" style="color:white">Planos</legend>
-            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                <fieldset>
-                    @Html.LabelFor(m => m.Caixao)
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Caixao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Urna)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Flor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantFlor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Coroa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantCoroa)
+                    </td>
+                    @if (item.Lapide)
+                    {
+                        <td>
+                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                        </td>
+                    }
+                    else {
+                        <td >
+                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px; display:block; margin:0 auto;" />
+                        </td>
+                    }
+                    @if(item.Necromaquiagem)
+                        {
+                        <td>
+                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                        </td>
+                    }
+                    else {
+                        <td >
+                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px; display:block; margin:0 auto;" />
+                        </td>
+                    }
+                    @if(item.Paramentacao){
+                        <td>
+                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                        </td>
+                    }
+                    else {
+                        <td >
+                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px; display:block; margin:0 auto;" />
+                        </td>
+                    }
+                    @if(item.Translado)
+                        {
+                        <td>
+                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                        </td>
+                    }
+                    else {
+                        <td >
+                            <img class="center" src="~/Imagens/noun_don't_180604.png" style="width: 25px;" />
+                        </td>
+                    }
+                    @if (item.Veu)
+                    {
+                        <td>
+                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px;"/>
+                        </td>
+                    }
+                    else {
+                        <td >
+                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px;" />
+                        </td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Valor)
+                    </td>
+                </tr>
+            }
 
+        </table>
 
-
-
-                    <input type="submit">
-
-                </fieldset>
-            </div>
-        }
     }
-
 }

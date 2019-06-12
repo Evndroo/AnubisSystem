@@ -17,9 +17,15 @@ namespace SistemaAnubis.Controllers
         GridView dgv = new GridView();
 
         // GET: Busca
-        public ActionResult Index(){
+        public ActionResult Index(IndexDTO dto){
             ViewBag.Mensagem = "Bem vindo " + MvcApplication.Session.Instance.Nome + ".";
-            return View();
+            if (dto.Alert==false)
+            {
+                IndexDTO model = new IndexDTO();
+                model.Alert = false;
+                return View(model);
+            }
+            else return View(dto);
         }
 
 
@@ -204,8 +210,13 @@ namespace SistemaAnubis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Urna(UrnaDTO dto) {
-            return RedirectToAction("Index");
+        public ActionResult Urna(UrnaDTO dto, string btn) {           
+            UrnaBLL bll = new UrnaBLL();
+            dto.arrayU = bll.buscar(dto);
+            dgv.DataSource =  bll.BuscarUrnaGrid(dto);
+            ViewBag.GridViewString = CarregaGrid();
+            
+            return View(dto);
         }
 
 
@@ -245,8 +256,12 @@ namespace SistemaAnubis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Coroa(CaixaoDTO dto) {
-            return RedirectToAction("Index");
+        public ActionResult Coroa(CoroaDTO dto) {
+            CoroaBLL bll = new CoroaBLL();
+            dto.arrayCO = bll.Consultar(dto);
+            bll.busCoroaGrid(dto);
+
+            return View(dto);
         }
 
 

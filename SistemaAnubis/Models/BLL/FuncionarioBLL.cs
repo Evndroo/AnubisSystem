@@ -55,6 +55,32 @@ namespace SistemaAnubis.Models.BLL
             }
         }
 
+        internal List<FuncionarioDTO> Listar()
+        {
+            List<FuncionarioDTO> list = new List<FuncionarioDTO>();
+
+            MySqlCommand cmd = new MySqlCommand("select * from tbLogin join tbFuncionario on cod_login_func = cod_login;", con.conectarBD());
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                FuncionarioDTO inst = new FuncionarioDTO();
+                inst.User = dr[1].ToString();
+                inst.Nvl = dr[3].ToString();
+                inst.Nome = dr[5].ToString();
+                inst.Cpf = dr[6].ToString();
+                inst.Email = dr[7].ToString();
+                inst.Telefone = dr[8].ToString();
+                inst.Celular = dr[9].ToString();
+                inst.Cep = dr[10].ToString();
+                inst.Num = dr[11].ToString();
+                list.Add(inst);
+            }
+            con.desconectarBD();
+
+            return list;
+        }
+
         public DataTable Consultar(FuncionarioDTO dto)
         {
 
@@ -120,7 +146,7 @@ namespace SistemaAnubis.Models.BLL
 
         public override void buscarUser(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busFunc(@user)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busFuncUser(@user)", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
             dr = cmd.ExecuteReader();
 
@@ -177,7 +203,8 @@ namespace SistemaAnubis.Models.BLL
             cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
             cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = dto.Email;
-            cmd.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = dto.Telefone;
+            cmd.Parameters.Add("@tel", MySqlDbType.VarChar).Value = dto.Telefone;
+            cmd.Parameters.Add("@cel", MySqlDbType.VarChar).Value = dto.Celular;
             cmd.Parameters.Add("@cep", MySqlDbType.VarChar).Value = dto.Cep;
             cmd.Parameters.Add("@num", MySqlDbType.VarChar).Value = dto.Num;
             cmd.ExecuteNonQuery();
@@ -217,6 +244,11 @@ namespace SistemaAnubis.Models.BLL
             MySqlCommand cmd = new MySqlCommand("call busFunc(@user)", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
             return Data(cmd);
+        }
+
+        internal void MudarSenha(FuncionarioDTO func)
+        {
+            throw new NotImplementedException();
         }
 
         /************************************************************************************

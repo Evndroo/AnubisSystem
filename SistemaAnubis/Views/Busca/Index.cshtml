@@ -1,4 +1,4 @@
-﻿
+﻿@model SistemaAnubis.Models.DTO.IndexDTO
 @{
     ViewBag.Title = "Index";
 
@@ -49,5 +49,10 @@
             </div>
         </div>
     }
-}
-
+    if (Model.Alert == true)
+    {
+       <script type="text/javascript">
+           alert("Cadastro efetuado com sucesso");
+       </script>
+        }
+    }

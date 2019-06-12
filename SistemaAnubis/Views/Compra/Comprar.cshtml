@@ -1,0 +1,67 @@
+﻿@model SistemaAnubis.Models.DTO.CompraDTO
+@using SistemaAnubis.Models.DTO;
+
+@{
+
+ViewBag.Title = "Comprar";
+
+
+if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    <div class="form-container" style="padding: 15% 0 10% 0;">
+        <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+            <h1 class="text-center">Você precisa se logar!</h1>
+            <div class="col text-center my-3">
+                <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+            </div>
+        </div>
+    </div>
+
+            }
+            else
+            {
+                Layout = "~/Views/Shared/_Logado.cshtml";
+
+                List<string> planos = new List<string>();
+                planos.Add("");
+                foreach (PlanoDTO dto in Model.Planos)
+                {
+                    planos.Add(dto.Nome);
+                }
+
+                List<string> funcionarios = new List<string>();
+                planos.Add("");
+                foreach (FuncionarioDTO dto in Model.Funcionarios)
+                {
+                    planos.Add(dto.Nome);
+                }
+
+                using (Html.BeginForm("Comprar", "Compra", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+                {
+
+        <legend class="text-center card-title" style="color:white">Cadastrar Administrador</legend>
+        <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+            <fieldset>
+                <div class="validation-summary-valid" data-valmsg-summary="true">
+
+                    @Html.LabelFor(m => m.Vendedor)
+
+                    @Html.TextBoxFor(m => m.Vendedor)
+
+                    @Html.LabelFor(m => m.Plano)
+
+                    @Html.DropDownListFor(m => m.Plano, new MultiSelectList(planos))
+
+
+                    <div class="col text-center my-3">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+
+            </fieldset>
+        </div>
+    }
+}
+}
+}

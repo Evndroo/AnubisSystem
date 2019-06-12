@@ -3,18 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Anubis - Homepage</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script language="javaScript" type="text/javascript" src="~/Scripts/script.js"></script>
-
-    <!-- Bootstrap core CSS -->
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/script.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
     <link type="text/css" href="~/Scripts/style.css" rel="stylesheet">
+
 </head>
 <body style="overflow-x: hidden;">
 
@@ -29,7 +25,10 @@
                 <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Caixao", "Cadastro")'">Caixao</a>
                 <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Cliente", "Cadastro")'">Cliente</a>
                 <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Falecido", "Cadastro")'">Falecido</a>
-                <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Funcionario", "Cadastro")'">Funcionario</a>
+                @if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
+                {
+                    <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Funcionario", "Cadastro")'">Funcionario</a>
+                }
                 <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Administrador", "Cadastro")'">Administrador</a>
                 <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Urna", "Cadastro")'">Urna</a>
                 <a class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Caixao", "Cadastro")'">Caixão</a>
@@ -51,10 +50,19 @@
                             <li class="menu-has-children" style="list-style-type: none;">
                                 <a>Minha Conta</a>
                                 <ul style="list-style-type: none; right: 0%;">
-                                    <li><a href="#">Configurações</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
+                                    <li><a href="@Url.Action("MudarSenha", "Alterar")">Mudar Senha</a></li>
+                                    @if (MvcApplication.Session.Instance.Nvl == "3")
+                                    {
+                                        <li><a href="@Url.Action("ClienteInfo", "Alterar")">Alterar</a></li>
+                                    }
+                                    else if (MvcApplication.Session.Instance.Nvl == "2")
+                                    {
+                                        <li><a href="@Url.Action("FuncionarioInfo", "Alterar")">Alterar</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("AdministradorInfo", "Alterar")">Alterar</a></li>
+                                    }
                                     <li><a href="@Url.Action("Index", "Home")">Sair</a></li>
                                 </ul>
                             </li>
@@ -68,8 +76,6 @@
     </div>
 
         <!-- Bootstrap core JavaScript -->
-        <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-        <script src="~/Scripts/bootstrap.bundle.min.js"></script>
         
         <!-- Menu Toggle Script -->
         <script>

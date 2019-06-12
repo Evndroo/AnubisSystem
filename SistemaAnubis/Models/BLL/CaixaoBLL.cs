@@ -32,7 +32,7 @@ namespace SistemaAnubis.Models.BLL
                 }
                 else if ((MvcApplication.Session.Instance.Nvl == "2"))
                 {
-                    MySqlCommand cmd = new MySqlCommand("call inserirUrna(null,@nome,@altura,@largura,@profundidade,@descricao,@valor,@dono,null)", con.conectarBD());
+                    MySqlCommand cmd = new MySqlCommand("call inserirCaixao(null,@nome,@altura,@largura,@profundidade,@descricao,@valor,@dono,null)", con.conectarBD());
 
                     cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Modelo;
                     cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
@@ -45,7 +45,7 @@ namespace SistemaAnubis.Models.BLL
                 }
                 else
                 {
-                    MySqlCommand cmd = new MySqlCommand("call inserirUrna(@dono,@nome,@altura,@largura,@profundidade,@descricao,@valor,null,null)", con.conectarBD());
+                    MySqlCommand cmd = new MySqlCommand("call inserirCaixao(@dono,@nome,@altura,@largura,@profundidade,@descricao,@valor,null,null)", con.conectarBD());
                     cmd.Parameters.Add("@dono", MySqlDbType.VarChar).Value = MvcApplication.Session.Instance.Codigo;
                     cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Modelo;
                     cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;

@@ -1,5 +1,6 @@
 ﻿@model SistemaAnubis.Models.DTO.UrnaDTO
 @using SistemaAnubis.Models.DTO
+
 @{
     ViewBag.Title = "Cadastrar Administrador";
 
@@ -10,12 +11,11 @@
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <h1 class="text-center">Você precisa se logar!</h1>
                 <div class="col text-center my-3">
-                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
                     <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
                 </div>
             </div>
         </div>
-
     }
     else
     {
@@ -27,6 +27,11 @@
         {
             tipoUrna.Add(dto.ToString());
         }
+
+        List<string> TiposUrna = new List<string>();
+        TiposUrna.Add(String.Empty);
+        TiposUrna.Add("Urna alta");
+        TiposUrna.Add("Urna baixa");
 
         using (Html.BeginForm("Urna", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
@@ -43,10 +48,14 @@
                         <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>
 
+                    <hr style="border-color:white" />
+
+                    @Html.Raw(ViewBag.GridViewString)
+
                 </fieldset>
             </div>
         }
-
     }
+
 }
 

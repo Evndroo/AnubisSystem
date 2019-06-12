@@ -72,7 +72,7 @@ namespace SistemaAnubis.Controllers
                 MvcApplication.Session.Instance.Cep = dto.Cep;
                 MvcApplication.Session.Instance.Num = dto.Num;
                 MvcApplication.Session.Instance.Nvl = dto.Nvl;
-                
+                MvcApplication.Session.Instance.CodUser = dto.CodUser;
                 return RedirectToAction("Index", "Busca");
             }
             else
@@ -251,13 +251,13 @@ namespace SistemaAnubis.Controllers
                     break;
                 case 2:
                     bll.buscarUser(dto);
-                    if (dto.Nome == null) //Busca cliente pelo user de Login
+                    if (dto.Codigo == null) //Busca cliente pelo user de Login
                     {
                         bllF.buscarUser(dto);
-                        if (dto.Nome == null) //Busca funcionário pelo user de Login
+                        if (dto.Codigo == null) //Busca funcionário pelo user de Login
                         {
                             bllA.buscarUser(dto);//Busca administrador pelo user de Login
-                            if (dto.Nome == null)
+                            if (dto.Codigo == null)
                             {//Usuário não está cadastrado
                                 dto.LimpaDTO(dto);
                                 dto.erro  = "Usuário não registrado";

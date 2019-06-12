@@ -69,6 +69,12 @@ namespace SistemaAnubis.Models.BLL
             return array;
         }
 
+        public DataTable busCoroaGrid(CoroaDTO dto) {
+            MySqlCommand cmd = new MySqlCommand("select * from tbCoroa where especie_coroa = @esp;",con.conectarBD());
+            cmd.Parameters.Add("@esp",MySqlDbType.VarChar).Value = dto.Especie;
+            return Data(cmd);
+        }
+
            
         public void buscar(CoroaDTO dto)
         {
@@ -109,9 +115,18 @@ namespace SistemaAnubis.Models.BLL
             con.desconectarBD();
         }
 
-        internal string BuscarCodigo(string coroa)
+        public string BuscarCodigo(string coroa)
         {
             throw new NotImplementedException();
+        }
+
+        public DataTable Data(MySqlCommand cmd)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable agenda = new DataTable();
+            da.Fill(agenda);
+            con.desconectarBD();
+            return agenda;
         }
     }
 }

@@ -1,9 +1,7 @@
-﻿@model SistemaAnubis.Models.DTO.AdministradorDTO
+﻿@model IEnumerable<SistemaAnubis.Models.DTO.AdministradorDTO>
 
 @{
-    /**/
-
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Cliente";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -11,9 +9,9 @@
 
         <div class="form-container" style="padding: 15% 0 10% 0;">
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                <h1 class="text-center">Você precisa se logar!</h1>
+                <h1 class="text-center">Você precisa fazer login!</h1>
                 <div class="col text-center my-3">
-                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
                     <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
                 </div>
             </div>
@@ -25,26 +23,69 @@
         Layout = "~/Views/Shared/_Logado.cshtml";
         if (int.Parse(MvcApplication.Session.Instance.Nvl) == 1)
         {
-            List<string> TipoBusca = new List<string>();
+            <h2>Administradores</h2>
 
-            TipoBusca.Add("");
-            TipoBusca.Add("Usuário");
-            TipoBusca.Add("CPF");
-            TipoBusca.Add("E-mail");
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cpf)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefone)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Celular)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cep)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Num)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nvl)
+                    </th>
+                    <th></th>
+                </tr>
 
-            using (Html.BeginForm("Administrador", "Consulta", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nome)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cpf)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Celular)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cep)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Num)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nvl)
+                        </td>
+                    </tr>
+                }
 
-                <legend class="text-center card-title" style="color:white">Buscar Administrador</legend>
-                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                    <fieldset>
-                        Consultar por:
-                        @Html.DropDownList("TipoBusca", new MultiSelectList(TipoBusca)) <br />
-                        <input type="text" name="busca" id="busca" />
-                        <input type="submit">
-                    </fieldset>
-                </div>
-            }
+            </table>
+
         }
         else
         {

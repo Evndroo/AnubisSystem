@@ -8,5 +8,6 @@ namespace SistemaAnubis.Models.DTO
 {
     public class ClienteDTO : LoginDTO
     {
+        
     }
 }

@@ -48,11 +48,34 @@ namespace SistemaAnubis.Controllers
                         return View();
                     }
                     else
-                        return View();
+                    {
+                        IndexDTO model = new IndexDTO();
+                        model.Alert = true;
+                        if (MvcApplication.Session.Instance.Codigo != null)
+                        {
+                            return RedirectToAction("Index", "Busca", model);
+                        }
+                        else
+                        {
+                            MvcApplication.Session.Instance.Codigo = dto.Codigo;
+                            MvcApplication.Session.Instance.User = dto.User;
+                            MvcApplication.Session.Instance.Senha = dto.Senha;
+                            MvcApplication.Session.Instance.Nome = dto.Nome;
+                            MvcApplication.Session.Instance.Cpf = dto.Cpf;
+                            MvcApplication.Session.Instance.Email = dto.Email;
+                            MvcApplication.Session.Instance.Telefone = dto.Telefone;
+                            MvcApplication.Session.Instance.Celular = dto.Celular;
+                            MvcApplication.Session.Instance.Cep = dto.Cep;
+                            MvcApplication.Session.Instance.Num = dto.Num;
+                            MvcApplication.Session.Instance.Nvl = dto.Nvl;
+                            MvcApplication.Session.Instance.CodUser = dto.CodUser;
+                            return RedirectToAction("Index", "Busca", model);
+                        }
+                    }
                 }
                 else
                 {
-                    return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");                    
+                    return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
                 }
             }
             else {
@@ -94,7 +117,29 @@ namespace SistemaAnubis.Controllers
                         return View();
                     }
                     else
-                        return View();
+                    {
+                        IndexDTO model = new IndexDTO();
+                        model.Alert = true;
+                        if (MvcApplication.Session.Instance.Codigo != null)
+                        {
+                            return RedirectToAction("Index", "Busca", model);
+                        }
+                        else {
+                            MvcApplication.Session.Instance.Codigo = dto.Codigo;
+                            MvcApplication.Session.Instance.User = dto.User;
+                            MvcApplication.Session.Instance.Senha = dto.Senha;
+                            MvcApplication.Session.Instance.Nome = dto.Nome;
+                            MvcApplication.Session.Instance.Cpf = dto.Cpf;
+                            MvcApplication.Session.Instance.Email = dto.Email;
+                            MvcApplication.Session.Instance.Telefone = dto.Telefone;
+                            MvcApplication.Session.Instance.Celular = dto.Celular;
+                            MvcApplication.Session.Instance.Cep = dto.Cep;
+                            MvcApplication.Session.Instance.Num = dto.Num;
+                            MvcApplication.Session.Instance.Nvl = dto.Nvl;
+                            MvcApplication.Session.Instance.CodUser = dto.CodUser;
+                            return RedirectToAction("Index", "Busca",model);
+                        }
+                    }
                 }
                 else
                 {
@@ -140,7 +185,30 @@ namespace SistemaAnubis.Controllers
                         return View();
                     }
                     else
-                        return View();
+                    {
+                        IndexDTO model = new IndexDTO();
+                        model.Alert = true;
+                        if (MvcApplication.Session.Instance.Codigo != null)
+                        {
+                            return RedirectToAction("Index", "Busca", model);
+                        }
+                        else
+                        {
+                            MvcApplication.Session.Instance.Codigo = dto.Codigo;
+                            MvcApplication.Session.Instance.User = dto.User;
+                            MvcApplication.Session.Instance.Senha = dto.Senha;
+                            MvcApplication.Session.Instance.Nome = dto.Nome;
+                            MvcApplication.Session.Instance.Cpf = dto.Cpf;
+                            MvcApplication.Session.Instance.Email = dto.Email;
+                            MvcApplication.Session.Instance.Telefone = dto.Telefone;
+                            MvcApplication.Session.Instance.Celular = dto.Celular;
+                            MvcApplication.Session.Instance.Cep = dto.Cep;
+                            MvcApplication.Session.Instance.Num = dto.Num;
+                            MvcApplication.Session.Instance.Nvl = dto.Nvl;
+                            MvcApplication.Session.Instance.CodUser = dto.CodUser;
+                            return RedirectToAction("Index", "Busca", model);
+                        }
+                    }
                 }
                 else
                 {
@@ -165,7 +233,10 @@ namespace SistemaAnubis.Controllers
         {
             FalecidoBLL bll = new FalecidoBLL();
             bll.inserir(dto);
-            return View();
+            IndexDTO model = new IndexDTO();
+            model.Alert = true;
+            return RedirectToAction("Index", "Busca", model);
+
         }
 
 
@@ -179,8 +250,11 @@ namespace SistemaAnubis.Controllers
         public ActionResult Caixao(CaixaoDTO dto)
         {
             CaixaoBLL bll = new CaixaoBLL();
-            if (bll.inserir(dto)){
-                return RedirectToAction("Index", "Busca");
+            IndexDTO model = new IndexDTO();
+            model.Alert = true;
+            if (bll.inserir(dto))
+            {
+                return RedirectToAction("Index", "Busca",model);
             }
             return View();
         }
@@ -195,7 +269,10 @@ namespace SistemaAnubis.Controllers
         public ActionResult Coroa(CoroaDTO dto)
         {
             CoroaBLL bll = new CoroaBLL();
-            if (bll.inserir(dto)) return RedirectToAction("Indexx", "Busca");
+
+            IndexDTO model = new IndexDTO();
+            model.Alert = true;
+            if (bll.inserir(dto)) return RedirectToAction("Index", "Busca",model);
             else return View();
         }
 
@@ -264,12 +341,15 @@ namespace SistemaAnubis.Controllers
             try
             {
                 bll.inserir(dto);
-                return View();
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("Index", "Busca", model);
+                
             }
-            catch(MySqlException ex)
+            catch(Exception ex)
             {
                 ViewBag.Erro = ex.ToString();
-                return View();
+                return View(new PlanoDTO());
             }
         }
 
@@ -287,7 +367,9 @@ namespace SistemaAnubis.Controllers
             {
                 CompraBLL bll = new CompraBLL();
                 bll.inserir(dto);
-                return View();
+                IndexDTO model = new IndexDTO();
+                model.Compra = true;
+                return RedirectToAction("Index", "Busca", model);
             }
             catch
             {
