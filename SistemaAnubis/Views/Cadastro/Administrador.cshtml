@@ -60,7 +60,7 @@
 
                             @Html.LabelFor(m => m.Email) <small class="text-muted" id="erro">@ViewBag.erro3</small>
 
-                            @Html.TextBoxFor(m => m.Email, new { @type="email", @class = "form-control" })
+                            @Html.TextBoxFor(m => m.Email, new { @type = "email", @class = "form-control" })
 
                             @Html.LabelFor(m => m.Telefone)
 
@@ -74,9 +74,21 @@
 
                             @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" })
 
+                            <label>Logradouro</label>
+                            <input id="Rua" type="text" class="form-control" readonly>
+
                             @Html.LabelFor(m => m.Num)
 
                             @Html.TextBoxFor(m => m.Num, new { @class = "form-control" })
+
+                            <label>Bairro</label>
+                            <input id="Bairro" type="text" class="form-control" readonly>
+
+                            <label>Cidade</label>
+                            <input id="Cidade" type="text" class="form-control" readonly>
+
+                            <label>Estado</label>
+                            <input id="Estado" type="text" class="form-control" readonly>
 
 
                             <div class="col text-center my-3">

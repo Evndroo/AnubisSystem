@@ -178,12 +178,21 @@
     <Content Include="Content\Site.css" />
     <Content Include="Imagens\2.jpg" />
     <Content Include="Imagens\3.jpg" />
+    <Content Include="Imagens\a2.jpg" />
+    <Content Include="Imagens\backgroundag.jpg" />
+    <Content Include="Imagens\backgroundagag.jpg" />
+    <Content Include="Imagens\certo.png" />
     <Content Include="Imagens\emgelf_logo.PNG" />
-    <Content Include="Imagens\noun_don%27t_180604.png" />
-    <Content Include="Imagens\noun_yes_1482086.png" />
+    <Content Include="Imagens\errado.png" />
+    <Content Include="Imagens\funeral-andre.jpg" />
+    <Content Include="Imagens\funeral-hebe.jpg" />
+    <Content Include="Imagens\funeral-stan.jpg" />
+    <Content Include="Imagens\logo-nova.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Imagens\1.jpg" />
+    <Content Include="Imagens\trofeu-economia.jpg" />
+    <Content Include="Imagens\trofeu-funeraria.jpg" />
     <Content Include="Scripts\bootstrap-grid.css" />
     <Content Include="Scripts\bootstrap-grid.min.css" />
     <Content Include="Scripts\bootstrap-reboot.css" />
@@ -260,13 +269,11 @@
     <Content Include="Views\Busca\Flores.cshtml" />
     <Content Include="Views\Busca\Coroa.cshtml" />
     <Content Include="Views\Home\Portifolio.cshtml" />
-    <Content Include="Views\Home\Contato.cshtml" />
     <Content Include="Views\Home\Suporte.cshtml" />
     <Content Include="Views\Home\Empresa.cshtml" />
     <Content Include="Views\Shared\_Logado.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Esqueci.cshtml" />
-    <Content Include="Views\Busca\Result.cshtml" />
     <Content Include="Views\Alterar\Cliente.cshtml" />
     <Content Include="Views\Compra\Comprar.cshtml" />
     <Content Include="Views\Alterar\Funcionario.cshtml" />
@@ -285,6 +292,9 @@
     <Content Include="Views\Alterar\ClienteInfo.cshtml" />
     <Content Include="Views\Alterar\FuncionarioInfo.cshtml" />
     <Content Include="Views\Alterar\MudarSenha.cshtml" />
+    <Content Include="Views\Alterar\Planos.cshtml" />
+    <Content Include="Views\Busca\Falecido.cshtml" />
+    <Content Include="Views\Alterar\Caixao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

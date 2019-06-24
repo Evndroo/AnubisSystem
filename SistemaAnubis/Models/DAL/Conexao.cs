@@ -9,7 +9,8 @@ namespace SistemaAnubis.Models.DAL
     public class Conexao
     {
         public static string msg;
-        MySqlConnection con = new MySqlConnection("Server=localhost;Database=dbAnubis;user=root;pwd=1234567");
+        MySqlConnection con = new MySqlConnection("Server=localhost;Database=dbAnubis;user=root;pwd=1234567;CharSet=utf8;");
+        //MySqlConnection con = new MySqlConnection("server=db4free.net;Database=anubis;user=emgelf;pwd=emgelf123;Port=3306");
 
         public MySqlConnection conectarBD() {
             try {

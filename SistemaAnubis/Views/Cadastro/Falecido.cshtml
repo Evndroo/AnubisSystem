@@ -1,4 +1,5 @@
 ﻿@model SistemaAnubis.Models.DTO.FalecidoDTO
+@using SistemaAnubis.Models.DTO;
 
 @{
     ViewBag.Title = "Cadastrar Administrador";
@@ -6,35 +7,123 @@
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
     {
         Layout = "~/Views/Shared/_Logado.cshtml";
 
-        using (Html.BeginForm("Falecido", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        if (MvcApplication.Session.Instance.Nvl == "3")
         {
 
-            <legend class="text-center card-title" style="color:white">Cadastrar Falecido</legend>
-            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                <fieldset>
-                    @Html.ValidationSummary()
-                    <div class="validation-summary-valid" data-valmsg-summary="true">
-                        <ul>
-                            <li style="display:none"><legend>Cadastrar Falecido</legend></li>
-                        </ul>
-                    </div>
+            List<string> Planos = new List<string>();
+            Planos.Add("");
+            foreach (PlanoDTO dto in Model.arrayP)
+            {
+                Planos.Add(dto.ToString());
+            }
 
-                    <div class="col text-center my-3">
-                        <button type="submit" class="btn btn-primary">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </div>
-                </fieldset>
-            </div>
+            using (Html.BeginForm("Falecido", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+
+                <legend class="text-center card-title" style="color:white">Cadastrar Falecido</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+
+                        <legend>Cadastrar Falecido</legend>
+
+                        @Html.LabelFor(m => m.Nome)
+
+                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+
+                        @Html.LabelFor(m => m.Nascimento)
+
+                        @Html.TextBoxFor(m => m.Nascimento, new { @class = "form-control", @type = "date" })
+
+                        @Html.LabelFor(m => m.Falecimento)
+
+                        @Html.TextBoxFor(m => m.Falecimento, new { @class = "form-control", @type = "date" })
+
+                        @Html.LabelFor(m => m.Plano)
+
+                        @Html.DropDownListFor(m => m.Plano, new MultiSelectList(Planos), new { @class = "form-control" })
+
+                        <div class="col text-center my-3">
+                            <button type="submit" class="btn btn-primary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </fieldset>
+                </div>
+            }
+        }
+        else
+        {
+            List<string> Planos = new List<string>();
+            Planos.Add("");
+            foreach (PlanoDTO dto in Model.arrayP)
+            {
+                Planos.Add(dto.ToString());
+            }
+
+            List<string> Responsavel = new List<string>();
+            Responsavel.Add("");
+            foreach (ClienteDTO dto in Model.clientes)
+            {
+                Responsavel.Add(dto.ToString());
+            }
+
+            using (Html.BeginForm("Falecido", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+
+                <legend class="text-center card-title" style="color:white">Cadastrar Falecido</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+                        @ViewBag.erroCad
+                        <div class="validation-summary-valid" data-valmsg-summary="true">
+                            <ul>
+                                <li style="display:none"><legend>Cadastrar Falecido</legend></li>
+                            </ul>
+                        </div>
+
+                        @Html.LabelFor(m => m.Nome)
+
+                        @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+
+                        @Html.LabelFor(m => m.Nascimento)
+
+                        @Html.TextBoxFor(m => m.Nascimento, new { @class = "form-control", @type = "date" })
+
+                        @Html.LabelFor(m => m.Falecimento)
+
+                        @Html.TextBoxFor(m => m.Falecimento, new { @class = "form-control", @type = "date" })
+
+                        @Html.LabelFor(m => m.Plano)
+
+                        @Html.DropDownListFor(m => m.Plano, new MultiSelectList(Planos), new { @class = "form-control" })
+
+                        @Html.LabelFor(m => m.Responsavel)
+
+                        @Html.DropDownListFor(m => m.Responsavel, new MultiSelectList(Responsavel), new { @class = "form-control" })
+
+
+
+                        <div class="col text-center my-3">
+                            <button type="submit" class="btn btn-primary">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </fieldset>
+                </div>
+            }
         }
     }
-
-
 }

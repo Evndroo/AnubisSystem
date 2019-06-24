@@ -18,8 +18,62 @@ namespace SistemaAnubis.Controllers
 
         public ActionResult Planos()
         {
+            PlanoDTO dto = new PlanoDTO();
+            dto.arrayP = new PlanoBLL().Listar();
+            dto.arrayF = new FloresBLL().Consultar(new FloresDTO());
+            dto.arrayCO= new CoroaBLL().Consultar(new CoroaDTO());
+            dto.arrayC = new CaixaoBLL().buscar(new CaixaoDTO());
+            dto.arrayU = new UrnaBLL().buscar(new UrnaDTO());
+            return View(dto);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Planos(PlanoDTO dto, string btn, FormCollection frm)
+        {
+            PlanoBLL bll = new PlanoBLL();
+            if (btn == "Buscar")
+            {
+                dto = bll.buscar(dto);
+                dto.arrayP = new PlanoBLL().Listar();
+                dto.arrayF = new FloresBLL().Consultar(new FloresDTO());
+                dto.arrayCO = new CoroaBLL().Consultar(new CoroaDTO());
+                dto.arrayC = new CaixaoBLL().buscar(new CaixaoDTO());
+                dto.arrayU = new UrnaBLL().buscar(new UrnaDTO());
+                PlanoDTO.Antigo = dto.Nome;
+                return View(dto);
+
+            }
+            else if (btn == "Salvar")
+            {
+                string veu = frm["Véu"];
+                string lapide = frm["Lap"];
+                string necromaquiagem = frm["necro"];
+                string translado = frm["Transl"];
+                string paramentacao = frm["Paramentação"];
+
+                if (veu != null) dto.Veu = 1;
+                else dto.Veu = 0;
+
+                if (lapide != null) dto.Lapide = 1;
+                else dto.Lapide = 0;
+
+                if (necromaquiagem != null) dto.Necromaquiagem = 1;
+                else dto.Necromaquiagem = 0;
+
+                if (translado != null) dto.Translado = 1;
+                else dto.Translado = 0;
+
+                if (paramentacao != null) dto.Paramentacao = 1;
+                else dto.Paramentacao = 0;
+                bll.atualizar(dto);
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
+            }
+            else
+            {
+                return View();
+            }
         }
 
 
@@ -37,7 +91,40 @@ namespace SistemaAnubis.Controllers
             ClienteBLL bll = new ClienteBLL();
             if (btn == "Buscar")
             {
-                bll.busUser(dto);
+                dto.Email = dto.User;
+                dto.Cpf = dto.User;
+                if (Int64.TryParse(dto.Cpf, out long i))
+                {
+                    if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                    {
+                        dto.Email = null;
+                        dto.User = null;
+                        bll.buscarCpf(dto);
+                    }
+                    else if (dto.Cpf.Length != 11)
+                    { //Usuário numérico
+                        dto.Email = null;
+                        dto.Cpf = null;
+                        bll.buscarUser(dto);
+                    }
+                    else
+                    {
+                        //CPF inválido
+                        ViewBag.erro = "Cpf Inválido";
+                    }
+                }
+                else if (Validacoes.isEmail(dto.Email)) //buscando por email
+                {
+                    dto.Cpf = null;
+                    dto.User = null;
+                    bll.buscarEmail(dto);
+
+                }
+                else {
+                    dto.Email = null;
+                    dto.Cpf = null;
+                    bll.buscarUser(dto);
+                }
                 return View(dto);
             }
             else if (btn == "Salvar")
@@ -61,32 +148,115 @@ namespace SistemaAnubis.Controllers
 
         public ActionResult Funcionario()
         {
-
-            return View();
+            FuncionarioDTO dto = new FuncionarioDTO();
+            return View(dto);
         }
 
         [HttpPost]
         public ActionResult Funcionario(FuncionarioDTO dto, string btn)
         {
-            if (btn == "Buscar")
+            FuncionarioBLL bll = new FuncionarioBLL();
+            if (btn == "Buscar") {
+                dto.Email = dto.User;
+                dto.Cpf = dto.User;
+                if (Int64.TryParse(dto.Cpf, out long i))
+                {
+                    if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                    {
+                        dto.Email = null;
+                        dto.User = null;
+                        bll.buscarCpf(dto);
+                    }
+                    else if (dto.Cpf.Length != 11)
+                    { //Usuário numérico
+                        dto.Email = null;
+                        dto.Cpf = null;
+                        bll.buscarUser(dto);
+                    }
+                    else
+                    {
+                        //CPF inválido
+                        ViewBag.erro = "Cpf Inválido";
+                    }
+                }
+                else if (Validacoes.isEmail(dto.Email)) //buscando por email
+                {
+                    dto.Cpf = null;
+                    dto.User = null;
+                    bll.buscarEmail(dto);
+
+                }
+                else
+                {
+                    dto.Email = null;
+                    dto.Cpf = null;
+                    bll.buscarUser(dto);
+                }
                 return View(dto);
+            }
             else if (btn == "Salvar")
             {
-                return RedirectToAction("index");
+                bll.alterar(dto);
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
             }
             else return View();
         }
 
-        public ActionResult Administrador() { return View(); }
+        public ActionResult Administrador() {
+            AdministradorDTO dto = new AdministradorDTO();
+            return View(dto);
+        }
 
         [HttpPost]
-        public ActionResult Administrador(FuncionarioDTO dto, string btn)
+        public ActionResult Administrador(AdministradorDTO dto, string btn)
         {
-            if (btn == "Buscar")
-                return View();
+            AdministradorBLL bll = new AdministradorBLL();
+            if (btn == "Buscar") {
+                dto.Email = dto.User;
+                dto.Cpf = dto.User;
+                if (Int64.TryParse(dto.Cpf, out long i))
+                {
+                    if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                    {
+                        dto.Email = null;
+                        dto.User = null;
+                        bll.buscarCpf(dto);
+                    }
+                    else if (dto.Cpf.Length != 11)
+                    { //Usuário numérico
+                        dto.Email = null;
+                        dto.Cpf = null;
+                        bll.buscarUser(dto);
+                    }
+                    else
+                    {
+                        //CPF inválido
+                        ViewBag.erro = "Cpf Inválido";
+                    }
+                }
+                else if (Validacoes.isEmail(dto.Email)) //buscando por email
+                {
+                    dto.Cpf = null;
+                    dto.User = null;
+                    bll.buscarEmail(dto);
+
+                }
+                else
+                {
+                    dto.Email = null;
+                    dto.Cpf = null;
+                    bll.buscarUser(dto);
+                }
+                return View(dto);
+            }
             else if (btn == "Salvar")
             {
-                return RedirectToAction("index");
+                bll.alterar(dto);
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
             }
             else return View();
         }
@@ -107,17 +277,26 @@ namespace SistemaAnubis.Controllers
         [HttpPost]
         public ActionResult Urna(UrnaDTO dto, string btn)
         {
+            UrnaBLL bll = new UrnaBLL();
             if (btn == "Buscar")
             {
-                UrnaBLL bll = new UrnaBLL();
                 bll.achar(dto);
+                dto.Altura = dto.Altura.Replace(',', '.');
+                dto.Largura = dto.Largura.Replace(',', '.');
+                dto.Profundidade = dto.Profundidade.Replace(',', '.');
+                dto.Valor = dto.Valor.Replace(',', '.');
+                UrnaDTO.Antiga = dto.Nome;
                 dto.arrayU = bll.buscar(dto);
                 return View(dto);
 
             }
             else if (btn == "Salvar")
             {
+                bll.atualizar(dto);
 
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
             }
             else
             { //botão é deletar
@@ -197,7 +376,7 @@ namespace SistemaAnubis.Controllers
             if (Validacoes.IsCpf(dto.Cpf))
             {
                 FuncionarioBLL bll = new FuncionarioBLL();
-                bll.atualizar(dto);
+                bll.alterar(dto);
 
                 IndexDTO model = new IndexDTO();
                 model.Alert = true;
@@ -242,7 +421,7 @@ namespace SistemaAnubis.Controllers
             if (Validacoes.IsCpf(dto.Cpf))
             {
                 AdministradorBLL bll = new AdministradorBLL();
-                bll.atualizar(dto);
+                bll.alterar(dto);
 
                 IndexDTO model = new IndexDTO();
                 model.Alert = true;
@@ -300,6 +479,49 @@ namespace SistemaAnubis.Controllers
             }
             else {
                 ViewBag.incorreta = "Sua senha está incorreta";
+            }
+            return View();
+        }
+
+        public ActionResult Caixao()
+        {
+            CaixaoBLL bll = new CaixaoBLL();
+            CaixaoDTO dto = new CaixaoDTO();
+            dto.arrayC = bll.buscar(dto);
+            dto.Altura = "";
+            dto.Largura = "";
+            dto.Profundidade = "";
+            dto.Descricao = "";
+            dto.Valor = "";
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Caixao(CaixaoDTO dto, string btn)
+        {
+            CaixaoBLL bll = new CaixaoBLL();
+            if (btn == "Buscar")
+            {
+                bll.buscarModelo(dto);
+                dto.Altura = dto.Altura.Replace(',', '.');
+                dto.Largura = dto.Largura.Replace(',', '.');
+                dto.Profundidade = dto.Profundidade.Replace(',', '.');
+                dto.Valor = dto.Valor.Replace(',', '.');
+                dto.arrayC = bll.buscar(dto);
+                return View(dto);
+
+            }
+            else if (btn == "Salvar")
+            {
+                bll.atualizar(dto);
+
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
+            }
+            else
+            { //botão é deletar
+
             }
             return View();
         }

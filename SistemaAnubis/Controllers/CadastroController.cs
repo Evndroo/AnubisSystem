@@ -225,18 +225,78 @@ namespace SistemaAnubis.Controllers
 
         public ActionResult Falecido()
         {
-            return View();
+            FalecidoDTO dto = new FalecidoDTO();
+            PlanoBLL bllP = new PlanoBLL();
+            PlanoDTO dtoP = new PlanoDTO();
+            dtoP.arrayP = bllP.Consultar(dtoP);
+            dto.arrayP = dtoP.arrayP;
+            if (MvcApplication.Session.Instance.Nvl!=null) {
+                if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2) {
+                    ClienteDTO dtoCli = new ClienteDTO();
+                    ClienteBLL bllCli = new ClienteBLL();
+                    List<ClienteDTO> lista = new List<ClienteDTO>();
+                    dto.clientes = bllCli.Listar();
+                }
+            }
+            return View(dto);
         }
 
         [HttpPost]
         public ActionResult Falecido(FalecidoDTO dto)
         {
-            FalecidoBLL bll = new FalecidoBLL();
-            bll.inserir(dto);
-            IndexDTO model = new IndexDTO();
-            model.Alert = true;
-            return RedirectToAction("Index", "Busca", model);
+            dto.Nascimento = DateTime.Parse(dto.Nascimento).ToString("yyyy-MM-dd");
+            dto.Falecimento = DateTime.Parse(dto.Falecimento).ToString("yyyy-MM-dd");
 
+            if ((DateTime.Compare(DateTime.Parse(dto.Nascimento), DateTime.Parse(dto.Falecimento))) == -1)
+            {
+
+                FalecidoBLL bll = new FalecidoBLL();
+                try
+                {
+                    if (MvcApplication.Session.Instance.Nvl == "3") dto.Responsavel = MvcApplication.Session.Instance.User;
+                    bll.inserir(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.Alert = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch (Exception ex)
+                {
+                    PlanoBLL bllP = new PlanoBLL();
+                    PlanoDTO dtoP = new PlanoDTO();
+                    dtoP.arrayP = bllP.Consultar(dtoP);
+                    dto.arrayP = dtoP.arrayP;
+                    if (MvcApplication.Session.Instance.Nvl != null)
+                    {
+                        if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
+                        {
+                            ClienteDTO dtoCli = new ClienteDTO();
+                            ClienteBLL bllCli = new ClienteBLL();
+                            List<ClienteDTO> lista = new List<ClienteDTO>();
+                            dto.clientes = bllCli.Listar();
+                        }
+                    }
+                    ViewBag.erroCad = ex.ToString();
+                    return View(dto);
+                }
+            }
+            else {
+                PlanoBLL bllP = new PlanoBLL();
+                PlanoDTO dtoP = new PlanoDTO();
+                dtoP.arrayP = bllP.Consultar(dtoP);
+                dto.arrayP = dtoP.arrayP;
+                if (MvcApplication.Session.Instance.Nvl != null)
+                {
+                    if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
+                    {
+                        ClienteDTO dtoCli = new ClienteDTO();
+                        ClienteBLL bllCli = new ClienteBLL();
+                        List<ClienteDTO> lista = new List<ClienteDTO>();
+                        dto.clientes = bllCli.Listar();
+                    }
+                }
+                ViewBag.erroCad = "A data em que a pessoa veio a falecer não pode ser anterior ao seu nascimento";
+                return View(dto);
+            }
         }
 
 
@@ -288,7 +348,10 @@ namespace SistemaAnubis.Controllers
             
             FloresBLL bll = new FloresBLL();
             if (bll.inserir(dto)) {
-                return RedirectToAction("Index","Busca");
+
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("Index","Busca",model);
             }else
                 return View();
             
@@ -306,7 +369,9 @@ namespace SistemaAnubis.Controllers
 
             UrnaBLL bll = new UrnaBLL();
             if (bll.inserir(dto)) {
-                return RedirectToAction("Index", "Busca");
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("Index", "Busca", model);
             }
             return View();
 
@@ -334,13 +399,36 @@ namespace SistemaAnubis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Plano(PlanoDTO dto)
+        public ActionResult Plano(PlanoDTO dto, FormCollection frm)
             {
             PlanoBLL bll = new PlanoBLL();
+
+            string veu = frm["Véu"];
+            string lapide = frm["lap"];
+            string necromaquiagem= frm["necro"];
+            string translado = frm["transl"];
+            string paramentacao = frm["Paramentação"];
+
+            if (veu.StartsWith("true")) dto.Veu = 1;
+            else dto.Veu = 0;
+
+            if (lapide.StartsWith("true")) dto.Lapide = 1;
+            else dto.Lapide= 0;
+
+            if (necromaquiagem.StartsWith("true")) dto.Necromaquiagem= 1;
+            else dto.Necromaquiagem = 0;
+
+            if (translado.StartsWith("true")) dto.Translado= 1;
+            else dto.Translado= 0;
+
+            if (paramentacao.StartsWith("true")) dto.Paramentacao= 1;
+            else dto.Paramentacao= 0;
 
             try
             {
                 bll.inserir(dto);
+
+
                 IndexDTO model = new IndexDTO();
                 model.Alert = true;
                 return RedirectToAction("Index", "Busca", model);

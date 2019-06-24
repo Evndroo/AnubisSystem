@@ -11,7 +11,7 @@
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <h1 class="text-center">Você precisa se logar!</h1>
                 <div class="col text-center my-3">
-                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
                     <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
                 </div>
             </div>
@@ -47,6 +47,14 @@
 
                 </fieldset>
             </div>
+            if (ViewBag.GridViewString == "Nenhum dado foi encontrado" || ViewBag.GridViewString == "Cpf Inválido")
+            {
+                <label style="width: -webkit-fill-available; text-align: center; color:rgba(0,0,0,1)">@ViewBag.GridViewString</label>
+            }
+            else
+            {
+                <span>@Html.Raw(@ViewBag.GridViewString)</span>
+            }
         }
 
     }

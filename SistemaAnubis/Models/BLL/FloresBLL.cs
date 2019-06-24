@@ -19,12 +19,10 @@ namespace SistemaAnubis.Models.BLL
             try
             {
                 MySqlCommand cmd = new MySqlCommand("call inserirFlores(@especie,@tipo,@quantidade,@val)", con.conectarBD());
-                cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
                 cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
                 cmd.Parameters.Add("@quantidade", MySqlDbType.VarChar).Value = dto.Quantidade;
                 cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
                 cmd.Parameters.Add("@val", MySqlDbType.VarChar).Value = dto.Valor;
-
 
                 cmd.ExecuteNonQuery();
                 con.desconectarBD();
@@ -33,6 +31,12 @@ namespace SistemaAnubis.Models.BLL
             catch {
                 return false;
             }
+        }
+
+        public DataTable buscarG(FloresDTO dto) {
+            MySqlCommand cmd = new MySqlCommand("call busFlorAs(@esp);", con.conectarBD());
+            cmd.Parameters.Add("@esp", MySqlDbType.VarChar).Value = dto.Especie;
+            return Data(cmd);
         }
 
         public List<FloresDTO> Consultar(FloresDTO dto)
@@ -59,8 +63,8 @@ namespace SistemaAnubis.Models.BLL
         MySqlDataReader dr;
         public void buscar(FloresDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbFlores where cpf_adm = @cpf", con.conectarBD());
-            cmd.Parameters.AddWithValue("@cpf", dto.Codigo);
+            MySqlCommand cmd = new MySqlCommand("select * from tbFlores where especie_flor = @esp", con.conectarBD());
+            cmd.Parameters.Add("@esp", MySqlDbType.VarChar).Value = dto.Especie;
             dr = cmd.ExecuteReader();
 
 
@@ -93,7 +97,7 @@ namespace SistemaAnubis.Models.BLL
             con.desconectarBD();
         }
 
-        internal string BuscarCodigo(string flor)
+        string BuscarCodigo(string flor)
         {
             MySqlCommand cmd = new MySqlCommand("select cod_flor from tbFlores where especie_flor = @especie", con.conectarBD());
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = flor;
@@ -103,6 +107,16 @@ namespace SistemaAnubis.Models.BLL
                 return dr[0].ToString();
             }
             else return "Flor não encontrada";
+        }
+
+        public DataTable Data(MySqlCommand cmd)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable agenda = new DataTable();
+            da.Fill(agenda);
+            con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
+            return agenda;
         }
     }
 }

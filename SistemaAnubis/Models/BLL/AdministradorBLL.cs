@@ -132,21 +132,21 @@ namespace SistemaAnubis.Models.BLL
 
         public override DataTable buscarCpfGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busAdmCPF(@cpf)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busAdmCPFC(@cpf)", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
             return Data(cmd);
         }
 
         public override DataTable buscarEmailGrid (LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busAdmEmail(@email)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busAdmEmailC(@email)", con.conectarBD());
             cmd.Parameters.AddWithValue("@email", dto.Email);
             return Data(cmd);
         }
 
         public override DataTable buscarUserGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busAdm(@user)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busAdmC(@user)", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
             return Data(cmd);
         }
@@ -168,7 +168,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(AdministradorDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call inserirAdmLogin(@user,@senha,@nome,@cpf,@email,@telefone,@celular,@cep,@num)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call inserirAdmLogin(@user,@nome,@cpf,@email,@telefone,@celular,@cep,@num)", con.conectarBD());
             cmd.Parameters.Add("@user", MySqlDbType.VarChar).Value = dto.User;
             cmd.Parameters.Add("@senha", MySqlDbType.VarChar).Value = dto.Senha;
             cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
@@ -202,6 +202,22 @@ namespace SistemaAnubis.Models.BLL
                     dto.erro = "3";
                 }
             }
+        }
+
+        public void alterar(LoginDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("call altAdm(@cpf,@user,@nome,@email,@tel,@cel,@cep,@num)", con.conectarBD());
+            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
+            cmd.Parameters.Add("@user", MySqlDbType.VarChar).Value = dto.User;
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = dto.Email;
+            cmd.Parameters.Add("@tel", MySqlDbType.VarChar).Value = dto.Telefone;
+            cmd.Parameters.Add("@cel", MySqlDbType.VarChar).Value = dto.Celular;
+            cmd.Parameters.Add("@cep", MySqlDbType.VarChar).Value = dto.Cep;
+            cmd.Parameters.Add("@num", MySqlDbType.VarChar).Value = dto.Num;
+            cmd.ExecuteNonQuery();
+            con.desconectarBD();
+
         }
 
         public override void atualizar(LoginDTO dto) {
@@ -240,6 +256,7 @@ namespace SistemaAnubis.Models.BLL
             DataTable agenda = new DataTable();
             da.Fill(agenda);
             con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
             return agenda;
         }
 

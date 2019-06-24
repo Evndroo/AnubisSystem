@@ -27,20 +27,29 @@
             using (Html.BeginForm("Cliente", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {
                 <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
-                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                    <fieldset>
-                        @Html.LabelFor(m => m.Cpf)
+                <div class="form-group col-4 mx-auto text-center">
+                    <fieldset id="busca">
+                        @Html.Label("Digite o nome, cpf ou e-mail")
 
                         @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control" })
-
-                        @Html.Raw(@ViewBag.GridViewString)
 
                         <div class="col text-center my-3">
                             <button type="submit" class="btn btn-primary">Buscar</button>
                         </div>
 
+
+
                     </fieldset>
                 </div>
+
+                if (ViewBag.GridViewString == "Nenhum dado foi encontrado" || ViewBag.GridViewString == "Cpf Inválido")
+                {
+                    <label style="width: -webkit-fill-available; text-align: center; color:rgba(0,0,0,1)">@ViewBag.GridViewString</label>
+                }
+                else
+                {
+                    @Html.Raw(@ViewBag.GridViewString)
+                }
             }
 
         }

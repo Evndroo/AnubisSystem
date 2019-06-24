@@ -16,13 +16,15 @@ namespace SistemaAnubis.Models.BLL
 
         public void inserir(CompraDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call sp_inserirCompra(@user, @senha, nome)", con.conectarBD());
-            cmd.Parameters.Add("@user", MySqlDbType.VarChar).Value = dto.Cliente;
+            MySqlCommand cmd = new MySqlCommand("call inserirCompra(@cliente, @funcionario, @fal, @plano, @data)", con.conectarBD());
+            cmd.Parameters.Add("@cliente", MySqlDbType.VarChar).Value = dto.Cliente;
+            cmd.Parameters.Add("@funcionario", MySqlDbType.VarChar).Value = dto.Vendedor;
+            cmd.Parameters.Add("@fal", MySqlDbType.VarChar).Value = dto.Falecido;
             cmd.Parameters.Add("@plano", MySqlDbType.VarChar).Value = dto.Plano;
             cmd.Parameters.Add("@data", MySqlDbType.VarChar).Value = dto.Data;
-
             cmd.ExecuteNonQuery();
             con.desconectarBD();
+            
         }
 
         public DataTable Consultar(CompraDTO dto)
@@ -39,8 +41,8 @@ namespace SistemaAnubis.Models.BLL
         MySqlDataReader dr;
         public void buscar(CompraDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tbCompra where cod_cli = @cli", con.conectarBD());
-            cmd.Parameters.AddWithValue("@cli", dto.Cliente);
+            MySqlCommand cmd = new MySqlCommand("select * from tbCompra where cod_cli = @cli or cod", con.conectarBD());
+            cmd.Parameters.AddWithValue("@cli", MvcApplication.Session.Instance.Codigo);
             dr = cmd.ExecuteReader();
 
 
@@ -73,6 +75,16 @@ namespace SistemaAnubis.Models.BLL
             cmd.Parameters.Add("@plano", MySqlDbType.VarChar).Value = dto.Plano;
 
             con.desconectarBD();
+        }
+
+        public DataTable Data(MySqlCommand cmd)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable agenda = new DataTable();
+            da.Fill(agenda);
+            con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
+            return agenda;
         }
     }
 }

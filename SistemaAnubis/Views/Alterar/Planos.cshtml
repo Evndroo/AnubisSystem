@@ -1,0 +1,229 @@
+﻿@model SistemaAnubis.Models.DTO.PlanoDTO
+@using SistemaAnubis.Models.DTO;
+
+@{
+    ViewBag.Title = "Planos";
+
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
+        List<string> Planos = new List<string>();
+        Planos.Add("");
+        foreach (PlanoDTO dto in Model.arrayP)
+        {
+            Planos.Add(dto.ToString());
+        }
+
+        List<string> tipoCaixao = new List<string>();
+        tipoCaixao.Add("");
+        foreach (CaixaoDTO dto in Model.arrayC)
+        {
+            tipoCaixao.Add(dto.ToString());
+        }
+
+        List<string> tipoUrna = new List<string>();
+        tipoUrna.Add("");
+        foreach (UrnaDTO dto in Model.arrayU)
+        {
+            tipoUrna.Add(dto.ToString());
+        }
+
+        List<string> tipoCoroa = new List<string>();
+        tipoCoroa.Add("");
+        foreach (CoroaDTO dto in Model.arrayCO)
+        {
+            tipoCoroa.Add(dto.ToString());
+        }
+
+        List<string> tipoFlor = new List<string>();
+        tipoFlor.Add("");
+        foreach (FloresDTO dto in Model.arrayF)
+        {
+            tipoFlor.Add(dto.ToString());
+        }
+
+        using (Html.BeginForm("Planos", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+
+            <legend class="text-center card-title" style="color:white">Planos</legend>
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <fieldset>
+
+                    @Html.LabelFor(m => m.Nome)
+
+                    @Html.DropDownListFor(m => m.Nome, new MultiSelectList(Planos), new { @class = "form-control" })
+
+
+                    <div class="col text-center my-3">
+                        <button type="submit" name="btn" value="Buscar" class="btn btn-primary">Buscar</button>
+                    </div>
+
+                    <hr style="border-color:white" />
+
+                    @Html.LabelFor(m => m.Nome)
+
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+
+                    @Html.LabelFor(m => m.Caixao)
+
+                    <select class="form-control" id="Caixao" name="Caixao">
+                        @foreach (string caixoes in tipoCaixao)
+                        {
+                            if (caixoes == Model.Caixao)
+                            {
+                                <option selected="selected">@caixoes</option>
+                            }
+                            else
+                            {
+                                <option>@caixoes</option>
+                            }
+
+                        }
+                    </select>
+
+                    @Html.LabelFor(m => m.Urna)
+
+                    <select class="form-control" id="Urna" name="Urna">
+                        @foreach (string urna in tipoUrna)
+                        {
+                            if (urna == Model.Urna)
+                            {
+                                <option selected="selected">@urna</option>
+                            }
+                            else
+                            {
+                                <option>@urna</option>
+                            }
+
+                        }
+                    </select>
+
+                    @Html.LabelFor(m => m.Coroa)
+
+                    <select class="form-control" id="Coroa" name="Coroa">
+                        @foreach (string coroas in tipoCoroa)
+                        {
+                            if (coroas == Model.Coroa)
+                            {
+                                <option selected="selected">@coroas</option>
+                            }
+                            else
+                            {
+                                <option>@coroas</option>
+                            }
+
+                        }
+                    </select>
+
+                    @Html.LabelFor(m => m.QuantCoroa)
+
+                    <input class="form-control" id="QuantCoroa" name="QuantCoroa" type="number" value="@Model.QuantCoroa">
+
+                    @Html.LabelFor(m => m.Flor)
+
+                    <select class="form-control" id="Flor" name="Flor">
+                        @foreach (string flor in tipoFlor)
+                        {
+                            if (flor == Model.Flor)
+                            {
+                                <option selected="selected">flor</option>
+                            }
+                            else
+                            {
+                                <option>@flor</option>
+                            }
+                        }
+                    </select>
+
+                    @Html.LabelFor(m => m.QuantFlor)
+
+                    <input class="form-control" id="QuantFlor" name="QuantFlor" type="number" value="@Model.QuantFlor">
+
+                    @Html.LabelFor(m => m.Veu)
+
+                    @if (Model.Veu == 1)
+                    {
+
+                        <input class="form-control" id="V_u" name="Véu" type="checkbox" checked>
+                    }
+                    else
+                    {
+                        <input class="form-control" id="V_u" name="Véu" type="checkbox">
+                    }
+
+                    @Html.LabelFor(m => m.Lapide)
+
+
+                    @if (Model.Lapide == 1)
+                    {
+
+                        <input class="form-control" id="Lap" name="Lap" type="checkbox" checked>
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Lap" name="Lap" type="checkbox">
+                    }
+
+                    @Html.LabelFor(m => m.Necromaquiagem)
+
+                    @if (Model.Veu == 1)
+                    {
+
+                        <input class="form-control" id="Necro" name="Necro" type="checkbox" checked>
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Necro" name="Necro" type="checkbox">
+                    }
+
+                    @Html.LabelFor(m => m.Paramentacao)
+
+                    @if (Model.Paramentacao == 1)
+                    {
+
+                        <input class="form-control" id="Paramenta__o" name="Paramentação" type="checkbox" checked>
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Paramenta__o" name="Paramentação" type="checkbox">
+                    }
+
+                    @Html.LabelFor(m => m.Translado)
+
+                    @if (Model.Translado == 1)
+                    {
+
+                        <input class="form-control" id="Transl" name="Transl" type="checkbox" checked>
+                    }
+                    else
+                    {
+                        <input class="form-control" id="Transl" name="Transl" type="checkbox">
+                    }
+
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
+                            <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
+                        </div>
+
+                </fieldset>
+            </div>
+        }
+    }
+    
+}
+

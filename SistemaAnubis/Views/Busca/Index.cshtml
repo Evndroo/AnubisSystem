@@ -2,11 +2,35 @@
 @{
     ViewBag.Title = "Index";
 
+    if (Model.Compra == true && Model.Alert == true)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alert("Compra efetuada com sucesso");
+            });
+        </script>
+    }
+    else
+    if (Model.Alert == true)
+    {
+        <script type="text/javascript">
+            alert("Cadastro efetuado com sucesso");
+        </script>
+    }
+
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
@@ -16,43 +40,41 @@
             <ul class="carousel-indicators">
                 <li data-target="#slides" data-slide-to="0" class="active"></li>
                 <li data-target="#slides" data-slide-to="1"></li>
-                <li data-target="#slides" data-slide-to="2"></li>
             </ul>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="~/Imagens/1.jpg">
+                    <img src="~/Imagens/a2.jpg">
                     <div class="carousel-caption">
-                        <img src="~/Imagens/logo.png" class="logo">
-                        <h1 class="display-2">ANUBIS</h1>
-                        <h3>AQUI VEM O SLOGAN DA ANUBIS.</h3>
+                        <img src="~/Imagens/logo-nova.png" class="logo" alt="Primeira imagem">
+                        <h1 id="index_text">ANUBIS</h1>
+                        <h3 id="index_text">Seu amigo nos piores momentos.</h3>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="~/Imagens/2.jpg">
+                    <img src="~/Imagens/backgroundagag.jpg" alt="Segunda imagem">
                     <div class="carousel-caption">
-                        <button type="button" class="btn btn-primary btn-lg">
+                        <hr class="light mt-5">
+                        <h3>Nós temos os melhores planos:</h3>
+                        <h3>Infantis e adultos se organizando em inicial, médio e luxuoso.</h3>
+                        <h3>Englobam flores de diferentes espécies e quantidades, coroas, translado, paramentação, necromaquiagem e etc.</h3>
+                        <h3>Clique no botão abaixo para começar.</h3>
+                        <button type="button" onclick="location.href = '@Url.Action("Plano", "Cadastro")'" class="btn btn-primary btn-lg">
                             Desejo fazer um plano.
                         </button>
+                        <hr class="light">
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="~/Imagens/3.jpg">
-                </div>
-                <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Anterior</span>
-                </a>
-                <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Próximo</span>
-                </a>
             </div>
+
+            <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Anterior</span>
+            </a>
+
+            <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
+                <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Próximo</span>
+            </a>
         </div>
     }
-    if (Model.Alert == true)
-    {
-       <script type="text/javascript">
-           alert("Cadastro efetuado com sucesso");
-       </script>
-        }
-    }
+}

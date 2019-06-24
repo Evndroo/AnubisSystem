@@ -21,55 +21,49 @@
     else
     {
         Layout = "~/Views/Shared/_Logado.cshtml";
-
-        <h2>Planos</h2>
-        <table class="table-responsive-sm table"  style="font-size:15px; " >
-            <tr style="text-align:center;">
-                <th>
-                    @Html.DisplayNameFor(model => model.Nome)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Urna)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Caixao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Flor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.QuantFlor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Coroa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.QuantCoroa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lapide)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Necromaquiagem)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Paramentacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Translado)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Veu)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Valor)
-                </th>
-            </tr>
-
+        using (Html.BeginForm("Administrador", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+        <table class="table table-hover table-bordered mx-auto col-1"  id="tabela-principal" style="font-size:15px;" >
+            <thead>
+                <tr style="text-align:center;">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nome)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Urna)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Caixao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Flor)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Coroa)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lapide)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Necromaquiagem)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Paramentacao)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Translado)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Veu)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Valor)
+                    </th>
+                </tr>
+            </thead>
             @foreach (var item in Model)
             {
-                <tr>
-                    
+                <tr>                    
                     <td>
                         @Html.DisplayFor(modelItem => item.Nome)
                     </td>
@@ -83,66 +77,60 @@
                         @Html.DisplayFor(modelItem => item.Flor)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.QuantFlor)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Coroa)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QuantCoroa)
-                    </td>
-                    @if (item.Lapide)
+                    @if (item.Lapide==1)
                     {
                         <td>
-                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                            <img src="~/Imagens/certo.png" style="width: 25px; display:block; margin:0 auto;"/>
                         </td>
                     }
                     else {
                         <td >
-                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px; display:block; margin:0 auto;" />
+                            <img src="~/Imagens/errado.png" style="width: 25px; display:block; margin:0 auto;" />
                         </td>
                     }
-                    @if(item.Necromaquiagem)
+                    @if(item.Necromaquiagem==1)
                         {
                         <td>
-                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                            <img src="~/Imagens/certo.png" style="width: 25px; display:block; margin:0 auto;"/>
                         </td>
                     }
                     else {
                         <td >
-                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px; display:block; margin:0 auto;" />
+                            <img src="~/Imagens/errado.png" style="width: 25px; display:block; margin:0 auto;" />
                         </td>
                     }
-                    @if(item.Paramentacao){
+                    @if(item.Paramentacao==1){
                         <td>
-                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                            <img src="~/Imagens/certo.png" style="width: 25px; display:block; margin:0 auto;"/>
                         </td>
                     }
                     else {
                         <td >
-                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px; display:block; margin:0 auto;" />
+                            <img src="~/Imagens/errado.png" style="width: 25px; display:block; margin:0 auto;" />
                         </td>
                     }
-                    @if(item.Translado)
+                    @if(item.Translado==1)
                         {
                         <td>
-                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px; display:block; margin:0 auto;"/>
+                            <img src="~/Imagens/certo.png" style="width: 25px; display:block; margin:0 auto;"/>
                         </td>
                     }
                     else {
                         <td >
-                            <img class="center" src="~/Imagens/noun_don't_180604.png" style="width: 25px;" />
+                            <img class="center" src="~/Imagens/errado.png" style="width: 25px;" />
                         </td>
                     }
-                    @if (item.Veu)
+                    @if (item.Veu==1)
                     {
                         <td>
-                            <img src="~/Imagens/noun_yes_1482086.png" style="width: 25px;"/>
+                            <img src="~/Imagens/certo.png" style="width: 25px;"/>
                         </td>
                     }
                     else {
                         <td >
-                            <img src="~/Imagens/noun_don't_180604.png" style="width: 25px;" />
+                            <img src="~/Imagens/errado.png" style="width: 25px;" />
                         </td>
                     }
                     <td>
@@ -152,6 +140,6 @@
             }
 
         </table>
-
+        }
     }
 }

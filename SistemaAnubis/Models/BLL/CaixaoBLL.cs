@@ -104,7 +104,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void atualizar(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call upCaixao(@cod,@altura,@largura,@profundidade,@modelo, @valor)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call upCaixao(@modelo,@modelo,@altura,@largura,@profundidade,@valor)", con.conectarBD());
             cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
             cmd.Parameters.Add("@largura", MySqlDbType.VarChar).Value = dto.Largura;
@@ -123,6 +123,13 @@ namespace SistemaAnubis.Models.BLL
             con.desconectarBD();
         }
 
+        public DataTable BusscarGrid(CaixaoDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("call busCaixaoAs(@modelo);", con.conectarBD());
+            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Modelo;
+            return Data(cmd);
+        }
+
         public string BuscarCodigo(string caixao)
         {
             MySqlCommand cmd = new MySqlCommand("select cod_caixao from tbcaixao where modelo_caixao = @modelo", con.conectarBD());
@@ -133,6 +140,35 @@ namespace SistemaAnubis.Models.BLL
                 return dr[0].ToString();
             }
             else return "Caixão não encontrado";
+        }
+
+        public DataTable Data(MySqlCommand cmd)
+        {
+            MySqlDataAdapter da = new MySqlDataAdapter(cmd);
+            DataTable agenda = new DataTable();
+            da.Fill(agenda);
+            con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
+            return agenda;
+        }
+
+        public void buscarModelo(CaixaoDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from tbCaixao where modelo_caixao = @mod", con.conectarBD());
+            cmd.Parameters.Add("@mod", MySqlDbType.VarChar).Value = dto.Modelo;
+            dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                dto.Codigo = dr[0].ToString();
+                dto.Modelo = dr[1].ToString();
+                dto.Altura = dr[2].ToString();
+                dto.Largura = dr[3].ToString();
+                dto.Profundidade = dr[4].ToString();
+                dto.Descricao = dr[5].ToString();
+                dto.Valor = dr[6].ToString();               
+            }
+            con.desconectarBD();
         }
     }
 }

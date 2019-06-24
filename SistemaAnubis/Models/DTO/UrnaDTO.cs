@@ -11,14 +11,17 @@ namespace SistemaAnubis.Models.DTO
     {
         public string Altura { get; set; }
 
+        public static string Antiga { get; set; }
+
         public string Largura { get; set; }
 
         public string Profundidade { get; set; }
 
-        [DisplayName("Urna")]
+        [DisplayName("Nome da urna")]
         public string Nome { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
         public string Valor { get; set; }

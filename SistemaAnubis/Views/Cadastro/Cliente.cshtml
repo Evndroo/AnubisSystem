@@ -56,9 +56,23 @@
 
                     @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" })
 
+                    <label>Logradouro</label>
+                    <input id="Rua" type="text" class="form-control" readonly>
+
                     @Html.LabelFor(m => m.Num)
 
                     @Html.TextBoxFor(m => m.Num, new { @class = "form-control" })
+
+                    <label>Bairro</label>
+                    <input id="Bairro" type="text" class="form-control" readonly>
+
+                    <label>Cidade</label>
+                    <input id="Cidade" type="text" class="form-control" readonly>
+
+                    <label>Estado</label>
+                    <input id="Estado" type="text" class="form-control" readonly>
+
+
 
                     <div class="col text-center my-3">
                         <button type="submit" class="btn btn-primary">Enviar</button>
@@ -94,7 +108,7 @@
 
                         @Html.LabelFor(m => m.ConfSenha) <br>
 
-                        @Html.PasswordFor(m => m.Senha, new { @class = "form-control" }) <br>
+                        @Html.PasswordFor(m => m.ConfSenha, new { @class = "form-control" }) <br>
 
                         @Html.LabelFor(m => m.Nome) <br>
 
@@ -119,6 +133,18 @@
                         @Html.LabelFor(m => m.Cep) <br>
 
                         @Html.TextBoxFor(m => m.Cep, new { @class = "form-control" }) <br>
+
+                        <label>Logradouro</label>
+                        <input id="Rua" type="text" class="form-control" readonly>
+
+                        <label>Bairro</label>
+                        <input id="Bairro" type="text" class="form-control" readonly>
+
+                        <label>Cidade</label>
+                        <input id="Cidade" type="text" class="form-control" readonly>
+
+                        <label>Estado</label>
+                        <input id="Estado" type="text" class="form-control" readonly>
 
                         @Html.LabelFor(m => m.Num) <br>
 

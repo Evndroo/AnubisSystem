@@ -27,8 +27,30 @@ namespace SistemaAnubis.Models.BLL
         }
 
 
+        public void BuscarTodos(ClienteDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("select * from tbCliente", con.conectarBD());
+            dr = cmd.ExecuteReader();
+            List<ClienteDTO> array = new List<ClienteDTO>();
 
-        MySqlDataReader dr;
+            while (dr.Read())
+            {
+                ClienteDTO dtoCli = new ClienteDTO();
+                dtoCli.Codigo = dr[0].ToString();
+                dtoCli.Nome = dr[1].ToString();
+                dtoCli.Cpf = dr[2].ToString();
+                dtoCli.Email = dr[3].ToString();
+                dtoCli.Telefone = dr[4].ToString();
+                dtoCli.Celular = dr[5].ToString();
+                dtoCli.Cep = dr[6].ToString();
+                dtoCli.Num = dr[7].ToString();
+                array.Add(dtoCli);
+            }
+            dto.arrayCli = array;
+            con.desconectarBD();
+        }
+
+            MySqlDataReader dr;
         public override void buscarCpf(LoginDTO dto)
         {
             MySqlCommand cmd = new MySqlCommand("call busCliCpf(@cpf);", con.conectarBD());
@@ -53,31 +75,8 @@ namespace SistemaAnubis.Models.BLL
             }
             con.desconectarBD();
         }
+        
 
-        public override void buscarNome(LoginDTO dto)
-        {
-            MySqlCommand cmd = new MySqlCommand("Call busCliCPF(@cpf)", con.conectarBD());
-            cmd.Parameters.AddWithValue("@nome", dto.Nome);
-            dr = cmd.ExecuteReader();
-
-
-            while (dr.Read())
-            {
-                dto.CodUser = dr[0].ToString();
-                dto.User = dr[1].ToString();
-                dto.Senha = dr[2].ToString();
-                dto.Nvl = dr[3].ToString();
-                dto.Codigo = dr[4].ToString();
-                dto.Nome = dr[5].ToString();
-                dto.Cpf = dr[6].ToString();
-                dto.Email = dr[7].ToString();
-                dto.Telefone = dr[8].ToString();
-                dto.Celular = dr[9].ToString();
-                dto.Cep = dr[10].ToString();
-                dto.Num = dr[11].ToString();
-            }
-            con.desconectarBD();
-        }
 
         public override void buscarEmail(LoginDTO dto){
             MySqlCommand cmd = new MySqlCommand("call busCliEmail(@email)", con.conectarBD());
@@ -103,6 +102,8 @@ namespace SistemaAnubis.Models.BLL
             }
             con.desconectarBD();
         }
+
+        
 
         public override void buscarUser(LoginDTO dto)
         {
@@ -215,21 +216,21 @@ namespace SistemaAnubis.Models.BLL
 
         public override DataTable buscarEmailGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busCliEmail(@email)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busCliEmailC(@email)", con.conectarBD());
             cmd.Parameters.AddWithValue("@email", dto.Email);
             return Data(cmd);
         }
 
         public override DataTable buscarCpfGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("Call busCliCPF(@cpf)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("Call busCliCPFC(@cpf)", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
             return Data(cmd);
         }
 
         public override DataTable buscarUserGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busCli(@user);", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busCliC(@user);", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
             return Data(cmd);
         }
@@ -296,6 +297,23 @@ namespace SistemaAnubis.Models.BLL
 
         }
 
+        public void alterar(LoginDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("call upCli(@cpf,@user,@senha,@nome,@email,@tel,@cel,@cep,@num)", con.conectarBD());
+            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
+            cmd.Parameters.Add("@user", MySqlDbType.VarChar).Value = dto.User;
+            cmd.Parameters.Add("@senha", MySqlDbType.VarChar).Value = dto.Senha;
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = dto.Email;
+            cmd.Parameters.Add("@tel", MySqlDbType.VarChar).Value = dto.Telefone;
+            cmd.Parameters.Add("@cel", MySqlDbType.VarChar).Value = dto.Celular;
+            cmd.Parameters.Add("@cep", MySqlDbType.VarChar).Value = dto.Cep;
+            cmd.Parameters.Add("@num", MySqlDbType.VarChar).Value = dto.Num;
+            cmd.ExecuteNonQuery();
+            con.desconectarBD();
+
+        }
+
         public void deletar(ClienteDTO dto)
         {
             MySqlCommand cmd = new MySqlCommand("delete from tbCliente where cpf_cli = @cpf", con.conectarBD());
@@ -310,7 +328,12 @@ namespace SistemaAnubis.Models.BLL
             DataTable agenda = new DataTable();
             da.Fill(agenda);
             con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
             return agenda;
-        }        
+        }
+
+        public override void buscarNome(LoginDTO dto)
+        {
+        }
     }
 }

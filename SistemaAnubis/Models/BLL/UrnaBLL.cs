@@ -30,7 +30,7 @@ namespace SistemaAnubis.Models.BLL
                     cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = dto.Descricao;
                     cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
                     cmd.Parameters.Add("@dono", MySqlDbType.VarChar).Value = MvcApplication.Session.Instance.Nome;
-                    cmd.ExecuteNonQuery();
+                    int i = cmd.ExecuteNonQuery();
 
                 }
                 else if ((MvcApplication.Session.Instance.Nvl == "2"))
@@ -62,7 +62,7 @@ namespace SistemaAnubis.Models.BLL
                 con.desconectarBD();
                 return true;
             }
-            catch {
+            catch(Exception e) {
                 return false;
             }
         }
@@ -108,19 +108,22 @@ namespace SistemaAnubis.Models.BLL
 
         public void atualizar(UrnaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("update tbCaixao set where ", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call upUrna(@antiga,@modelo,@altura,@largura,@profundidade,@descricao,@valor);", con.conectarBD());
+            cmd.Parameters.Add("@antiga", MySqlDbType.VarChar).Value = UrnaDTO.Antiga;
+            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Nome;
             cmd.Parameters.Add("@altura", MySqlDbType.VarChar).Value = dto.Altura;
             cmd.Parameters.Add("@largura", MySqlDbType.VarChar).Value = dto.Largura;
             cmd.Parameters.Add("@profundidade", MySqlDbType.VarChar).Value = dto.Profundidade;
-            cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = dto.Descricao;
             cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
 
         }
 
         public DataTable BuscarUrnaGrid(UrnaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("select * from tburna where modelo_urna = @modelo", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busUrnaAs(@modelo)", con.conectarBD());
             cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Nome;
             return Data(cmd);
 
@@ -148,7 +151,7 @@ namespace SistemaAnubis.Models.BLL
 
         internal void achar(UrnaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busUrnaMod(@modelo)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busUrna(@modelo)", con.conectarBD());
             cmd.Parameters.Add("@modelo", MySqlDbType.VarChar).Value = dto.Nome;
             dr = cmd.ExecuteReader();
 
@@ -169,6 +172,7 @@ namespace SistemaAnubis.Models.BLL
             DataTable agenda = new DataTable();
             da.Fill(agenda);
             con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
             return agenda;
         }
     }

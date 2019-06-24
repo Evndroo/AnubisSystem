@@ -17,8 +17,10 @@ namespace SistemaAnubis.Models.DTO
                 
         public string Profundidade { get; set; }
 
+        [DisplayName("Nome")]
         public string Modelo { get; set; }
 
+        [DisplayName("Descrição")]
         public string Descricao { get; set; }
 
         public string Valor { get; set; }

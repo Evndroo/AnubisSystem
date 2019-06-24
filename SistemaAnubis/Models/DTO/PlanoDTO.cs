@@ -11,8 +11,12 @@ namespace SistemaAnubis.Models.DTO
     {
 
         public string Codigo { get; set; }
+
         public string Urna { get; set; }
+
+        [DisplayName("Caixão")]
         public string Caixao { get; set; }
+
         public string Flor { get; set; }
 
         [DisplayName("Quantidade")]
@@ -21,7 +25,10 @@ namespace SistemaAnubis.Models.DTO
 
         [DisplayName("Quantidade")]
         public string QuantCoroa { get; set; }
+
+        [DisplayName("Lápide")]
         public int Lapide { get; set; }
+
         public int Necromaquiagem { get; set; }
 
         [DisplayName("Paramentação")]
@@ -36,6 +43,7 @@ namespace SistemaAnubis.Models.DTO
         public string Dono { get;  set; }
         public string Nome { get;  set; }
         public string Valor { get; set; }
+        public static object Antigo { get; set; }
 
         public List<CoroaDTO> arrayCO = new List<CoroaDTO>();
 

@@ -3,65 +3,117 @@
 
 @{
 
-ViewBag.Title = "Comprar";
+    ViewBag.Title = "Comprar";
 
+    
 
-if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
-{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    <div class="form-container" style="padding: 15% 0 10% 0;">
-        <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-            <h1 class="text-center">Você precisa se logar!</h1>
-            <div class="col text-center my-3">
-                <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
-                <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
             </div>
         </div>
-    </div>
 
-            }
-            else
-            {
-                Layout = "~/Views/Shared/_Logado.cshtml";
-
-                List<string> planos = new List<string>();
-                planos.Add("");
-                foreach (PlanoDTO dto in Model.Planos)
-                {
-                    planos.Add(dto.Nome);
-                }
-
-                List<string> funcionarios = new List<string>();
-                planos.Add("");
-                foreach (FuncionarioDTO dto in Model.Funcionarios)
-                {
-                    planos.Add(dto.Nome);
-                }
-
-                using (Html.BeginForm("Comprar", "Compra", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
-                {
-
-        <legend class="text-center card-title" style="color:white">Cadastrar Administrador</legend>
-        <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-            <fieldset>
-                <div class="validation-summary-valid" data-valmsg-summary="true">
-
-                    @Html.LabelFor(m => m.Vendedor)
-
-                    @Html.TextBoxFor(m => m.Vendedor)
-
-                    @Html.LabelFor(m => m.Plano)
-
-                    @Html.DropDownListFor(m => m.Plano, new MultiSelectList(planos))
-
-
-                    <div class="col text-center my-3">
-                        <button type="submit" class="btn btn-primary">Enviar</button>
-                    </div>
-
-            </fieldset>
-        </div>
     }
-}
-}
+    else
+    {
+
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
+        List<string> planos = new List<string>();
+        planos.Add("");
+        foreach (PlanoDTO dto in Model.Planos)
+        {
+            planos.Add(dto.Nome);
+        }
+
+        List<string> funcionarios = new List<string>();
+        funcionarios.Add("");
+        foreach (FuncionarioDTO dto in Model.Funcionarios)
+        {
+            funcionarios.Add(dto.Nome);
+        }
+
+        List<string> falecidos = new List<string>();
+        falecidos.Add("");
+        foreach (FalecidoDTO dto in Model.Falecidos)
+        {
+            falecidos.Add(dto.Nome); // + " - " + dto.Nascimento.Substring(0, 10)
+        }
+
+        List<string> clis = new List<string>();
+        clis.Add("");
+        foreach (ClienteDTO dto in Model.Clientes)
+        {
+            clis.Add(dto.User);
+        }
+
+        using (Html.BeginForm("Comprar", "Compra", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+
+            <legend class="text-center card-title" style="color:white">Cadastrar Administrador</legend>
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <fieldset>
+                    <div class="validation-summary-valid" data-valmsg-summary="true">
+                        @if (MvcApplication.Session.Instance.Nvl == "3" || MvcApplication.Session.Instance.Nvl == "1")
+                        {
+                            @Html.LabelFor(m => m.Vendedor)
+
+                            @Html.DropDownListFor(m => m.Vendedor, new MultiSelectList(funcionarios), new { @class = "form-control" })
+                        }
+
+
+                        @Html.LabelFor(m => m.Plano)
+
+                        @Html.DropDownListFor(m => m.Plano, new MultiSelectList(planos), new { @class = "form-control" })
+
+                        @if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
+                        {//Cliente que vai comprar
+                            @Html.LabelFor(m => m.Cliente)
+
+                            @Html.DropDownListFor(m => m.Cliente, new MultiSelectList(clis), new { @class = "form-control" })
+                        }
+
+                        <small class="text-uppercase">Preencha apensa se for comprar para um falecido(a)</small>
+                        @Html.LabelFor(m => m.Falecido)
+
+                        @Html.DropDownListFor(m => m.Falecido, new MultiSelectList(falecidos), new { @class = "form-control" })
+
+
+
+                        <div class="col text-center my-3">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+
+                </fieldset>
+            </div>
+            if (Model.erro == true)
+            {
+                <script type="text/javascript">
+                    alert("Uma compra já foi feita nessas condições");
+                </script>
+            }
+
+            <script>
+                $(document).ready(function () {
+                    $("#para_fal").click(function () {
+                        if ($(this).prop("checked") == true) {
+                            $("#Falecido").attr('readonly', true);
+                            $("#Falecido").attr('enable', true);
+                        } else {
+                            $("#Falecido").attr('readonly', false);
+                            $("#Falecido").attr('enable', false);
+                        }
+                    });
+                });
+
+            </script>
+        }
+    }
 }

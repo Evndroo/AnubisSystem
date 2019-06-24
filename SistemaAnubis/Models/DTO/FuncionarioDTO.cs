@@ -8,5 +8,11 @@ namespace SistemaAnubis.Models.DTO
 {
     public class FuncionarioDTO : LoginDTO
     {
+        public List<FuncionarioDTO> arrayfunc = new List<FuncionarioDTO>();
+
+        public override string ToString()
+        {
+            return this.User;
+        }
     }
 }

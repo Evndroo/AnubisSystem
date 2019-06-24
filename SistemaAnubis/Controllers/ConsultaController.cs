@@ -53,30 +53,5 @@ namespace SistemaAnubis.Controllers
             adm = bll.listar();
             return View(adm);
         }
-        
-
-        public ActionResult Urna()
-        {
-
-            return View();
-        }
-
-        public ActionResult Caixao()
-        {
-
-            return View();
-        }
-
-        public ActionResult Flores()
-        {
-
-            return View();
-        }
-
-        public ActionResult Coroa()
-        {
-
-            return View();
-        }
     }
 }

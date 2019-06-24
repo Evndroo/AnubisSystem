@@ -1,7 +1,7 @@
 ﻿@model SistemaAnubis.Models.DTO.FuncionarioDTO
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Funcionário";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -28,11 +28,9 @@
                 <legend class="text-center card-title" style="color:white">Buscar Funcionario</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
-                        @Html.LabelFor(m => m.Cpf)
+                        @Html.Label("Digite o nome, cpf ou e-mail")
 
                         @Html.TextBoxFor(m => m.Cpf, new { @class = "form-control" })
-
-                        @Html.Raw(@ViewBag.GridViewString)
 
                         <div class="col text-center my-3">
                             <button type="submit" class="btn btn-primary">Buscar</button>
@@ -41,7 +39,17 @@
                     </fieldset>
 
                 </div>
+                if (ViewBag.GridViewString == "Nenhum dado foi encontrado" || ViewBag.GridViewString == "Cpf Inválido")
+                {
+                    <label style="width: -webkit-fill-available; text-align: center; color:rgba(0,0,0,1)">@ViewBag.GridViewString</label>
+                }
+                else
+                {
+                    @Html.Raw(@ViewBag.GridViewString)
+                }
             }
+
+
         }
         else
         {

@@ -8,6 +8,11 @@ namespace SistemaAnubis.Models.DTO
 {
     public class ClienteDTO : LoginDTO
     {
-        
+       public List<ClienteDTO> arrayCli = new List<ClienteDTO>();
+
+        public override string ToString()
+        {
+            return this.User;
+        }
     }
 }

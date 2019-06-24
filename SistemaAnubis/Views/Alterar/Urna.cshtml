@@ -38,48 +38,51 @@
         using (Html.BeginForm("Urna", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
 
-            @Html.LabelFor(m => m.Nome)
+            <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
 
-            @Html.DropDownListFor(m => m.Nome, new MultiSelectList(tipoUrna), new { @class = "form-control" })
+                        @Html.LabelFor(m => m.Nome)
 
-            <div class="col text-center my-3">
-                <button type="submit" name="btn" value="Buscar" class="btn btn-primary">Buscar</button>
-            </div>
+                        @Html.DropDownListFor(m => m.Nome, new MultiSelectList(tipoUrna), new { @class = "form-control" })
 
-            <hr style="border-color:white">
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Buscar" class="btn btn-primary">Buscar</button>
+                        </div>
 
-
-            @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "dropUrna", @class =
-                    "form-control my-2", onChange = "Urna();" })
+                        <hr style="border-color:white">
 
 
-                    @Html.LabelFor(m => m.Altura)
+                        @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "dropUrna", @class ="form-control my-2", onChange = "Urna();" })
 
-                    <input class="form-control" id="altura" name="Altura" readonly="readonly" type="text" value="@Model.Altura">
 
-                    @Html.LabelFor(m => m.Largura)
+                        @Html.LabelFor(m => m.Altura)
 
-                    <input class="form-control" id="largura" name="Largura" readonly="readonly" type="text" value="@Model.Largura">
+                        <input class="form-control" id="altura" name="Altura" readonly="readonly" type="text" value="@Model.Altura">
 
-                    @Html.LabelFor(m => m.Profundidade)
+                        @Html.LabelFor(m => m.Largura)
 
-                    <input class="form-control" id="profundidade" name="Profundidade" readonly="readonly" type="text"
-                           value="@Model.Profundidade">
+                        <input class="form-control" id="largura" name="Largura" readonly="readonly" type="text" value="@Model.Largura">
 
-                    @Html.LabelFor(m => m.Descricao)
+                        @Html.LabelFor(m => m.Profundidade)
 
-                    <textarea class="form-control" cols="20" id="Descricao" name="Descricao" rows="2">@Model.Descricao</textarea>
+                        <input class="form-control" id="profundidade" name="Profundidade" readonly="readonly" type="text"
+                                value="@Model.Profundidade">
 
-                    @Html.LabelFor(m => m.Valor)
+                        @Html.LabelFor(m => m.Descricao)
 
-                    <input class="form-control" id="valor" name="Valor" readonly="readonly" type="text" value='@Model.Valor'>
+                        <textarea class="form-control" cols="20" id="Descricao" name="Descricao" rows="2">@Model.Descricao</textarea>
 
-                    <div class="col text-center my-3">
-                        <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
-                        <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
-                    </div>
+                        @Html.LabelFor(m => m.Valor)
 
-                
+                        <input class="form-control" id="valor" name="Valor" readonly="readonly" type="text" value='@Model.Valor'>
+
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
+                            <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </fieldset>
+                </div>
         }
     }
 }

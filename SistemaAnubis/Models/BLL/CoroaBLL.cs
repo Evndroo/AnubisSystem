@@ -38,7 +38,7 @@ namespace SistemaAnubis.Models.BLL
         public DataTable ConsultarGrid(CoroaDTO dto)
         {
 
-            MySqlCommand cmd = new MySqlCommand("select * from tbCoroa", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("select * from tbCoroa;", con.conectarBD());
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataTable agenda = new DataTable();
             da.Fill(agenda);
@@ -70,7 +70,7 @@ namespace SistemaAnubis.Models.BLL
         }
 
         public DataTable busCoroaGrid(CoroaDTO dto) {
-            MySqlCommand cmd = new MySqlCommand("select * from tbCoroa where especie_coroa = @esp;",con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busCoroaAs(@esp);",con.conectarBD());
             cmd.Parameters.Add("@esp",MySqlDbType.VarChar).Value = dto.Especie;
             return Data(cmd);
         }
@@ -126,6 +126,7 @@ namespace SistemaAnubis.Models.BLL
             DataTable agenda = new DataTable();
             da.Fill(agenda);
             con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
             return agenda;
         }
     }

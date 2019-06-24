@@ -36,6 +36,7 @@ namespace SistemaAnubis.Models.DTO
         [Required(ErrorMessage ="Campo é obrigatório")]
         public string Cpf { get; set; }
         
+        [DisplayName("E-mail")]
         [DataType(DataType.EmailAddress,ErrorMessage = "Email inválido")]
         public string Email { get; set; }
 

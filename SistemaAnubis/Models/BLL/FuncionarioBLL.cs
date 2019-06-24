@@ -55,7 +55,7 @@ namespace SistemaAnubis.Models.BLL
             }
         }
 
-        internal List<FuncionarioDTO> Listar()
+        public List<FuncionarioDTO> Listar()
         {
             List<FuncionarioDTO> list = new List<FuncionarioDTO>();
 
@@ -116,6 +116,21 @@ namespace SistemaAnubis.Models.BLL
                 dto.Cep = dr[10].ToString();
                 dto.Num = dr[11].ToString();
             }
+            con.desconectarBD();
+        }
+
+        internal void alterar(FuncionarioDTO dto)
+        {
+            MySqlCommand cmd = new MySqlCommand("call altFunc(@cpf,@user,@nome,@email,@tel,@cel,@cep,@num)", con.conectarBD());
+            cmd.Parameters.Add("@user", MySqlDbType.VarChar).Value = dto.User;
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
+            cmd.Parameters.Add("@email", MySqlDbType.VarChar).Value = dto.Email;
+            cmd.Parameters.Add("@tel", MySqlDbType.VarChar).Value = dto.Telefone;
+            cmd.Parameters.Add("@cel", MySqlDbType.VarChar).Value = dto.Celular;
+            cmd.Parameters.Add("@cep", MySqlDbType.VarChar).Value = dto.Cep;
+            cmd.Parameters.Add("@num", MySqlDbType.VarChar).Value = dto.Num;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 
@@ -226,14 +241,14 @@ namespace SistemaAnubis.Models.BLL
 
         public override DataTable buscarEmailGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busFuncEmail(@email);", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busFuncEmailC(@email);", con.conectarBD());
             cmd.Parameters.AddWithValue("@email", dto.Email);
             return Data(cmd);
         }
 
         public override DataTable buscarCpfGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busFuncCPF(@cpf)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busFuncCPFC(@cpf)", con.conectarBD());
             cmd.Parameters.AddWithValue("@cpf", dto.Cpf);
             return Data(cmd);
 
@@ -241,7 +256,7 @@ namespace SistemaAnubis.Models.BLL
 
         public override DataTable buscarUserGrid(LoginDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busFunc(@user)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call busFuncC(@user)", con.conectarBD());
             cmd.Parameters.AddWithValue("@user", dto.User);
             return Data(cmd);
         }
@@ -257,11 +272,11 @@ namespace SistemaAnubis.Models.BLL
 
         public DataTable Data(MySqlCommand cmd)
         {
-
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);
             DataTable agenda = new DataTable();
             da.Fill(agenda);
             con.desconectarBD();
+            if (agenda.Rows.Count == 0) return null;
             return agenda;
         }
     }

@@ -1,7 +1,8 @@
 ﻿@model SistemaAnubis.Models.DTO.FuncionarioDTO
 
+
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Funcionario";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -9,7 +10,7 @@
 
         <div class="form-container" style="padding: 15% 0 10% 0;">
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
-                <h1 class="text-center">Você precisa fazer login!</h1>
+                <h1 class="text-center">Você precisa se logar!</h1>
                 <div class="col text-center my-3">
                     <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
                     <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
@@ -22,11 +23,17 @@
     {
         Layout = "~/Views/Shared/_Logado.cshtml";
 
-        if (int.Parse(MvcApplication.Session.Instance.Nvl) == 1)
+        if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
+            <script>
+                mudar = function () {
+                    var user = document.getElementById("txtUser");
+                    user.nodeValue = Model.Cpf;
+                }
+            </script>
             using (Html.BeginForm("Funcionario", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {
-                <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                <legend class="text-center card-title" style="color:white">Buscar</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
                         <label>User</label>
@@ -49,7 +56,7 @@
 
                         @Html.LabelFor(m => m.Cpf) <small class="text-muted" id="erro">@ViewBag.erro2</small>
 
-                        <input class="form-control text-box single-line" data-val="true" data-val-required="Campo é obrigatório" id="Cpf" name="Cpf" type="text" value="@Model.Cpf">
+                        <input class="form-control text-box single-line" readonly data-val="true" data-val-required="Campo é obrigatório" id="Cpf" name="Cpf" type="text" value="@Model.Cpf">
 
 
                         @Html.LabelFor(m => m.Email) <small class="text-muted" id="erro">@ViewBag.erro3</small>
@@ -68,11 +75,24 @@
 
                         <input class="form-control" id="Cep" name="Cep" type="text" value="@Model.Cep">
 
+                        <label>Logradouro</label>
+                        <input id="Rua" type="text" class="form-control" readonly>
+
                         @Html.LabelFor(m => m.Num)
 
                         <input class="form-control" id="Num" name="Num" type="text" value="@Model.Num">
 
+                        <label>Bairro</label>
+                        <input id="Bairro" type="text" class="form-control" readonly>
+
+                        <label>Cidade</label>
+                        <input id="Cidade" type="text" class="form-control" readonly>
+
+                        <label>Estado</label>
+                        <input id="Estado" type="text" class="form-control" readonly>
+
                         <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
                             <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
                         </div>
 

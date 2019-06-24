@@ -59,9 +59,21 @@
 
                         <input class="form-control" id="Cep" name="Cep" type="text" value="@Model.Cep">
 
+                        <label>Logradouro</label>
+                        <input id="Rua" type="text" class="form-control" readonly>
+
                         @Html.LabelFor(m => m.Num)
 
                         <input class="form-control" id="Num" name="Num" type="text" value="@Model.Num">
+
+                        <label>Bairro</label>
+                        <input id="Bairro" type="text" class="form-control" readonly>
+
+                        <label>Cidade</label>
+                        <input id="Cidade" type="text" class="form-control" readonly>
+
+                        <label>Estado</label>
+                        <input id="Estado" type="text" class="form-control" readonly>
 
                         <div class="col text-center my-3">
                             <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>

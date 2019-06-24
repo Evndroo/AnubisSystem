@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Net.Configuration;
 using System.Net;
 using MySql.Data.MySqlClient;
+using SistemaAnubis.Models.DAL;
 
 namespace SistemaAnubis.Controllers
 {
@@ -18,6 +19,8 @@ namespace SistemaAnubis.Controllers
 
         public ActionResult Index()
         {
+            Conexao con = new Conexao();
+            con.conectarBD();
             return View();
         }
 

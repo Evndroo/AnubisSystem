@@ -48,12 +48,19 @@
                         <button type="submit" class="btn btn-primary">Buscar</button>
                     </div>
 
-                    <hr style="border-color:white" />
-
-                    @Html.Raw(ViewBag.GridViewString)
-
                 </fieldset>
             </div>
+
+            if (ViewBag.GridViewString == "Nenhum dado foi encontrado" || ViewBag.GridViewString == "Cpf Inválido")
+            {
+            <span class="alert">
+                <label style="text-align: center; font-size:16pt" class="text-dark mx-auto col-lg-12">@ViewBag.GridViewString</label>
+            </span>
+            }
+            else
+            {
+                <span>@Html.Raw(@ViewBag.GridViewString)</span>
+            }
         }
     }
 

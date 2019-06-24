@@ -12,7 +12,7 @@
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <h1 class="text-center">Você precisa se logar!</h1>
                 <div class="col text-center my-3">
-                    <button onclick="location.href='@Url.Action("Login", "Home")'"class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
                     <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
                 </div>
             </div>
@@ -33,7 +33,7 @@
         using (Html.BeginForm("Plano", "Busca", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
 
-            <legend class="text-center card-title" style="color:white">Planoss</legend>
+            <legend class="text-center card-title" style="color:white">Planos</legend>
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <fieldset>
 
@@ -48,6 +48,30 @@
 
                 </fieldset>
             </div>
+            if (ViewBag.GridViewString == "Nenhum dado foi encontrado" || ViewBag.GridViewString == "Cpf Inválido")
+            {
+                <label style="width: -webkit-fill-available; text-align: center; color:rgba(0,0,0,1)">@ViewBag.GridViewString</label>
+            }
+            else
+            {
+                <span>@Html.Raw(@ViewBag.GridViewString)</span>
+                <script>
+                    $(document).ready(function () {
+                        var i = 0;
+                        $("#tabela-principal tbody tr td").each(function () {
+                            i++;
+                            var s = $(this).html();
+                            if (s == 1) {
+                                if (i != 10)
+                                    $(this).html("<img src='/Imagens/certo.png' style='width: 25px; display:block; margin:0 auto;'>");
+                            }
+                            else if (s == 0) {
+                                $(this).html("<img src='/Imagens/errado.png' style='width: 25px; display:block; margin:0 auto;'>");
+                            }
+                        });
+                    });
+                </script>
+            }
         }
     }
 }

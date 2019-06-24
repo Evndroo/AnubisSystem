@@ -28,6 +28,31 @@ namespace SistemaAnubis.Controllers
             else return View(dto);
         }
 
+        public ActionResult Falecido() {
+            FalecidoDTO dto = new FalecidoDTO();
+            FalecidoBLL bll = new FalecidoBLL();
+            if(MvcApplication.Session.Instance.Nvl != "3")
+                dto.listaFal = bll.Listar();
+            else 
+                dto.listaFal = bll.ListarByResp();
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Falecido(FalecidoDTO dto)
+        {
+            FalecidoBLL bll = new FalecidoBLL();
+            if (MvcApplication.Session.Instance.Nvl != "3")
+                dto.listaFal = bll.Listar();
+            else
+                dto.listaFal = bll.ListarByResp();
+            dto.listaFal = bll.Listar();
+            dgv.DataSource = bll.bucaFalNome(dto);
+
+            ViewBag.GridViewString = CarregaGrid().Replace(" 00:00:00","");
+            return View(dto);
+        }
+
 
         public ActionResult Cliente()
         {
@@ -39,42 +64,48 @@ namespace SistemaAnubis.Controllers
         public ActionResult Cliente(ClienteDTO dto, FormCollection frm)
         {
             ClienteBLL bll = new ClienteBLL();
-            dto.Email = dto.Cpf;
-            dto.User = dto.Cpf;
-            if (Validacoes.isEmail(dto.Email)) //buscando por email
+            if (dto.Cpf != null)
             {
-                dto.Cpf = null;
-                dto.User = null;
-                dgv.DataSource = bll.buscarEmailGrid(dto);
-
-            }
-            else if (Int64.TryParse(dto.Cpf,out long i))
-            {
-                if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                dto.Email = dto.Cpf;
+                dto.User = dto.Cpf;
+                if (Validacoes.isEmail(dto.Email)) //buscando por email
                 {
-                    dto.Email = null;
+                    dto.Cpf = null;
                     dto.User = null;
-                    dgv.DataSource = bll.buscarCpfGrid(dto);
+                    dgv.DataSource = bll.buscarEmailGrid(dto);
+                    ViewBag.GridViewString = CarregaGrid();
+
                 }
-                else if (dto.Cpf.Length != 11)
-                { //Usuário numérico
-                    dto.Email = "";
-                    dto.Cpf = "";
-                    Logado.User = dto.User;
-                }
-                else
+                else if (Int64.TryParse(dto.Cpf, out long i))
                 {
-                    //CPF inválido
-                    ViewBag.GridViewString = "Cpf Inválido";
+                    if (Validacoes.IsCpf(dto.Cpf)) //buscando por cpf
+                    {
+                        dto.Email = null;
+                        dto.User = null;
+                        dgv.DataSource = bll.buscarCpfGrid(dto);
+                        ViewBag.GridViewString = CarregaGrid();
+                    }
+                    else if (dto.Cpf.Length != 11)
+                    { //Usuário numérico
+                        dto.Email = "";
+                        dto.Cpf = "";
+                        dgv.DataSource = bll.buscarUserGrid(dto);
+                        ViewBag.GridViewString = CarregaGrid();
+                    }
+                    else
+                    {
+                        //CPF inválido
+                        ViewBag.GridViewString = "Cpf Inválido";
+                    }
+                }
+                else //tentou buscar com o user
+                {
+                    dto.Cpf = null;
+                    dto.Email = null;
+                    dgv.DataSource = bll.buscarUserGrid(dto);
+                    ViewBag.GridViewString = CarregaGrid();
                 }
             }
-            else //tentou buscar com o user
-            {
-                dto.Cpf = null;
-                dto.Email = null;
-                dgv.DataSource = bll.buscarUserGrid(dto);
-            }
-            ViewBag.GridViewString = CarregaGrid();
             return View();
         }
 
@@ -100,7 +131,7 @@ namespace SistemaAnubis.Controllers
                 dto.Cpf = null;
                 dto.User = null;
                 dgv.DataSource = bll.buscarEmailGrid(dto);
-
+                ViewBag.GridViewString = CarregaGrid();
             }
             else if (Int64.TryParse(dto.Cpf, out long i))
             {
@@ -109,17 +140,19 @@ namespace SistemaAnubis.Controllers
                     dto.Email = null;
                     dto.User = null;
                     dgv.DataSource = bll.buscarCpfGrid(dto);
+                    ViewBag.GridViewString = CarregaGrid();
                 }
-                else if (dto.Cpf.Length != 11)
-                { //Usuário numérico
-                    dto.Email = "";
-                    dto.Cpf = "";
-                    Logado.User = dto.User;
+                else if (dto.Cpf.Length == 11)
+                {             //CPF inválido
+                    ViewBag.GridViewString = "Cpf Inválido";
                 }
                 else
                 {
-                    //CPF inválido
-                    ViewBag.GridViewString = "Cpf Inválido";
+                    //Usuário numérico
+                    dto.Email = "";
+                    dto.Cpf = "";
+                    dgv.DataSource = bll.buscarUserGrid(dto);
+                    ViewBag.GridViewString = CarregaGrid();
                 }
             }
             else //tentou buscar com o user
@@ -127,8 +160,9 @@ namespace SistemaAnubis.Controllers
                 dto.Cpf = null;
                 dto.Email = null;
                 dgv.DataSource = bll.buscarUserGrid(dto);
+                ViewBag.GridViewString = CarregaGrid();
+
             }
-            ViewBag.GridViewString = CarregaGrid();
             return View();           
         }
         
@@ -156,6 +190,7 @@ namespace SistemaAnubis.Controllers
                 dto.Cpf = null;
                 dto.User = null;
                 dgv.DataSource = bll.buscarEmailGrid(dto);
+                ViewBag.GridViewString = CarregaGrid();
 
             }
             else if (Int64.TryParse(dto.Cpf, out long i))
@@ -165,12 +200,14 @@ namespace SistemaAnubis.Controllers
                     dto.Email = null;
                     dto.User = null;
                     dgv.DataSource = bll.buscarCpfGrid(dto);
+                    ViewBag.GridViewString = CarregaGrid();
                 }
                 else if (dto.Cpf.Length != 11)
                 { //Usuário numérico
                     dto.Email = "";
                     dto.Cpf = "";
-                    Logado.User = dto.User;
+                    dgv.DataSource = bll.buscarUserGrid(dto);
+                    ViewBag.GridViewString = CarregaGrid();
                 }
                 else
                 {
@@ -183,8 +220,8 @@ namespace SistemaAnubis.Controllers
                 dto.Cpf = null;
                 dto.Email = null;
                 dgv.DataSource = bll.buscarUserGrid(dto);
+                ViewBag.GridViewString = CarregaGrid();
             }
-            ViewBag.GridViewString = CarregaGrid();
             return View();
         }
 
@@ -198,7 +235,13 @@ namespace SistemaAnubis.Controllers
 
         [HttpPost]
         public ActionResult Caixao(CaixaoDTO dto) {
-            return RedirectToAction("Index");
+            CaixaoBLL bll = new CaixaoBLL();
+            dto.arrayC = bll.buscar(dto);
+            dgv.DataSource = bll.BusscarGrid(dto);
+        
+            ViewBag.GridViewString = CarregaGrid();
+            CarregaGrid();
+            return View(dto);
         }
 
 
@@ -214,23 +257,26 @@ namespace SistemaAnubis.Controllers
             UrnaBLL bll = new UrnaBLL();
             dto.arrayU = bll.buscar(dto);
             dgv.DataSource =  bll.BuscarUrnaGrid(dto);
-            ViewBag.GridViewString = CarregaGrid();
-            
+            ViewBag.GridViewString = CarregaGrid();            
             return View(dto);
         }
 
 
 
         public ActionResult Plano() {
-            PlanoBLL bll = new PlanoBLL();
+            PlanoBLL bll = new PlanoBLL(); 
             PlanoDTO dto = new PlanoDTO();
             dto.arrayP = bll.Consultar(dto);
             return View(dto);
         }
 
         [HttpPost]
-        public ActionResult Plano(CaixaoDTO dto) {
-            return RedirectToAction("Index");
+        public ActionResult Plano(PlanoDTO dto) {
+            PlanoBLL bll = new PlanoBLL();
+            dto.arrayP = bll.Consultar(dto);
+            dgv.DataSource = bll.buscarG(dto);
+            ViewBag.GridViewString = CarregaGrid();
+            return View(dto);
         }
 
 
@@ -242,9 +288,12 @@ namespace SistemaAnubis.Controllers
         }
 
         [HttpPost]
-        public ActionResult Flores(CaixaoDTO dto) {
-            return RedirectToAction("Index");
-
+        public ActionResult Flores(FloresDTO dto) {
+            FloresBLL bll = new FloresBLL();
+            dto.arrayF = bll.Consultar(dto);
+            dgv.DataSource= bll.buscarG(dto);
+            ViewBag.GridViewString = CarregaGrid();
+            return View(dto);
         }
 
 
@@ -259,21 +308,31 @@ namespace SistemaAnubis.Controllers
         public ActionResult Coroa(CoroaDTO dto) {
             CoroaBLL bll = new CoroaBLL();
             dto.arrayCO = bll.Consultar(dto);
-            bll.busCoroaGrid(dto);
-
+            dgv.DataSource = bll.busCoroaGrid(dto);
+            ViewBag.GridViewString = CarregaGrid();
             return View(dto);
         }
 
 
         public string CarregaGrid()
         {
+            dgv.CssClass = "table table-hover table-bordered mx-auto col-6";
+            dgv.ID = "tabela-principal";            
+            dgv.UseAccessibleHeader = true;
+            dgv.HorizontalAlign = HorizontalAlign.Center;
+            if (dgv.DataSource != null)
+                dgv.DataBound += (object o, EventArgs ev) =>
+                {
+                    dgv.HeaderRow.TableSection = TableRowSection.TableHeader;
 
+                };
             dgv.DataBind();
             StringWriter sw = new StringWriter();
             HtmlTextWriter htw = new HtmlTextWriter(sw);
+            
             dgv.RenderControl(htw);
-
-            if (dgv.Rows.Count >= 1) { 
+            if (dgv.Rows.Count >= 1) {
+                
                 return sw.ToString();
             }
             else return "Nenhum dado foi encontrado";

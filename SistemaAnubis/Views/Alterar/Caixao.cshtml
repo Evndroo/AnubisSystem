@@ -1,0 +1,90 @@
+﻿@model SistemaAnubis.Models.DTO.CaixaoDTO
+@using SistemaAnubis.Models.DTO
+
+@{
+    ViewBag.Title = "Caixao";
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa se logar!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+
+        Layout = "~/Views/Shared/_Logado.cshtml";
+
+        List<string> tipoUrna = new List<string>();
+        tipoUrna.Add("");
+        foreach (CaixaoDTO dto in Model.arrayC)
+        {
+            tipoUrna.Add(dto.ToString());
+        }
+
+        List<string> TiposUrna = new List<string>();
+        TiposUrna.Add(String.Empty);
+        TiposUrna.Add("Urna alta");
+        TiposUrna.Add("Urna baixa");
+
+        using (Html.BeginForm("Caixao", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+        {
+
+            <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <fieldset>
+
+                    @Html.LabelFor(m => m.Modelo)
+
+                    @Html.DropDownListFor(m => m.Modelo, new MultiSelectList(tipoUrna), new { @class = "form-control" })
+
+                    <div class="col text-center my-3">
+                        <button type="submit" name="btn" value="Buscar" class="btn btn-primary">Buscar</button>
+                    </div>
+
+                    <hr style="border-color:white">
+
+
+                    @Html.DropDownList("TiposProjetos", new MultiSelectList(TiposUrna), new { id = "dropUrna", @class = "form-control my-2", onChange = "Urna();" })
+
+
+                    @Html.LabelFor(m => m.Altura)
+
+                    <input class="form-control" id="Altura" name="Altura" type="text" readonly="readonly" value="@Model.Altura">
+
+                    <!--<input class="form-control" id="altura" name="Altura" readonly="readonly" type="text" value="@Model.Altura">-->
+
+                    @Html.LabelFor(m => m.Largura)
+
+                    <input class="form-control" id="largura" name="Largura" readonly="readonly" type="text" value="@Model.Largura">
+
+                    @Html.LabelFor(m => m.Profundidade)
+
+                    <input class="form-control" id="profundidade" name="Profundidade" readonly="readonly" type="text"
+                           value="@Model.Profundidade">
+
+                    @Html.LabelFor(m => m.Descricao)
+
+                    <textarea class="form-control" cols="20" id="Descricao" name="Descricao" rows="2">@Model.Descricao</textarea>
+
+                    @Html.LabelFor(m => m.Valor)
+
+                    <input class="form-control" id="valor" name="Valor" readonly="readonly" type="text" value='@Model.Valor'>
+
+                    <div class="col text-center my-3">
+                        <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
+                        <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
+                    </div>
+                </fieldset>
+            </div>
+        }
+    }
+}
+

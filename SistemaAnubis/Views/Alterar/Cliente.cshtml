@@ -51,11 +51,11 @@
 
                         @Html.LabelFor(m => m.Nome)
 
-                        <input class="form-control" data-val="true" data-val-length="O campo Nome deve ser uma cadeia de caracteres com no mínimo 3 e no máximo 85 de comprimento." data-val-length-max="85" data-val-length-min="3" id="Nome" name="Nome" type="text" value = "@Model.Nome"/>
+                        <input class="form-control" data-val="true" data-val-length="O campo Nome deve ser uma cadeia de caracteres com no mínimo 3 e no máximo 85 de comprimento." data-val-length-max="85" data-val-length-min="3" id="Nome" name="Nome" type="text" value="@Model.Nome" />
 
                         @Html.LabelFor(m => m.Cpf) <small class="text-muted" id="erro">@ViewBag.erro2</small>
 
-                        <input class="form-control text-box single-line" data-val="true" data-val-required="Campo é obrigatório" id="Cpf" name="Cpf" type="text" value="@Model.Cpf">
+                        <input class="form-control text-box single-line" readonly data-val="true" data-val-required="Campo é obrigatório" id="Cpf" name="Cpf" type="text" value="@Model.Cpf">
 
 
                         @Html.LabelFor(m => m.Email) <small class="text-muted" id="erro">@ViewBag.erro3</small>
@@ -74,9 +74,21 @@
 
                         <input class="form-control" id="Cep" name="Cep" type="text" value="@Model.Cep">
 
+                        <label>Logradouro</label>
+                        <input id="Rua" type="text" class="form-control" readonly>
+
                         @Html.LabelFor(m => m.Num)
 
                         <input class="form-control" id="Num" name="Num" type="text" value="@Model.Num">
+
+                        <label>Bairro</label>
+                        <input id="Bairro" type="text" class="form-control" readonly>
+
+                        <label>Cidade</label>
+                        <input id="Cidade" type="text" class="form-control" readonly>
+
+                        <label>Estado</label>
+                        <input id="Estado" type="text" class="form-control" readonly>
 
                         <div class="col text-center my-3">
                             <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>

@@ -23,36 +23,34 @@
         Layout = "~/Views/Shared/_Logado.cshtml";
         if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
-            <h2>Clientes</h2>
-
-            <table class="table">
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Cpf)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Telefone)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Celular)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Cep)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Num)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nvl)
-                    </th>
-                    <th></th>
-                </tr>
+            using (Html.BeginForm("Administrador", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+            <table class="table table-hover table-bordered mx-auto col-6" id="tabela-principal" style="font-size:15px; background-color:white; ">
+                <thead>
+                    <tr style="text-align:center;">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nome)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cpf)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Telefone)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Celular)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Cep)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Num)
+                        </th>
+                    </tr>
+                </thead>
 
                 @foreach (var item in Model)
                 {
@@ -78,14 +76,11 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Num)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nvl)
-                        </td>
                     </tr>
                 }
 
             </table>
-
+            }
         }
         else
         {
@@ -99,6 +94,6 @@
                     </div>
                 </div>
             </div>
-            }
         }
     }
+}

@@ -6,8 +6,16 @@
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
@@ -15,18 +23,34 @@
         if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
         {
             Layout = "~/Views/Shared/_Logado.cshtml";
+
+            List<string> tipos = new List<string>();
+            tipos.Add("");
+            tipos.Add("Plástico");
+            tipos.Add("Madeira");
+            tipos.Add("Natural");
+
             using (Html.BeginForm("Flores", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {
                 <legend class="text-center card-title" style="color:white">Cadastrar Flores</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
-                        @Html.ValidationSummary()
-                        <div class="validation-summary-valid" data-valmsg-summary="true">
-                            <ul>
-                                <li style="display:none"><legend>Cadastrar Administrador</legend></li>
-                            </ul>
-                        </div>
 
+                        @Html.LabelFor(m => m.Tipo)
+
+                        @Html.DropDownListFor(m => m.Tipo, new MultiSelectList(tipos), new { @class = "form-control" })
+
+                        @Html.LabelFor(m => m.Especie)
+
+                        @Html.TextBoxFor(m => m.Especie, new { @class = "form-control" })
+
+                        @Html.LabelFor(m => m.Quantidade)
+
+                        @Html.TextBoxFor(m => m.Quantidade, new { @class = "form-control", @type = "number" })
+
+                        @Html.LabelFor(m => m.Valor)
+
+                        @Html.TextBoxFor(m => m.Valor, new { @class = "form-control", @type="number", pattern = "[0-9]+([.][0-9]+)?", min = 1 })
 
                         <div class="col text-center my-3">
                             <button type="submit" class="btn btn-primary">Cancelar</button>

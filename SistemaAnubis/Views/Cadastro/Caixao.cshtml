@@ -8,8 +8,16 @@
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
-        <h1>Faça login primeiro</h1>
-        <a onclick="location.href='@Url.Action("Login", "Home")'">Voltar</a>
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
 
     }
     else
@@ -33,15 +41,15 @@
 
                     @Html.LabelFor(m => m.Altura)
 
-                    @Html.TextBoxFor(m => m.Altura, new { @readonly = "readonly", id = "alturaC", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Altura, new { @readonly = "readonly", id = "Altura", @class = "form-control" })
 
                     @Html.LabelFor(m => m.Largura)
 
-                    @Html.TextBoxFor(m => m.Largura, new { @readonly = "readonly", id = "larguraC", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Largura, new { @readonly = "readonly", id = "Largura", @class = "form-control" })
 
                     @Html.LabelFor(m => m.Profundidade)
 
-                    @Html.TextBoxFor(m => m.Profundidade, new { @readonly = "readonly", id = "profundidadeC", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Profundidade, new { @readonly = "readonly", id = "Profundidade", @class = "form-control" })
 
                     @Html.LabelFor(m => m.Modelo)
 
@@ -53,7 +61,7 @@
 
                     @Html.LabelFor(m => m.Valor)
 
-                    @Html.TextBoxFor(m => m.Valor, new { id = "valor", @readonly = "readonly", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.Valor, new { id = "Valor", @readonly = "readonly", @class = "form-control" })
 
                     <div class="col text-center my-3">
                         <button type="submit" class="btn btn-primary">Cancelar</button>
@@ -65,4 +73,4 @@
     }
 
 
-    }
+}
