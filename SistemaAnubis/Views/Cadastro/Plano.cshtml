@@ -2,7 +2,7 @@
 @using SistemaAnubis.Models.DTO;
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Customizar Plano";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -27,36 +27,36 @@
         tipoCaixao.Add("");
         foreach (CaixaoDTO dto in Model.arrayC)
         {
-            tipoCaixao.Add(dto.ToString());
+            tipoCaixao.Add(dto.ToString() + " R$ " + dto.Valor.Replace(",","."));
         }
 
         List<string> tipoUrna = new List<string>();
         tipoUrna.Add("");
         foreach (UrnaDTO dto in Model.arrayU)
         {
-            tipoUrna.Add(dto.ToString());
+            tipoUrna.Add(dto.ToString() + " R$ " + dto.Valor.Replace(",", "."));
         }
 
         List<string> tipoCoroa = new List<string>();
         tipoCoroa.Add("");
         foreach (CoroaDTO dto in Model.arrayCO)
         {
-            tipoCoroa.Add(dto.ToString());
+            tipoCoroa.Add(dto.ToString() + " R$ " + dto.Valor.Replace(",", "."));
         }
 
         List<string> tipoFlor = new List<string>();
         tipoFlor.Add("");
         foreach (FloresDTO dto in Model.arrayF)
         {
-            tipoFlor.Add(dto.ToString());
+            tipoFlor.Add(dto.ToString() +" R$ "+ dto.Valor.Replace(",", "."));
         }
 
-        
+
 
         using (Html.BeginForm("Plano", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
 
-            <legend class="text-center card-title" style="color:white">Cadastrar Plano</legend>
+            <legend class="text-center card-title" style="color:white">Customização de Plano</legend>
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <fieldset>
                     @Html.ValidationSummary()
@@ -79,7 +79,7 @@
 
                     @Html.LabelFor(m => m.QuantCoroa)
 
-                    @Html.TextBoxFor(m => m.QuantCoroa, new { @type = "number", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.QuantCoroa, new { @type = "number", @class = "form-control", @readonly = "readonly" })
 
                     @Html.LabelFor(m => m.Flor)
 
@@ -87,7 +87,7 @@
 
                     @Html.LabelFor(m => m.QuantFlor)
 
-                    @Html.TextBoxFor(m => m.QuantFlor, new { @type = "number", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.QuantFlor, new { @type = "number", @class = "form-control",@readonly="readonly" })
 
                     @Html.LabelFor(m => m.Veu)
 
@@ -109,8 +109,11 @@
 
                     @Html.CheckBox("Transl", new { @class = "form-control" })
 
+                    @Html.LabelFor(m => m.Valor)
+
+                    @Html.TextBoxFor(m => m.Valor,"0", new {@readonly = "readonly", @class = "form-control"})
+
                     <div class="col text-center my-3">
-                        <button type="submit" class="btn btn-primary">Cancelar</button>
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </fieldset>
@@ -119,3 +122,244 @@
         }
         
     }
+
+<script>
+    $(document).ready(function () {
+        $("#Transl").click(function () {
+            var transl = $("#Transl").is(":checked");
+            if (transl) {      /* $("#Valor").val() + 300) */
+
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                $("#Valor").val(parseFloat($("#Valor").val()) + 300);
+            } else {
+                $("#Valor").val(parseFloat($("#Valor").val()) - 300);
+            }
+        });
+
+        $("#Paramenta__o").click(function () {
+            var transl = $("#Paramenta__o").is(":checked");
+            if (transl) {      /* $("#Valor").val() + 300) */
+
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                $("#Valor").val(parseFloat($("#Valor").val()) + 750);
+            } else {
+                $("#Valor").val(parseFloat($("#Valor").val()) - 750);
+            }
+        });
+
+        $("#Necro").click(function () {
+            var transl = $("#Necro").is(":checked");
+            if (transl) {      /* $("#Valor").val() + 300) */
+
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                $("#Valor").val(parseFloat($("#Valor").val()) + 500);
+            } else {
+                $("#Valor").val(parseFloat($("#Valor").val()) - 500);
+            }
+        });
+
+        $("#V_u").click(function () {
+            var transl = $("#V_u").is(":checked");
+            if (transl) {      /* $("#Valor").val() + 300) */
+
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                $("#Valor").val(parseFloat($("#Valor").val()) + 20);
+            } else {
+                $("#Valor").val(parseFloat($("#Valor").val()) - 20);
+            }
+        });
+
+        $("#Lap").click(function () {
+            var transl = $("#Lap").is(":checked");
+            if (transl) {      /* $("#Valor").val() + 300) */
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                $("#Valor").val(parseFloat($("#Valor").val()) + 377);
+            } else {
+                $("#Valor").val(parseFloat($("#Valor").val()) - 377);
+            }
+        });
+
+        var iUrna = 0;
+        var oldUrna = 0;
+        $("#Urna").change(function () {
+            if ($("#Urna").val() != "") {
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                let urnaVal = parseFloat($("#Urna").val().split(" R$ ")[1]);
+                iUrna++;
+                if (iUrna == 1) {
+                    oldUrna = urnaVal;
+                    $("#Valor").val(parseFloat($("#Valor").val()) + urnaVal);
+                    iUrna++;
+                } else {
+                    $("#Valor").val(parseFloat($("#Valor").val()) - oldUrna);
+                    $("#Valor").val(parseFloat($("#Valor").val()) + urnaVal);
+                    oldUrna = urnaVal;
+                    iUrna++;
+
+                }
+            } else {
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+
+                if (iUrna != 1)
+                    $("#Valor").val(parseFloat($("#Valor").val()) - oldUrna);
+                if ($("#Valor").val() == "0") oldUrna=0;
+
+            }
+        });
+
+        var iCai = 0;
+        var oldCai = 0;
+        $("#Caixao").change(function () {
+            if ($("#Caixao").val() != "") {
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+                let caiVal = parseFloat($("#Caixao").val().split(" R$ ")[1]);
+                iCai++;
+                if (iCai == 1) {
+                    oldCai = caiVal;
+                    $("#Valor").val(parseFloat($("#Valor").val()) + caiVal);
+                    iCai++;
+                } else {
+                    $("#Valor").val(parseFloat($("#Valor").val()) - oldCai);
+                    $("#Valor").val(parseFloat($("#Valor").val()) + caiVal);
+                    oldCai = caiVal;
+                    iCai++;
+
+                }
+            } else {
+                if ($("#Valor").val() == "")
+                    $("#Valor").val(0);
+
+                if (iCai != 1)
+                    $("#Valor").val(parseFloat($("#Valor").val()) - oldCai);
+                if ($("#Valor").val() == "0") oldCai = 0;
+
+            }
+        });
+        /*Manipulando valor pela flor e quantidade*/
+
+        var valFlor = 0;
+        var oldFlor = 0;
+        $("#Flor").change(function () {
+            if ($("#Flor").val() != "") {
+                valFlor = $("#Flor").val().split(" R$ ")[1];
+                if ($("#QuantFlor").val() == 0 || $("#QuantFlor").val() == "") {
+                    if (valFlor) {
+                        $("#QuantFlor").attr('readonly', false);
+                    } else {
+                        valFlor = 0;
+                        $("#QuantFlor").attr('readonly', true);
+                    }
+                    oldFlor = valFlor;
+                } else {
+                    valFlor = $("#Flor").val().split(" R$ ")[1];
+                    var total = parseFloat($("#QuantFlor").val()) * parseFloat(valFlor);
+                    $("#Valor").val(parseFloat($("#Valor").val()) + parseFloat(total));
+                    $("#Valor").val(parseFloat($("#Valor").val()) - parseFloat($("#QuantFlor").val()) * parseFloat(oldFlor));
+                    oldFlor = valFlor;
+                    oldQuantFlor = total;
+                }
+            } else {
+
+            }
+        });
+
+        var iFlor = 0;
+        var oldQuantFlor = 0;
+        $("#QuantFlor").change(function () {
+            if ($("#Valor").val() == "")
+                $("#Valor").val(0);
+            iFlor ++;
+            if ($("#QuantFlor").val() == "" || parseFloat($("#QuantFlor").val()) <= 0) {
+                $("#Valor").val(parseFloat($("#Valor").val()) - parseFloat(valFlor));
+                oldQuantFlor = 0;
+                iFlor = 0;
+                $("#QuantFlor").val(0);
+                if (parseFloat($("#Valor").val()) <= 0)
+                    $("#Valor").val(0);
+
+            }
+            else {
+                if (i == 1) {
+                    var total = parseFloat($("#QuantFlor").val()) * parseFloat(valFlor);
+                    $("#Valor").val(parseFloat($("#Valor").val()) + parseFloat(total));
+                    oldQuantFlor = total;
+                } else {
+                    var total = parseFloat($("#QuantFlor").val()) * parseFloat(valFlor);
+                    $("#Valor").val(parseFloat($("#Valor").val()) - parseFloat(oldQuantFlor));
+                    $("#Valor").val(parseFloat($("#Valor").val()) + parseFloat(total));
+                    oldQuantFlor = total;
+                    
+                    if ($("#Valor").val() == "0") oldQuantFlor = 0;
+                }
+            }
+        });
+
+
+        /*Manipulando valor pela coroa e quantidade */
+        var valCoroa = 0;
+        var oldCoroa = 0;
+        $("#Coroa").change(function () {
+            if ($("#Coroa").val() != "") {
+                valCoroa = $("#Coroa").val().split(" R$ ")[1];
+                if ($("#QuantCoroa").val() == 0 || $("#QuantCoroa").val() == "") {
+                    if (valCoroa) {
+                        $("#QuantCoroa").attr('readonly', false);
+                    } else {
+                        valCoroa = 0;
+                        $("#QuantCoroa").attr('readonly', true);
+                    }
+                    oldCoroa = valCoroa;
+                } else {
+                    valCoroa = $("#Coroa").val().split(" R$ ")[1];
+                    var total = parseFloat($("#QuantCoroa").val()) * parseFloat(valCoroa);
+                    $("#Valor").val(parseFloat($("#Valor").val()) + parseFloat(total));
+                    $("#Valor").val(parseFloat($("#Valor").val()) - parseFloat($("#QuantCoroa").val()) * parseFloat(oldCoroa));
+                    oldCoroa = valCoroa;
+                    oldQuantCoroa = total;
+                }
+            } else {
+
+            }
+        });
+
+        var i = 0;
+        var oldQuantCoroa = 0;
+        $("#QuantCoroa").change(function () {
+            if ($("#Valor").val() == "")
+                $("#Valor").val(0);
+            i++;
+            if ($("#QuantCoroa").val() == "" || parseFloat($("#QuantCoroa").val()) <= 0) {
+                $("#Valor").val(parseFloat($("#Valor").val()) - parseFloat(valCoroa));
+                oldQuantCoroa = 0;
+                i = 0;
+                $("#QuantCoroa").val(0);
+                if (parseFloat($("#Valor").val()) <= 0) 
+                    $("#Valor").val(0);
+
+            }
+            else {
+                if (i == 1) {
+                    var total = parseFloat($("#QuantCoroa").val()) * parseFloat(valCoroa);
+                    $("#Valor").val(parseFloat($("#Valor").val()) + parseFloat(total));
+                    oldQuantCoroa = total;
+                } else {
+                    var total = parseFloat($("#QuantCoroa").val()) * parseFloat(valCoroa);
+                    $("#Valor").val(parseFloat($("#Valor").val()) - parseFloat(oldQuantCoroa));
+                    $("#Valor").val(parseFloat($("#Valor").val()) + parseFloat(total));
+                    oldQuantCoroa = total;
+                    if ($("#Valor").val() == "0") oldQuantCoroa = 0;
+                }
+            }
+        });
+
+    });
+
+</script>

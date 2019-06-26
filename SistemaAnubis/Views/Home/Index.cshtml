@@ -1,50 +1,51 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Home";
 
-    if (MvcApplication.Session.Instance.Nome != null)
-    {
-        MvcApplication.Session.Instance.LimparLogado();
-    }
+        Layout = "~/Views/Shared/_Layout.cshtml";
+        ViewBag.Title = "Home";
+
+        if (MvcApplication.Session.Instance.Nome != null)
+        {
+            MvcApplication.Session.Instance.LimparLogado();
+        }
 }
 
-<div id="slides" class="carousel slide" data-ride="carousel">
-    <ul class="carousel-indicators">
-        <li data-target="#slides" data-slide-to="0" class="active"></li>
-        <li data-target="#slides" data-slide-to="1"></li>
-    </ul>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="~/Imagens/a2.jpg">
-            <div class="carousel-caption">
-                <img src="~/Imagens/logo-nova.png" class="logo" alt="Primeira imagem">
-                <h1 id="index_text">ANUBIS</h1>
-                <h3 id="index_text">Seu amigo nos piores momentos.</h3>
+    <div id="slides" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#slides" data-slide-to="0" class="active"></li>
+            <li data-target="#slides" data-slide-to="1"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/Imagens/a2.jpg">
+                <div class="carousel-caption">
+                    <img src="~/Imagens/logo-nova.png" class="logo" alt="Primeira imagem">
+                    <h1 id="index_text">ANUBIS</h1>
+                    <h3 id="index_text">Seu amigo nos piores momentos.</h3>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/Imagens/backgroundagag.jpg" alt="Segunda imagem">
+                <div class="carousel-caption">
+                    <hr class="light mt-5">
+                    <h3>Nós temos os melhores planos:</h3>
+                    <h3>Infantis e adultos se organizando em inicial, médio e luxuoso.</h3>
+                    <h3>Englobam flores de diferentes espécies e quantidades, coroas, translado, paramentação, necromaquiagem e etc.</h3>
+                    <h3>Clique no botão abaixo para começar.</h3>
+                    <button type="button" class="btn btn-primary btn-lg">
+                        Desejo fazer um plano.
+                    </button>
+                    <hr class="light">
+                </div>
             </div>
         </div>
-        <div class="carousel-item">
-            <img src="~/Imagens/backgroundagag.jpg" alt="Segunda imagem">
-            <div class="carousel-caption">
-                <hr class="light mt-5">
-                <h3>Nós temos os melhores planos:</h3>
-                <h3>Infantis e adultos se organizando em inicial, médio e luxuoso.</h3>
-                <h3>Englobam flores de diferentes espécies e quantidades, coroas, translado, paramentação, necromaquiagem e etc.</h3>
-                <h3>Clique no botão abaixo para começar.</h3>
-                <button type="button" onclick="location.href = '@Url.Action("Login", "Home")'" class="btn btn-primary btn-lg">
-                    Desejo fazer um plano.
-                </button>
-                <hr class="light">
-            </div>
-        </div>
+
+        <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+
+        <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
+            <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
     </div>
-
-    <a class="carousel-control-prev" href="#slides" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Anterior</span>
-    </a>
-
-    <a class="carousel-control-next" href="#slides" role="button" data-slide="next">
-        <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Próximo</span>
-    </a>
-</div>

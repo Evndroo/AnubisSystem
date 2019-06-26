@@ -123,9 +123,9 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(FalecidoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call delFalecido(cod)", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
-
+            MySqlCommand cmd = new MySqlCommand("call delFalecido(@nome)", con.conectarBD());
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

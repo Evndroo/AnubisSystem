@@ -14,6 +14,9 @@ namespace SistemaAnubis.Models.DTO
         public string Data { get; set; }
         public string Falecido { get; set; }
         public string Funcionario { get; set; }
+        public string Compra { get; set; }
+        public string Vencimento { get; set; }
+        public string CVV { get; set; }
 
         public List<PlanoDTO> Planos = new List<PlanoDTO>();
         public List<FalecidoDTO> Falecidos = new List<FalecidoDTO>();

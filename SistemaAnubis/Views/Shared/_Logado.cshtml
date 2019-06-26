@@ -70,22 +70,29 @@
                 {
                     <a href='@Url.Action("Administrador", "Alterar")' class="list-group-item list-group-item-action" style="display:none" id="administradorAlt">Administrador</a>
                 }
-                <a href='@Url.Action("Urna", "Alterar")' class="list-group-item list-group-item-action" style="display:none" id="administradorAlt">Urna</a>
+                <a href='@Url.Action("Urna", "Alterar")' class="list-group-item list-group-item-action" style="display:none" id="UrnaAlt">Urna</a>
 
+                <a href='@Url.Action("Caixao", "Alterar")' class="list-group-item list-group-item-action" style="display:none" id="CaixaoAlt">Caixão</a>
 
                 @if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
                 {
+                    <a href='@Url.Action("Flores", "Alterar")' class="list-group-item list-group-item-action" style="display:none" id="FlorAlt">Flor</a>
+
+                    <a href='@Url.Action("Coroa", "Alterar")' class="list-group-item list-group-item-action" style="display:none" id="CoroaAlt">Coroa de Flores</a>
+
                     <div class="sidebar-heading dropdown-toggle" id="consultar">Listas</div>
                     <a href='@Url.Action("Planos", "Consulta")' class="list-group-item list-group-item-action" style="display:none" id="planoList">Planos</a>
                     <a href='@Url.Action("Cliente", "Consulta")' class="list-group-item list-group-item-action" style="display:none" id="clienteList">Cliente</a>
-                    <a href='@Url.Action("Funcionario", "Consulta")' class="list-group-item list-group-item-action" style="display:none" id="funcionarioList">Funncionário</a>
                 }
                 else
                 {
                     <a href='@Url.Action("Planos", "Consulta")' class="list-group-item list-group-item-action" id="planoList">Planos</a>
+                    <a href='@Url.Action("Funcionario", "Consulta")' class="list-group-item list-group-item-action" style="display:none" id="funcionarioList">Funncionário</a>
+
                 }
                 @if (int.Parse(MvcApplication.Session.Instance.Nvl) == 1)
                 {
+                    <a href='@Url.Action("Funcionario", "Consulta")' class="list-group-item list-group-item-action" style="display:none" id="funcionarioList">Funncionário</a>
                     <a href='@Url.Action("Administrador", "Consulta")' class="list-group-item list-group-item-action" style="display:none" id="administradorList">Administrador</a>
                 }
                 <a href='@Url.Action("Comprar", "Compra")' class="list-group-item list-group-item-action" id="">Compra</a>
@@ -98,7 +105,18 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg" style="background-color: #000; color: #fff;">
                 <button class="btn btn-primary" id="menu-toggle">Menu</button>
-                <!---h3>@ViewBag.mensagem</h3--->
+                @if (MvcApplication.Session.Instance.Nvl == "3")
+                {
+                    <h3 style="margin-left:20px">Fique em paz, cuidaremos de tudo para você</h3>
+                }
+                else if (MvcApplication.Session.Instance.Nvl == "2")
+                {
+                    <h3 style="margin-left:20px">Bom trabalho</h3>
+                }
+                else
+                { 
+                    <h3 style="margin-left:20px">Sua gestão é a nossa salvação</h3>
+                }
                 <li class="nav-item dropdown ml-auto" style="list-style-type: none;">
                     <nav id="nav-menu-container">
                         <ul class="nav-menu" style="list-style-type: none;">
@@ -126,17 +144,106 @@
                 </li>
             </nav>
             @RenderBody()
-                
+
         </div>
     </div>
 
-        <!-- Bootstrap core JavaScript -->
-        
-        <!-- Menu Toggle Script -->
+    <!-- Bootstrap core JavaScript -->
+    <!-- Menu Toggle Script -->
+
+    @if (MvcApplication.Session.Instance.Nvl == "2")
+    {
         <script>
-            $("#menu-toggle").click(function (e) {
-                e.preventDefault();
-                $("#wrapper").toggleClass("toggled");
+            $(document).ready(function () {
+
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+
+                $("#busca").click(function () {
+                    if ($("#busPlano").css("display") == "none") {
+                        $("#busPlano").fadeIn();
+                        $("#busFunc").fadeIn();
+                        $("#busCli").fadeIn();
+                        $("#busCoroa").fadeIn();
+                        $("#busCai").fadeIn();
+                        $("#busFlor").fadeIn();
+                        $("#busUrna").fadeIn();
+                    } else {
+                        $("#busPlano").fadeOut();
+                        $("#busFunc").fadeOut();
+                        $("#busCli").fadeOut();
+                        $("#busCoroa").fadeOut();
+                        $("#busCai").fadeOut();
+                        $("#busFlor").fadeOut();
+                        $("#busUrna").fadeOut();
+                    }
+                });
+
+                $("#alterar").click(function () {
+                    if ($("#FlorAlt").css("display") == "none") {
+                        $("#clienteAlt").fadeIn();
+                        $("#funcionarioAlt").fadeIn();
+                        $("#planoAlt").fadeIn();
+                        $("#UrnaAlt").fadeIn();
+                        $("#CoroaAlt").fadeIn();
+                        $("#CaixaoAlt").fadeIn();
+                        $("#FlorAlt").fadeIn();
+                    } else {
+                        $("#clienteAlt").fadeOut();
+                        $("#funcionarioAlt").fadeOut();
+                        $("#planoAlt").fadeOut();
+                        $("#UrnaAlt").fadeOut();
+                        $("#CoroaAlt").fadeOut();
+                        $("#CaixaoAlt").fadeOut();
+                        $("#FlorAlt").fadeOut();
+                    }
+                });
+
+
+                $("#consultar").click(function () {
+                    if ($("#clienteList").css("display") == "none") {
+                        $("#clienteList").fadeIn();
+                        $("#funcionarioList").fadeIn();
+                        $("#planoList").fadeIn();
+                    } else {
+                        $("#clienteList").fadeOut();
+                        $("#funcionarioList").fadeOut();
+                        $("#planoList").fadeOut();
+                    }
+                });
+
+                $("#cadastro").click(function () {
+                    if ($("#cadUrna").css("display") == "none") {
+                        $("#cadCoroa").fadeIn();
+                        $("#cadFlor").fadeIn();
+                        $("#cadUrna").fadeIn();
+                        $("#cadCai").fadeIn();
+                        $("#cadCli").fadeIn();
+                        $("#cadFal").fadeIn();
+                        $("#cadFunc").fadeIn();
+                    } else {
+                        $("#cadCoroa").fadeOut();
+                        $("#cadFlor").fadeOut();
+                        $("#cadUrna").fadeOut();
+                        $("#cadCai").fadeOut();
+                        $("#cadCli").fadeOut();
+                        $("#cadFal").fadeOut();
+                        $("#cadFunc").fadeOut();
+                    }
+                });
+            });
+        </script>
+    }
+    else if (MvcApplication.Session.Instance.Nvl == "1")
+    {
+        <script>
+            $(document).ready(function () {
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
 
                 $("#busca").click(function () {
                     if ($("#busPlano").css("display") == "none") {
@@ -166,25 +273,31 @@
                         $("#clienteAlt").fadeIn();
                         $("#funcionarioAlt").fadeIn();
                         $("#planoAlt").fadeIn();
+                        $("#UrnaAlt").fadeIn();
+                        $("#CoroaAlt").fadeIn();
+                        $("#CaixaoAlt").fadeIn();
+                        $("#FlorAlt").fadeIn();
                     } else {
                         $("#administradorAlt").fadeOut();
                         $("#clienteAlt").fadeOut();
                         $("#funcionarioAlt").fadeOut();
                         $("#planoAlt").fadeOut();
+                        $("#UrnaAlt").fadeOut();
+                        $("#CoroaAlt").fadeOut();
+                        $("#CaixaoAlt").fadeOut();
+                        $("#FlorAlt").fadeOut();
                     }
                 });
 
 
                 $("#consultar").click(function () {
-                    if ($("#administradorList").css("display") == "none") {
+                    if ($("#clienteList").css("display") == "none") {
                         $("#administradorList").fadeIn();
                         $("#clienteList").fadeIn();
-                        $("#funcionarioList").fadeIn();
                         $("#planoList").fadeIn();
                     } else {
                         $("#administradorList").fadeOut();
                         $("#clienteList").fadeOut();
-                        $("#funcionarioList").fadeOut();
                         $("#planoList").fadeOut();
                     }
                 });
@@ -212,5 +325,55 @@
                 });
             });
         </script>
-    </body>
+    }
+    else
+    {
+        <script>
+            $(document).ready(function () {
+                $("#menu-toggle").click(function (e) {
+                    e.preventDefault();
+                    $("#wrapper").toggleClass("toggled");
+                });
+
+                $("#busca").click(function () {
+                    if ($("#busPlano").css("display") == "none") {
+                        $("#busPlano").fadeIn();
+                        $("#busCoroa").fadeIn();
+                        $("#busCai").fadeIn();
+                    } else {
+                        $("#busPlano").fadeOut();
+                        $("#busCoroa").fadeOut();
+                        $("#busCai").fadeOut();
+                    }
+                });
+
+                $("#alterar").click(function () {
+                    if ($("#planoAlt").css("display") == "none") {
+                        $("#planoAlt").fadeIn();
+                        $("#UrnaAlt").fadeIn();
+                        $("#CaixaoAlt").fadeIn();
+                    } else {
+                        $("#planoAlt").fadeOut();
+                        $("#UrnaAlt").fadeOut();
+                        $("#CaixaoAlt").fadeOut();
+                    }
+                });
+
+                
+
+                $("#cadastro").click(function () {
+                    if ($("#cadUrna").css("display") == "none") {
+                        $("#cadUrna").fadeIn();
+                        $("#cadCai").fadeIn();
+                        $("#cadFal").fadeIn();
+                    } else {
+                        $("#cadUrna").fadeOut();
+                        $("#cadCai").fadeOut();
+                        $("#cadFal").fadeOut();
+                    }
+                });
+            });
+        </script>
+    }
+</body>
 </html>

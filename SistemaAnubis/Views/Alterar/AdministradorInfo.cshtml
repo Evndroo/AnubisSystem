@@ -3,7 +3,7 @@
 @{
             /**/
 
-            ViewBag.Title = "AdministradorInfo";
+            ViewBag.Title = "Meus dados";
 
             if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
             {
@@ -28,7 +28,7 @@
                 {
                     using (Html.BeginForm("AdministradorInfo", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
                     {
-                        <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                        <legend class="text-center card-title" style="color:white">Meus dados</legend>
                         <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                             <fieldset>
 

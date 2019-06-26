@@ -9,5 +9,6 @@ namespace SistemaAnubis.Models.DTO
     {
         public bool Alert { get; set; }
         public bool Compra { get; set; }
+        public bool delete { get; set; }
     }
 }

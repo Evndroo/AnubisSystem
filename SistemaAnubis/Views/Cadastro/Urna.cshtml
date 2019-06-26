@@ -1,7 +1,7 @@
 ﻿@model SistemaAnubis.Models.DTO.UrnaDTO
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Cadastrar Urna";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -28,7 +28,7 @@
         using (Html.BeginForm("Urna", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
 
-                <legend class="text-center card-title" style="color:white">Cadastrar </legend>
+                <legend class="text-center card-title" style="color:white">Cadastrar Urna</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
 

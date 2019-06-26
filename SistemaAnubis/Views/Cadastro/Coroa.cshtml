@@ -1,7 +1,7 @@
 ﻿@model SistemaAnubis.Models.DTO.CoroaDTO
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Cadastrar Coroa";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -28,7 +28,7 @@
             List<string> tipos = new List<string>();
             tipos.Add("");
             tipos.Add("Plástico");
-            tipos.Add("Natural");
+            tipos.Add("Real");
 
             using (Html.BeginForm("Coroa", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {

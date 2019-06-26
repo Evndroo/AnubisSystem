@@ -316,9 +316,9 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(ClienteDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("delete from tbCliente where cpf_cli = @cpf", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call delCli(@cpf);", con.conectarBD());
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
-
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

@@ -1,7 +1,7 @@
 ﻿@model SistemaAnubis.Models.DTO.FloresDTO
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Cadastrar Flores";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -28,7 +28,7 @@
             tipos.Add("");
             tipos.Add("Plástico");
             tipos.Add("Madeira");
-            tipos.Add("Natural");
+            tipos.Add("Real");
 
             using (Html.BeginForm("Flores", "Cadastro", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {

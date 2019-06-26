@@ -239,7 +239,7 @@ namespace SistemaAnubis.Models.BLL
         public void deletar(AdministradorDTO dto) {
             MySqlCommand cmd = new MySqlCommand("call delAdm(@cpf)", con.conectarBD());
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
-
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

@@ -57,7 +57,7 @@
         using (Html.BeginForm("Comprar", "Compra", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
         {
 
-            <legend class="text-center card-title" style="color:white">Cadastrar Administrador</legend>
+            <legend class="text-center card-title" style="color:white">Efetuar Compra</legend>
             <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                 <fieldset>
                     <div class="validation-summary-valid" data-valmsg-summary="true">
@@ -80,7 +80,7 @@
                             @Html.DropDownListFor(m => m.Cliente, new MultiSelectList(clis), new { @class = "form-control" })
                         }
 
-                        <small class="text-uppercase">Preencha apensa se for comprar para um falecido(a)</small>
+                        <small class="text-uppercase" style="color:white">Preencha apensa se for comprar para um falecido(a)</small>
                         @Html.LabelFor(m => m.Falecido)
 
                         @Html.DropDownListFor(m => m.Falecido, new MultiSelectList(falecidos), new { @class = "form-control" })

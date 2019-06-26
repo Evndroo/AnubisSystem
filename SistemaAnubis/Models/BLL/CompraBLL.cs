@@ -68,15 +68,6 @@ namespace SistemaAnubis.Models.BLL
 
         }
 
-        public void deletar(CompraDTO dto)
-        {
-            MySqlCommand cmd = new MySqlCommand("delete from tbCompra where cod_cli = @cod and cod_plano=@plano", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Cliente;
-            cmd.Parameters.Add("@plano", MySqlDbType.VarChar).Value = dto.Plano;
-
-            con.desconectarBD();
-        }
-
         public DataTable Data(MySqlCommand cmd)
         {
             MySqlDataAdapter da = new MySqlDataAdapter(cmd);

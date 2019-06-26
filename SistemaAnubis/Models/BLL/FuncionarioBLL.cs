@@ -231,6 +231,7 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("calll delFunc(@cpf)", con.conectarBD());
             cmd.Parameters.Add("@cpf", MySqlDbType.VarChar).Value = dto.Cpf;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

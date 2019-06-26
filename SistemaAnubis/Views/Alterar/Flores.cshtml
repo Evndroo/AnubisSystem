@@ -1,0 +1,137 @@
+﻿@model SistemaAnubis.Models.DTO.FloresDTO
+@using SistemaAnubis.Models.DTO
+
+@{
+    ViewBag.Title = "Flores";
+
+    ViewBag.Title = "Cadastrar Administrador";
+
+    if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+        <div class="form-container" style="padding: 15% 0 10% 0;">
+            <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                <h1 class="text-center">Você precisa fazer login!</h1>
+                <div class="col text-center my-3">
+                    <button onclick="location.href='@Url.Action("Login", "Home")'" class="btn btn-primary">Logar.</button>
+                    <button onclick="location.href='@Url.Action("Index", "Home")'" class="btn btn-primary">Voltar ao início.</button>
+                </div>
+            </div>
+        </div>
+
+    }
+    else
+    {
+        if (int.Parse(MvcApplication.Session.Instance.Nvl) <= 2)
+        {
+            Layout = "~/Views/Shared/_Logado.cshtml";
+
+            List<string> tipoFlor = new List<string>();
+            tipoFlor.Add("");
+            foreach (FloresDTO dto in Model.arrayF)
+            {
+                tipoFlor.Add(dto.ToString());
+            }
+
+            using (Html.BeginForm("Flores", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
+            {
+                <legend class="text-center card-title" style="color:white">Alterar informação de Flores</legend>
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <fieldset>
+                        @Html.LabelFor(m => m.Especie)
+
+                        <select class="form-control" id="Especie" name="Especie">
+                            <option selected="selected"></option>
+                            @foreach (string flor in tipoFlor)
+                            {
+                                if (Model.Tipo == flor)
+                                {
+                                    <option selected="selected">@flor</option>
+                                }
+                                else
+                                {
+                                    <option>@flor</option>
+                                }
+                            }
+                        </select>
+
+
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Buscar" class="btn btn-primary">Buscar</button>
+                        </div>
+
+                        <hr style="border-color:white" />
+
+                        @Html.LabelFor(m => m.Tipo)
+
+                        <select class="form-control" id="Tipo" name="Tipo">
+                            <option selected="selected"></option>
+                            @if (Model.Tipo == "Plástico")
+                            {
+                                <option selected="selected">Plástico</option>
+                            }
+                            else
+                            {
+                                <option>Plástico</option>
+                            }
+
+                            @if (Model.Tipo == "Madeira")
+                            {
+                                <option selected="selected">Madeira</option>
+                            }
+                            else
+                            {
+                                <option>Madeira</option>
+                            }
+
+                            @if (Model.Tipo == "Real")
+                            {
+                                <option selected="selected">Real</option>
+                            }
+                            else
+                            {
+                                <option>Real</option>
+                            }
+                        </select>
+
+                        @Html.LabelFor(m => m.Especie)
+
+                        <input class="form-control" id="Especie" name="Especie" type="text" value="@Model.Especie">
+
+                        @Html.LabelFor(m => m.Quantidade)
+
+                        <input class="form-control" id="Quantidade" name="Quantidade" type="number" min="1" value="@Model.Quantidade">
+
+                        @Html.LabelFor(m => m.Valor)
+
+                        <input class="form-control" data-val="true" data-val-required="O campo Valor é obrigatório." id="Valor" min="1" name="Valor" pattern="[0-9]+([.][0-9]+)?" type="number" value="@Model.Valor">
+
+                        <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
+                            <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
+                        </div>
+
+                    </fieldset>
+                </div>
+            }
+
+        }
+        else
+        {
+            <div class="form-container" style="padding: 15% 0 10% 0;">
+                <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
+                    <h1 class="text-center">Acesso negado</h1>
+                    <div class="col text-center my-3">
+                        <button class="btn btn-primary" onclick="location.href='@Url.Action("Index", "Busca")'">
+                            Voltar ao início
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+}
+
+

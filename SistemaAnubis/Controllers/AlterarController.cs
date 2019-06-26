@@ -21,9 +21,13 @@ namespace SistemaAnubis.Controllers
             PlanoDTO dto = new PlanoDTO();
             dto.arrayP = new PlanoBLL().Listar();
             dto.arrayF = new FloresBLL().Consultar(new FloresDTO());
-            dto.arrayCO= new CoroaBLL().Consultar(new CoroaDTO());
+            dto.arrayCO = new CoroaBLL().Consultar(new CoroaDTO());
             dto.arrayC = new CaixaoBLL().buscar(new CaixaoDTO());
             dto.arrayU = new UrnaBLL().buscar(new UrnaDTO());
+            dto.Caixao = " ";
+            dto.Urna = " ";
+            dto.Coroa = " ";
+            dto.Flor = " ";
             return View(dto);
         }
 
@@ -72,7 +76,17 @@ namespace SistemaAnubis.Controllers
             }
             else
             {
-                return View();
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
             }
         }
 
@@ -120,7 +134,8 @@ namespace SistemaAnubis.Controllers
                     bll.buscarEmail(dto);
 
                 }
-                else {
+                else
+                {
                     dto.Email = null;
                     dto.Cpf = null;
                     bll.buscarUser(dto);
@@ -136,7 +151,19 @@ namespace SistemaAnubis.Controllers
             }
             else if (btn == "Deletar")
             {
-                return View();
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
+
             }
             else return View();
         }
@@ -156,7 +183,8 @@ namespace SistemaAnubis.Controllers
         public ActionResult Funcionario(FuncionarioDTO dto, string btn)
         {
             FuncionarioBLL bll = new FuncionarioBLL();
-            if (btn == "Buscar") {
+            if (btn == "Buscar")
+            {
                 dto.Email = dto.User;
                 dto.Cpf = dto.User;
                 if (Int64.TryParse(dto.Cpf, out long i))
@@ -201,10 +229,24 @@ namespace SistemaAnubis.Controllers
                 model.Alert = true;
                 return RedirectToAction("index", "Busca", model);
             }
-            else return View();
+            else {
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
+            }
         }
 
-        public ActionResult Administrador() {
+        public ActionResult Administrador()
+        {
             AdministradorDTO dto = new AdministradorDTO();
             return View(dto);
         }
@@ -213,7 +255,8 @@ namespace SistemaAnubis.Controllers
         public ActionResult Administrador(AdministradorDTO dto, string btn)
         {
             AdministradorBLL bll = new AdministradorBLL();
-            if (btn == "Buscar") {
+            if (btn == "Buscar")
+            {
                 dto.Email = dto.User;
                 dto.Cpf = dto.User;
                 if (Int64.TryParse(dto.Cpf, out long i))
@@ -258,7 +301,20 @@ namespace SistemaAnubis.Controllers
                 model.Alert = true;
                 return RedirectToAction("index", "Busca", model);
             }
-            else return View();
+            else {
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
+            }
         }
 
         public ActionResult Urna()
@@ -300,9 +356,19 @@ namespace SistemaAnubis.Controllers
             }
             else
             { //botão é deletar
-
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
             }
-            return View();
         }
 
         public ActionResult ClienteInfo()
@@ -325,7 +391,7 @@ namespace SistemaAnubis.Controllers
 
         [HttpPost]
         public ActionResult ClienteInfo(ClienteDTO dto, FormCollection frm)
-        {                
+        {
             if (Validacoes.IsCpf(dto.Cpf))
             {
                 ClienteBLL bll = new ClienteBLL();
@@ -347,8 +413,8 @@ namespace SistemaAnubis.Controllers
             else
             {
                 return Content("<script language='javascript' type='text/javascript'>alert('CPF inválido!'); location.href='Administrador'</script>");
-            }               
-            
+            }
+
         }
 
 
@@ -442,8 +508,9 @@ namespace SistemaAnubis.Controllers
             }
         }
 
-        public ActionResult MudarSenha() {
-            
+        public ActionResult MudarSenha()
+        {
+
             return View();
         }
 
@@ -472,12 +539,14 @@ namespace SistemaAnubis.Controllers
                     }
 
                 }
-                else {
+                else
+                {
                     ViewBag.senha = "A senha e a confirmação não estão iguais";
                     return View();
                 }
             }
-            else {
+            else
+            {
                 ViewBag.incorreta = "Sua senha está incorreta";
             }
             return View();
@@ -521,9 +590,120 @@ namespace SistemaAnubis.Controllers
             }
             else
             { //botão é deletar
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
+            }
+        }
 
+        public ActionResult Flores()
+        {
+            FloresBLL bll = new FloresBLL();
+            FloresDTO dto = new FloresDTO();
+            dto.arrayF = bll.Consultar(dto);
+            dto.Especie = "";
+            dto.Quantidade = "";
+            dto.Tipo = "";
+            dto.Valor = "";
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Flores(FloresDTO dto, string btn)
+        {
+            FloresBLL bll = new FloresBLL();
+            if (btn == "Buscar")
+            {
+                dto.arrayF = bll.Consultar(dto);
+                bll.buscar(dto);
+                dto.Valor = dto.Valor.Replace(",", ".");
+                return View(dto);
+
+            }
+            else if (btn == "Salvar")
+            {
+                dto.arrayF = bll.Consultar(dto);
+                bll.atualizar(dto);
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
+            }
+            else
+            { //botão é deletar
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
+            }
+        }
+        public ActionResult Coroa()
+        {
+            CoroaBLL bll = new CoroaBLL();
+            CoroaDTO dto = new CoroaDTO();
+            dto.arrayCO = bll.Consultar(dto);
+            dto.Especie = "";
+            dto.Circunferencia = "";
+            dto.Descricao = "";
+            dto.Codigo = "";
+            dto.Tipo = "";
+            dto.Valor = "";
+            return View(dto);
+        }
+
+        [HttpPost]
+        public ActionResult Coroa(CoroaDTO dto, string btn)
+        {
+            CoroaBLL bll = new CoroaBLL();
+            if (btn == "Buscar")
+            {
+                dto.arrayCO = bll.Consultar(dto);
+                bll.buscar(dto);
+                dto.Valor = dto.Valor.Replace(",", ".");
+                dto.Valor = dto.Circunferencia.Replace(",", ".");
+                return View(dto);
+
+            }
+            else if (btn == "Salvar")
+            {
+                dto.arrayCO = bll.Consultar(dto);
+                bll.atualizar(dto);
+                IndexDTO model = new IndexDTO();
+                model.Alert = true;
+                return RedirectToAction("index", "Busca", model);
+            }
+            else
+            { //botão é deletar
+                try
+                {
+                    bll.deletar(dto);
+                    IndexDTO model = new IndexDTO();
+                    model.delete = true;
+                    return RedirectToAction("Index", "Busca", model);
+                }
+                catch
+                {
+                    ViewBag.delete = "Erro ao deletar";
+                    return View();
+                }
             }
             return View();
         }
     }
-}
+ }

@@ -117,8 +117,8 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(CaixaoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call delCaixao(@codigo)", con.conectarBD());
-            cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call delCaixao(@nome)", con.conectarBD());
+            cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Modelo;
 
             con.desconectarBD();
         }

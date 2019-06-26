@@ -34,7 +34,7 @@ namespace SistemaAnubis.Models.BLL
                 cmd.Parameters.Add("@necro", MySqlDbType.VarChar).Value = dto.Necromaquiagem;
                 cmd.Parameters.Add("@lapide", MySqlDbType.VarChar).Value = dto.Lapide;
                 cmd.Parameters.Add("@veu", MySqlDbType.VarChar).Value = dto.Veu;
-                cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = 1500;
+                cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
                 cmd.ExecuteNonQuery();
             }
             else if (MvcApplication.Session.Instance.Nvl == "2")
@@ -52,7 +52,7 @@ namespace SistemaAnubis.Models.BLL
                 cmd.Parameters.Add("@necro", MySqlDbType.VarChar).Value = dto.Necromaquiagem;
                 cmd.Parameters.Add("@lapide", MySqlDbType.VarChar).Value = dto.Lapide;
                 cmd.Parameters.Add("@veu", MySqlDbType.VarChar).Value = dto.Veu;
-                cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = 1500;
+                cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
                 cmd.Parameters.Add("@dono", MySqlDbType.VarChar).Value = MvcApplication.Session.Instance.Codigo;
                 cmd.ExecuteNonQuery();
             }
@@ -70,7 +70,7 @@ namespace SistemaAnubis.Models.BLL
                 cmd.Parameters.Add("@necro", MySqlDbType.VarChar).Value = dto.Necromaquiagem;
                 cmd.Parameters.Add("@lapide", MySqlDbType.VarChar).Value = dto.Lapide;
                 cmd.Parameters.Add("@veu", MySqlDbType.VarChar).Value = dto.Veu;
-                cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = 1500;
+                cmd.Parameters.Add("@valor", MySqlDbType.VarChar).Value = dto.Valor;
                 cmd.Parameters.Add("@dono", MySqlDbType.VarChar).Value = MvcApplication.Session.Instance.Codigo;
                 cmd.ExecuteNonQuery();
             }
@@ -164,7 +164,7 @@ namespace SistemaAnubis.Models.BLL
 
         public void atualizar(PlanoDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call upPlano(@antigo,@nome,@caixao,@urna,@translado,@paramentacao,@necro,@veu,@flor,@quantF,@coroa,@quantC,@Valor)", con.conectarBD());
+            MySqlCommand cmd = new MySqlCommand("call upPlano(@antigo,@nome,@caixao,@urna,@translado,@paramentacao,@necro,@veu,@lap,@flor,@quantF,@coroa,@quantC,@Valor)", con.conectarBD());
             cmd.Parameters.Add("@antigo", MySqlDbType.VarChar).Value = PlanoDTO.Antigo;
             cmd.Parameters.Add("@nome", MySqlDbType.VarChar).Value = dto.Nome;
             cmd.Parameters.Add("@caixao", MySqlDbType.VarChar).Value = dto.Caixao;
@@ -173,6 +173,7 @@ namespace SistemaAnubis.Models.BLL
             cmd.Parameters.Add("@paramentacao", MySqlDbType.VarChar).Value = dto.Paramentacao;
             cmd.Parameters.Add("@necro", MySqlDbType.VarChar).Value = dto.Necromaquiagem;
             cmd.Parameters.Add("@veu", MySqlDbType.VarChar).Value = dto.Veu;
+            cmd.Parameters.Add("@lap", MySqlDbType.VarChar).Value = dto.Lapide;
             cmd.Parameters.Add("@flor", MySqlDbType.VarChar).Value = dto.Flor;
             cmd.Parameters.Add("@quantF", MySqlDbType.VarChar).Value = dto.QuantFlor;
             cmd.Parameters.Add("@coroa", MySqlDbType.VarChar).Value = dto.Coroa;
@@ -186,8 +187,8 @@ namespace SistemaAnubis.Models.BLL
         public void deletar(PlanoDTO dto)
         {
             MySqlCommand cmd = new MySqlCommand("call delPlano(@cod)", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
-
+            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

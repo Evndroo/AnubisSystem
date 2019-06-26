@@ -131,9 +131,9 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(UrnaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call delUrna(@cpf)", con.conectarBD());
-            cmd.Parameters.Add("@cod", MySqlDbType.VarChar).Value = dto.Codigo;
-
+            MySqlCommand cmd = new MySqlCommand("call delUrna(@mod)", con.conectarBD());
+            cmd.Parameters.Add("@mod", MySqlDbType.VarChar).Value = dto.Nome;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

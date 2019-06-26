@@ -67,7 +67,7 @@ namespace SistemaAnubis.Controllers
                             MvcApplication.Session.Instance.Celular = dto.Celular;
                             MvcApplication.Session.Instance.Cep = dto.Cep;
                             MvcApplication.Session.Instance.Num = dto.Num;
-                            MvcApplication.Session.Instance.Nvl = dto.Nvl;
+                            MvcApplication.Session.Instance.Nvl = "3";
                             MvcApplication.Session.Instance.CodUser = dto.CodUser;
                             return RedirectToAction("Index", "Busca", model);
                         }
@@ -423,6 +423,11 @@ namespace SistemaAnubis.Controllers
 
             if (paramentacao.StartsWith("true")) dto.Paramentacao= 1;
             else dto.Paramentacao= 0;
+
+            dto.Caixao = dto.Caixao.Split(' ')[0];
+            dto.Urna = dto.Urna.Split(' ')[0];
+            dto.Flor = dto.Flor.Split(' ')[0];
+            dto.Coroa = dto.Coroa.Split(' ')[0];
 
             try
             {

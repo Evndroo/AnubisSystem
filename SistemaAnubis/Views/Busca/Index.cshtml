@@ -1,8 +1,15 @@
 ﻿@model SistemaAnubis.Models.DTO.IndexDTO
 @{
-    ViewBag.Title = "Index";
-
-    if (Model.Compra == true && Model.Alert == true)
+    ViewBag.Title = "Home";
+    if (Model.Alert == false && Model.Compra == false && Model.delete == true)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                alert("CInformações apagadas");
+            });
+        </script>
+    }
+    else if (Model.Compra == true && Model.Alert == true)
     {
         <script type="text/javascript">
             $(document).ready(function () {

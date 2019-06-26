@@ -72,19 +72,21 @@ namespace SistemaAnubis.Models.BLL
             {
                 dto.Codigo = dr[0].ToString();
                 dto.Especie = dr[1].ToString();
-                dto.Quantidade = dr[2].ToString();
-                dto.Tipo = dr[3].ToString();
+                dto.Tipo = dr[2].ToString();
+                dto.Quantidade = dr[3].ToString();
+                dto.Valor = dr[4].ToString();
             }
             con.desconectarBD();
         }
 
         public void atualizar(FloresDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("update tbFlores set nome_adm=@Nome, cpf_adm=@cpf, tel_adm=@tel, email_adm=@email, cel_adm = @cel, CepAdm=@cep, admnum_end = @num where cpf_adm = @cpf", con.conectarBD());
-            cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
+            MySqlCommand cmd = new MySqlCommand("call upFlor(@especie,@especie,@tipo,@quant,@val);", con.conectarBD());
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
-            cmd.Parameters.Add("@quantidade", MySqlDbType.VarChar).Value = dto.Quantidade;
             cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
+            cmd.Parameters.Add("@quant", MySqlDbType.VarChar).Value = dto.Quantidade;
+            cmd.Parameters.Add("@val", MySqlDbType.VarChar).Value = dto.Valor;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
 
         }
@@ -93,7 +95,7 @@ namespace SistemaAnubis.Models.BLL
         {
             MySqlCommand cmd = new MySqlCommand("call delFlores(@especie)", con.conectarBD());
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
-
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

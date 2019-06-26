@@ -2,7 +2,7 @@
 @using SistemaAnubis.Models.DTO
 
 @{
-    ViewBag.Title = "Cadastrar Administrador";
+    ViewBag.Title = "Urna";
 
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
@@ -45,7 +45,7 @@
                     @Html.DropDownListFor(m => m.Nome, new MultiSelectList(tipoUrna), new { @class = "form-control" })
 
                     <div class="col text-center my-3">
-                        <button type="submit" class="btn btn-primary">Buscar</button>
+                        <button type="submit" class="btn btn-primary">Buscar Urna</button>
                     </div>
 
                 </fieldset>

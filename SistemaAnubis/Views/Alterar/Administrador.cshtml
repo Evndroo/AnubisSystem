@@ -27,7 +27,7 @@
             
             using (Html.BeginForm("Administrador", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {
-                <legend class="text-center card-title" style="color:white">@Model.Nome</legend>
+                <legend class="text-center card-title" style="color:white">Informações de outro Administrador</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
                         <label>User</label>
@@ -86,6 +86,7 @@
                         <input id="Estado" type="text" class="form-control" readonly>
 
                         <div class="col text-center my-3">
+                            <button type="submit" name="btn" value="Deletar" class="btn btn-primary">Deletar</button>
                             <button type="submit" name="btn" value="Salvar" class="btn btn-primary">Salvar</button>
                         </div>
 

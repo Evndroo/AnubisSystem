@@ -187,10 +187,12 @@
     <Content Include="Imagens\funeral-andre.jpg" />
     <Content Include="Imagens\funeral-hebe.jpg" />
     <Content Include="Imagens\funeral-stan.jpg" />
+    <Content Include="Imagens\logar.jpg" />
     <Content Include="Imagens\logo-nova.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Imagens\1.jpg" />
+    <Content Include="Imagens\logue.jpg" />
     <Content Include="Imagens\trofeu-economia.jpg" />
     <Content Include="Imagens\trofeu-funeraria.jpg" />
     <Content Include="Scripts\bootstrap-grid.css" />
@@ -254,7 +256,6 @@
     <Content Include="Views\Cadastro\Flores.cshtml" />
     <Content Include="Views\Cadastro\Urna.cshtml" />
     <Content Include="Views\Cadastro\Plano.cshtml" />
-    <Content Include="Views\Cadastro\Compra.cshtml" />
     <Content Include="Views\Consulta\Planos.cshtml" />
     <Content Include="Views\Consulta\Administrador.cshtml" />
     <Content Include="Views\Consulta\Funcionario.cshtml" />
@@ -295,6 +296,8 @@
     <Content Include="Views\Alterar\Planos.cshtml" />
     <Content Include="Views\Busca\Falecido.cshtml" />
     <Content Include="Views\Alterar\Caixao.cshtml" />
+    <Content Include="Views\Alterar\Flores.cshtml" />
+    <Content Include="Views\Alterar\Coroa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

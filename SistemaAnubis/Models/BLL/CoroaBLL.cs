@@ -78,29 +78,27 @@ namespace SistemaAnubis.Models.BLL
            
         public void buscar(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call busCoroaDono(@codigo)", con.conectarBD());
-            cmd.Parameters.AddWithValue("@codigo", dto.Codigo);
+            MySqlCommand cmd = new MySqlCommand("call busCoroa(@especie)", con.conectarBD());
+            cmd.Parameters.AddWithValue("@especie", dto.Especie);
             dr = cmd.ExecuteReader();
 
 
             while (dr.Read())
             {
-                dto.Codigo = dr[0].ToString();
+                dto.Especie = dr[0].ToString();
                 dto.Tipo = dr[1].ToString();
-                dto.Especie = dr[2].ToString();
-                dto.Circunferencia = dr[3].ToString();
-                dto.Descricao = dr[4].ToString();
-                dto.Valor = dr[5].ToString();
+                dto.Circunferencia = dr[2].ToString();
+                dto.Descricao = dr[3].ToString();
+                dto.Valor = dr[4].ToString();
             }
             con.desconectarBD();
         }
 
         public void atualizar(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call upCoroa(@codigo,@tipo,@especie,@circunferencia,@desccricao)", con.conectarBD());
-            cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
-            cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
+            MySqlCommand cmd = new MySqlCommand("call upCoroa(@especie,@especie,@tipo,@circunferencia,@desccricao)", con.conectarBD());
             cmd.Parameters.Add("@especie", MySqlDbType.VarChar).Value = dto.Especie;
+            cmd.Parameters.Add("@tipo", MySqlDbType.VarChar).Value = dto.Tipo;
             cmd.Parameters.Add("@circunferencia", MySqlDbType.VarChar).Value = dto.Circunferencia;
             cmd.Parameters.Add("@descricao", MySqlDbType.VarChar).Value = dto.Descricao;
             con.desconectarBD();
@@ -109,9 +107,9 @@ namespace SistemaAnubis.Models.BLL
 
         public void deletar(CoroaDTO dto)
         {
-            MySqlCommand cmd = new MySqlCommand("call delCoroa(@codigo)", con.conectarBD());
-            cmd.Parameters.Add("@codigo", MySqlDbType.VarChar).Value = dto.Codigo;
-
+            MySqlCommand cmd = new MySqlCommand("call delCoroa(@esp)", con.conectarBD());
+            cmd.Parameters.Add("@esp", MySqlDbType.VarChar).Value = dto.Especie ;
+            cmd.ExecuteNonQuery();
             con.desconectarBD();
         }
 

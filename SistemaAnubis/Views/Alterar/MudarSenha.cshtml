@@ -2,7 +2,7 @@
 
 
 @{
-    ViewBag.Title = "ClienteInfo";
+    ViewBag.Title = "Mudar senha";
     if (SistemaAnubis.MvcApplication.Session.Instance.Nome == null)
     {
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -23,7 +23,7 @@
         Layout = "~/Views/Shared/_Logado.cshtml";
             using (Html.BeginForm("MudarSenha", "Alterar", FormMethod.Post, new { @id = "formUrna", @style = "padding: 10% 0 10% 0;", @class = "form-container" }))
             {
-                <legend class="text-center card-title" style="color:white">Buscar Cliente</legend>
+                <legend class="text-center card-title" style="color:white">Alterar senha</legend>
                 <div class="form-group col-4 mx-auto" style="margin-bottom: 0;">
                     <fieldset>
 
